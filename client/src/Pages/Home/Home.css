@@ -1,0 +1,25 @@
+.container-home-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-gap: 10px;
+    grid-template-areas:
+        "main main  main sidebar"
+        "main main  main sidebar"
+        "main main  main sidebar"
+        "main main  main sidebar"
+        "footer footer footer footer";
+}
+
+.container-home-grid__main {
+    grid-area: main;
+
+}
+
+.container-home-grid__sidebar {
+    grid-area: sidebar;
+}
+
+.container-home-grid__footer{
+    grid-area: footer;
+}

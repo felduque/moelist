@@ -1,0 +1,229 @@
+.content_primary_card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 0 1rem;
+  background-color: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease-in-out;
+}
+
+.content_sinopsis_and_banner{
+  display: flex;
+  flex-direction: row;
+  /* align-items: center; */
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 0 1rem;
+  /* background modo dark */  
+  background-color: #222737;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease-in-out;
+}
+
+.content_primary_card__img{
+  width: 350px;
+  height: 480px;
+  object-fit: cover;
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.title_card_content{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.content_card__title{
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: rgb(255, 255, 255);
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.content_sinopsis{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  text-align: justify;
+}
+
+.content_sinopsis__title{
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: rgb(0, 213, 255);
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.content_sinopsis__text{
+  font-size: 1.2rem;
+  color: darkgray;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.content_title_genres {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.content_genre_title {
+  font-size: 1.8rem;
+  color: rgb(0, 233, 167);
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.content_sinopsis__generos {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  gap: 2rem;
+}
+
+.content_sinopsis__generos__item{
+  list-style: none;
+  font-size: 1.2rem;
+  color: darkgray;
+  font-weight: bold;
+  margin-bottom: 1rem;
+
+
+}
+
+/* Infos */
+
+.content_primary_card__info_all_content {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  padding: 0 1rem;
+  /* background modo dark */  
+  background-color: #171823;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease-in-out;
+}
+
+.content_primary_card__info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 30%;
+  height: 100%;
+  padding: 0 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease-in-out;
+}
+
+.content_primary_card__info__title {
+  padding-top: 1.5rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content_primary_card__info__title__text{
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: rgb(255, 255, 255);
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.content_primary_card__info__content{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+
+.content_primary_card__info__content__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+  /* coloca una linea de separacion al final */
+  padding: 10px;
+  border-bottom: 1px solid #F45237;
+}
+
+.content_primary_card__info__content__item__title{
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #F45237;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.content_primary_card__info__content__item__text {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: rgb(255, 255, 255);
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+/* characters */
+
+.genera_character_card {
+  display: flex;
+  width: 70%;
+}
+
+.genera_character_cards_all{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  flex-direction: column;
+  padding: 30px;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.title_scans_list{
+  color: #F45237;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  
+}
+
+.content_afiliates_logos {
+  width: 350px;
+  height: 262px;
+  border-radius: 20px;
+  padding: 1rem;
+}
+
+.afiliate_logo{
+  width: 350px;
+  height: 262px;
+}
+
+
+
