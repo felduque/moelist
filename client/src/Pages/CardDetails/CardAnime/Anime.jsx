@@ -4,60 +4,53 @@ export const Anime = () => {
   return (
     <div className={`container-fluid ${style.bg_card}`}>
       <div className={`row pt-5 ${style.content_sinopsis_and_banner}`}>
-        <div className="col-3">
+        <div className="col-12 col-xl-3 text-center">
           <img
             className={style.content_primary_card__img}
             src="https://cdn.myanimelist.net/images/anime/1170/124312l.jpg"
             alt="Title"
           />
         </div>
-        <div className="col-9">
-          <div className={style.content_sinopsis}>
-            <div className={style.title_card_content}>
-              <h1 className={style.content_card__title}>VINLAND SAGA</h1>
-            </div>
-            <h2 className={style.content_sinopsis__title}>Sinopsis</h2>
-            <p className={style.content_sinopsis__text}>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque
-              quas repellendus et, asperiores labore harum. Debitis accusamus
-              quidem dicta, natus, minima voluptas ipsa quas, consequatur
-              officiis cum nobis aliquam deleniti. Lorem ipsum dolor sit amet,
-              consectetur adipisicing elit. Maxime ipsa sint aspernatur rem
-              asperiores enim voluptatibus quas quos aliquid sed porro soluta
-              dolores delectus illo veniam, consequatur officia vel neque! Lorem
-              ipsum dolor sit amet consectetur adipisicing elit. Aut nihil
-              fugiat earum at maiores consectetur neque consequuntur assumenda,
-              quaerat quisquam alias! Ab quo, minus ducimus cumque incidunt
-              maxime itaque atque. Lorem ipsum dolor sit amet consectetur
-              adipisicing elit. Pariatur molestias numquam laboriosam porro.
-              Mollitia, expedita voluptas ducimus neque nesciunt at. Ex ad
-              consequatur explicabo saepe consectetur in quas, dolorem nulla!
-              Lorem ipsum dolor Lorem ipsum dolor sit amet consectetur
-              adipisicing elit. Numquam facilis voluptate natus repellendus
-              adipisci veritatis, quasi et maiores deleniti officia voluptatem
-              ea sunt eos dicta architecto ut deserunt corrupti ex. Lorem ipsum
-              dolor sit amet consectetur adipisicing elit. Eaque quas
-            </p>
-            <div className={style.content_title_genres}>
-              <h2 className={style.content_genre_title}>Generos</h2>
-            </div>
-            <div className={style.content_sinopsis__generos}>
-              <li className={style.content_sinopsis__generos__item}>Acción</li>
-              <li className={style.content_sinopsis__generos__item}>
-                Aventura
-              </li>
-              <li className={style.content_sinopsis__generos__item}>Comedia</li>
-              <li className={style.content_sinopsis__generos__item}>Drama</li>
-              <li className={style.content_sinopsis__generos__item}>
-                Fantasía
-              </li>
-            </div>
+        <div className="col-12 col-xl-9">
+          <div className={style.title_card_content}>
+            <h1 className={style.content_card__title}>VINLAND SAGA</h1>
+          </div>
+          <h2 className={style.content_sinopsis__title}>Sinopsis</h2>
+          <p className={style.content_sinopsis__text}>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque quas
+            repellendus et, asperiores labore harum. Debitis accusamus quidem
+            dicta, natus, minima voluptas ipsa quas, consequatur officiis cum
+            nobis aliquam deleniti. Lorem ipsum dolor sit amet, consectetur
+            adipisicing elit. Maxime ipsa sint aspernatur rem asperiores enim
+            voluptatibus quas quos aliquid sed porro soluta dolores delectus
+            illo veniam, consequatur officia vel neque! Lorem ipsum dolor sit
+            amet consectetur adipisicing elit. Aut nihil fugiat earum at maiores
+            consectetur neque consequuntur assumenda, quaerat quisquam alias! Ab
+            quo, minus ducimus cumque incidunt maxime itaque atque. Lorem ipsum
+            dolor sit amet consectetur adipisicing elit. Pariatur molestias
+            numquam laboriosam porro. Mollitia, expedita voluptas ducimus neque
+            nesciunt at. Ex ad consequatur explicabo saepe consectetur in quas,
+            dolorem nulla! Lorem ipsum dolor Lorem ipsum dolor sit amet
+            consectetur adipisicing elit. Numquam facilis voluptate natus
+            repellendus adipisci veritatis, quasi et maiores deleniti officia
+            voluptatem ea sunt eos dicta architecto ut deserunt corrupti ex.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque quas
+          </p>
+          <div className={style.content_title_genres}>
+            <h2 className={style.content_genre_title}>Generos</h2>
+          </div>
+
+          <div className={style.content_sinopsis__generos}>
+            <li className={style.content_sinopsis__generos__item}>Acción</li>
+            <li className={style.content_sinopsis__generos__item}>Aventura</li>
+            <li className={style.content_sinopsis__generos__item}>Comedia</li>
+            <li className={style.content_sinopsis__generos__item}>Drama</li>
+            <li className={style.content_sinopsis__generos__item}>Fantasía</li>
           </div>
         </div>
       </div>
-      <div className={style.content_sinopsis_and_banner}></div>
       <div className="row mx-3 py-5">
-        <div className="col-3">
+        <div className="col-12 col-lg-3">
           <div className={style.content_primary_card__info}>
             <div className={style.content_primary_card__info__title}>
               <h2 className={style.content_primary_card__info__title__text}>
@@ -261,12 +254,12 @@ export const Anime = () => {
             </div>
           </div>
         </div>
-        <div className="col-9 ">
+        <div className="col-12 col-lg-9 mt-5  mt-lg-0">
           <div className={`row position-sticky ${style.scan_list}`}>
             <div className={style.title_scans_list}>
               Disfruta de todo el contenido en las siguientes paginas
             </div>
-            <div className="col-4">
+            <div className="col-12 col-md-6 col-xl-4">
               <div className={style.content_afiliates_logos}>
                 <img
                   className={style.afiliate_logo}
@@ -277,7 +270,7 @@ export const Anime = () => {
                 <h3 className="text-white text-center">AnimeFenix</h3>
               </div>
             </div>
-            <div className="col-4">
+            <div className="col-12 col-md-6 col-xl-4">
               <div className={style.content_afiliates_logos}>
                 <img
                   className={style.afiliate_logo}
