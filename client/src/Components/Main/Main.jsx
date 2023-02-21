@@ -48,7 +48,7 @@ export const Main = () => {
         </div>
         <div className="row">
           {mangas.map((manga) => (
-            <CardItem />
+            <CardItem {...propsM} />
           ))}
         </div>
 
