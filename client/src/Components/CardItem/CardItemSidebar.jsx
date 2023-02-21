@@ -1,4 +1,5 @@
 import React from "react";
+import "./CardItem.css";
 
 export const CardItemSidebar = ({ type }) => {
   return (
@@ -16,6 +17,9 @@ export const CardItemSidebar = ({ type }) => {
           >
             {type}
           </span>
+          <div className="demography text-white position-absolute bottom-0 text-center w-100">
+            Seinen
+          </div>
         </div>
 
         <p className="title-card-main text-center mt-3">

@@ -1,7 +1,7 @@
 import React from "react";
 import "./CardItem.css";
 
-export const CardItem = ({ image, title, type }) => {
+export const CardItem = ({ id, image, title, description, type }) => {
   return (
     <div className="col-6 col-md-2">
       <div className="position-relative">
@@ -25,7 +25,6 @@ export const CardItem = ({ image, title, type }) => {
 
         <p className="title-card-main mt-3">One Piece efffffffe fe fe</p>
       </div>
-      <div></div>
     </div>
   );
 };
