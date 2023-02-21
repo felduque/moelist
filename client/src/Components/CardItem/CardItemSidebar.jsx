@@ -1,0 +1,28 @@
+import React from "react";
+
+export const CardItemSidebar = ({ type }) => {
+  return (
+    <div className="col-12">
+      <div className="position-relative">
+        <div className="card-image position-relative">
+          <img
+            src="https://picsum.photos/200/300"
+            className="content-card-main-banner"
+            alt="One Piece"
+          />
+
+          <span
+            className={`badge rounded-pill ${type} position-absolute pill text-uppercase fw-bold`}
+          >
+            {type}
+          </span>
+        </div>
+
+        <p className="title-card-main text-center mt-3">
+          One Piece efffffffe fe fe
+        </p>
+      </div>
+      <div></div>
+    </div>
+  );
+};

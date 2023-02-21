@@ -1,0 +1,34 @@
+.pill {
+    top: 15px;
+    left: 15px;
+    height: 20px;
+    line-height: 13px !important;
+    font-size: 11px !important;
+}
+
+.demography {
+  height: 30px;
+  background-color: rgba(0, 0,0 ,.33);
+}
+
+.card-img {
+    width: 100%;
+    height: 300px;
+    border-radius: 10px; 
+}
+
+.anime {
+    background-color: var(--color-anime);
+}
+
+.manga {
+    background-color: var(--color-manga);
+}
+
+.manwha {
+    background-color: var(--color-manwha);
+}
+
+.manhua {
+    background-color: var(--color-manhua);
+}
