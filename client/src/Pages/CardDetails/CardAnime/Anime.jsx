@@ -1,51 +1,48 @@
-import React from "react";
 import style from "./Anime.module.css";
+import { getAnimeById } from "../../../Api/Anime/anime";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+
 export const Anime = () => {
+  const [animes, setAnimes] = useState([]);
+  const [scans, setScans] = useState([]);
+
+  const { id } = useParams();
+  useEffect(() => {
+    const fetchAnimes = async () => {
+      const animes = await getAnimeById(id);
+      setAnimes(animes?.data?.anime);
+      setScans(animes?.data?.scans);
+    };
+    fetchAnimes();
+  }, []);
+
   return (
     <div className={`container-fluid ${style.bg_card}`}>
       <div className={`row pt-5 ${style.content_sinopsis_and_banner}`}>
         <div className="col-12 col-xl-3 text-center">
           <img
             className={style.content_primary_card__img}
-            src="https://cdn.myanimelist.net/images/anime/1170/124312l.jpg"
-            alt="Title"
+            src={animes?.image}
+            alt={animes?.title}
           />
         </div>
         <div className="col-12 col-xl-9">
           <div className={style.title_card_content}>
-            <h1 className={style.content_card__title}>VINLAND SAGA</h1>
+            <h1 className={style.content_card__title}>{animes?.title}</h1>
           </div>
           <h2 className={style.content_sinopsis__title}>Sinopsis</h2>
-          <p className={style.content_sinopsis__text}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque quas
-            repellendus et, asperiores labore harum. Debitis accusamus quidem
-            dicta, natus, minima voluptas ipsa quas, consequatur officiis cum
-            nobis aliquam deleniti. Lorem ipsum dolor sit amet, consectetur
-            adipisicing elit. Maxime ipsa sint aspernatur rem asperiores enim
-            voluptatibus quas quos aliquid sed porro soluta dolores delectus
-            illo veniam, consequatur officia vel neque! Lorem ipsum dolor sit
-            amet consectetur adipisicing elit. Aut nihil fugiat earum at maiores
-            consectetur neque consequuntur assumenda, quaerat quisquam alias! Ab
-            quo, minus ducimus cumque incidunt maxime itaque atque. Lorem ipsum
-            dolor sit amet consectetur adipisicing elit. Pariatur molestias
-            numquam laboriosam porro. Mollitia, expedita voluptas ducimus neque
-            nesciunt at. Ex ad consequatur explicabo saepe consectetur in quas,
-            dolorem nulla! Lorem ipsum dolor Lorem ipsum dolor sit amet
-            consectetur adipisicing elit. Numquam facilis voluptate natus
-            repellendus adipisci veritatis, quasi et maiores deleniti officia
-            voluptatem ea sunt eos dicta architecto ut deserunt corrupti ex.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque quas
-          </p>
+          <p className={style.content_sinopsis__text}>{animes?.description}</p>
           <div className={style.content_title_genres}>
             <h2 className={style.content_genre_title}>Generos</h2>
           </div>
 
           <div className={style.content_sinopsis__generos}>
-            <li className={style.content_sinopsis__generos__item}>Acción</li>
-            <li className={style.content_sinopsis__generos__item}>Aventura</li>
-            <li className={style.content_sinopsis__generos__item}>Comedia</li>
-            <li className={style.content_sinopsis__generos__item}>Drama</li>
-            <li className={style.content_sinopsis__generos__item}>Fantasía</li>
+            {animes?.genres?.map((genre, index) => (
+              <li key={index} className={style.content_sinopsis__generos__item}>
+                {genre}
+              </li>
+            ))}
           </div>
         </div>
       </div>
@@ -71,7 +68,7 @@ export const Anime = () => {
                     style.content_primary_card__info__content__item__text
                   }
                 >
-                  TV
+                  {animes?.type}
                 </p>
               </div>
               <div className={style.content_primary_card__info__content__item}>
@@ -87,7 +84,7 @@ export const Anime = () => {
                     style.content_primary_card__info__content__item__text
                   }
                 >
-                  12
+                  {animes?.episodes}
                 </p>
               </div>
               <div className={style.content_primary_card__info__content__item}>
@@ -103,7 +100,7 @@ export const Anime = () => {
                     style.content_primary_card__info__content__item__text
                   }
                 >
-                  Manga
+                  {animes?.source}
                 </p>
               </div>
 
@@ -120,7 +117,7 @@ export const Anime = () => {
                     style.content_primary_card__info__content__item__text
                   }
                 >
-                  Finalizado
+                  {animes?.status}
                 </p>
               </div>
               <div className={style.content_primary_card__info__content__item}>
@@ -136,7 +133,7 @@ export const Anime = () => {
                     style.content_primary_card__info__content__item__text
                   }
                 >
-                  12/12/2020
+                  {animes?.premiered}
                 </p>
               </div>
               <div className={style.content_primary_card__info__content__item}>
@@ -152,7 +149,7 @@ export const Anime = () => {
                     style.content_primary_card__info__content__item__text
                   }
                 >
-                  24 min
+                  {animes?.duration}
                 </p>
               </div>
               <div className={style.content_primary_card__info__content__item}>
@@ -168,7 +165,7 @@ export const Anime = () => {
                     style.content_primary_card__info__content__item__text
                   }
                 >
-                  Seinen
+                  {animes?.demography}
                 </p>
               </div>
               <div className={style.content_primary_card__info__content__item}>
@@ -184,7 +181,7 @@ export const Anime = () => {
                     style.content_primary_card__info__content__item__text
                   }
                 >
-                  Verano 2020
+                  {animes?.season}
                 </p>
               </div>
               <div className={style.content_primary_card__info__content__item}>
@@ -195,13 +192,16 @@ export const Anime = () => {
                 >
                   Estudio
                 </h3>
-                <p
-                  className={
-                    style.content_primary_card__info__content__item__text
-                  }
-                >
-                  Studio Pierrot
-                </p>
+                {animes?.studios?.map((studio, index) => (
+                  <p
+                    className={
+                      style.content_primary_card__info__content__item__text
+                    }
+                    key={index}
+                  >
+                    {studio}
+                  </p>
+                ))}
               </div>
               <div className={style.content_primary_card__info__content__item}>
                 <h3
@@ -216,7 +216,7 @@ export const Anime = () => {
                     style.content_primary_card__info__content__item__text
                   }
                 >
-                  Kamada
+                  {animes?.author}
                 </p>
               </div>
               <div className={style.content_primary_card__info__content__item}>
@@ -232,7 +232,7 @@ export const Anime = () => {
                     style.content_primary_card__info__content__item__text
                   }
                 >
-                  Renken
+                  {animes?.artist}
                 </p>
               </div>
               <div className={style.content_primary_card__info__content__item}>
@@ -243,13 +243,16 @@ export const Anime = () => {
                 >
                   Producido
                 </h3>
-                <p
-                  className={
-                    style.content_primary_card__info__content__item__text
-                  }
-                >
-                  Mainichi Broadcasting System
-                </p>
+                {animes?.producers?.map((item, index) => (
+                  <p
+                    className={
+                      style.content_primary_card__info__content__item__text
+                    }
+                    key={index}
+                  >
+                    {item}
+                  </p>
+                ))}
               </div>
             </div>
           </div>
@@ -259,28 +262,21 @@ export const Anime = () => {
             <div className={style.title_scans_list}>
               Disfruta de todo el contenido en las siguientes paginas
             </div>
-            <div className="col-12 col-md-6 col-xl-4">
-              <div className={style.content_afiliates_logos}>
-                <img
-                  className={style.afiliate_logo}
-                  src="https://i.ibb.co/7gsC0b5/666777.png"
-                  alt="Title"
-                />
+            {scans?.map((scan, index) => (
+              <div className="col-12 col-md-6 col-xl-4" key={index}>
+                <a href={animes?.urlContent} target="_blank">
+                  <div className={style.content_afiliates_logos}>
+                    <img
+                      className={style.afiliate_logo}
+                      src={scan?.image}
+                      alt={scan?.name}
+                    />
 
-                <h3 className="text-white text-center">AnimeFenix</h3>
+                    <h3 className="text-white text-center">{scan?.name}</h3>
+                  </div>
+                </a>
               </div>
-            </div>
-            <div className="col-12 col-md-6 col-xl-4">
-              <div className={style.content_afiliates_logos}>
-                <img
-                  className={style.afiliate_logo}
-                  src="https://i.ibb.co/7gsC0b5/666777.png"
-                  alt="Title"
-                />
-
-                <h3 className="text-white text-center">AnimeFenix</h3>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
         <div className={style.content_primary_card__info_all_content}></div>

@@ -1,35 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { getAnimes } from "../../Api/Anime/anime";
+import { getMangas } from "../../Api/Mangas/mangas";
+import { getManhuas } from "../../Api/Manhuas/mahuas";
+import { getManhwas } from "../../Api/Manhwas/manhwas";
 import { CardItem } from "../CardItem/CardItem";
 import "./Main.css";
 
 export const Main = () => {
-  const animes = [];
-  const mangas = [];
-  const manhwas = [];
-  const manhuas = [];
+  const [animes, setAnimes] = useState([]);
+  const [mangas, setMangas] = useState([]);
+  const [manhwas, setManhwas] = useState([]);
+  const [manhuas, setManhuas] = useState([]);
 
-  const propsA = {
-    type: "anime",
-  };
+  useEffect(() => {
+    const fetchAnimes = async () => {
+      const animes = await getAnimes();
+      const mangas = await getMangas();
+      const manhwas = await getManhwas();
+      const manhuas = await getManhuas();
+      setManhuas(manhuas?.data);
+      setManhwas(manhwas?.data);
+      setMangas(mangas?.data);
 
-  const propsM = {
-    type: "manga",
-  };
-
-  const PropsMan = {
-    type: "manwha",
-  };
-
-  const PropsMh = {
-    type: "manhua",
-  };
-
-  for (let i = 0; i < 6; i++) {
-    animes.push(i);
-    mangas.push(i);
-    manhwas.push(i);
-    manhuas.push(i);
-  }
+      setAnimes(animes?.data);
+    };
+    fetchAnimes();
+  }, []);
 
   return (
     <div className="content-primary-main">
@@ -38,35 +34,39 @@ export const Main = () => {
           <h2 className="text-white">Animes</h2>
         </div>
         <div className="row row-cols-1 row-cols-sm-3 row-cols-xl-4 row-cols-xxl-6">
-          {animes.map((anime) => (
-            <CardItem {...propsA} />
-          ))}
+          {animes.map((anime) => {
+            anime.type = "anime";
+            return <CardItem {...anime} />;
+          })}
         </div>
 
         <div className="conent-title-catogory">
           <h2 className="text-white">Mangas</h2>
         </div>
         <div className="row row-cols-1 row-cols-sm-3 row-cols-xl-4 row-cols-xxl-6">
-          {mangas.map((manga) => (
-            <CardItem {...propsM} />
-          ))}
+          {mangas.map((manga) => {
+            anime.type = "manga";
+            return <CardItem {...manga} />;
+          })}
         </div>
 
         <div className="conent-title-catogory">
           <h2 className="text-white">Manhwas</h2>
         </div>
         <div className="row row-cols-1 row-cols-sm-3 row-cols-xl-4 row-cols-xxl-6">
-          {manhwas.map((manhwa) => (
-            <CardItem {...PropsMan} />
-          ))}
+          {manhwas.map((manhwa) => {
+            manhwa.type = "manwha";
+            return <CardItem {...manhwa} />;
+          })}
         </div>
         <div className="conent-title-catogory">
           <h2 className="text-white">Manhuas</h2>
         </div>
         <div className="row row-cols-1 row-cols-sm-3 row-cols-xl-4 row-cols-xxl-6">
-          {manhuas.map((manhua) => (
-            <CardItem {...PropsMh} />
-          ))}
+          {manhuas.map((manhua) => {
+            manhua.type = "manhua";
+            return <CardItem {...manhua} />;
+          })}
         </div>
       </div>
     </div>
