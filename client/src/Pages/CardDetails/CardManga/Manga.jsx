@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import style from "./Manga.module.css";
+import { useParams } from "react-router-dom";
+import { getMangasById } from "../../../Api/Mangas/mangas";
 
 export const Manga = () => {
   const [mangas, setMangas] = useState([]);

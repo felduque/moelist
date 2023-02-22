@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
-
 import style from "./Anime.module.css";
+import { getAnimeById } from "../../../Api/Anime/anime";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 export const Anime = () => {
   const [animes, setAnimes] = useState([]);
