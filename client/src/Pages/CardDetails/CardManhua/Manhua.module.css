@@ -16,6 +16,11 @@
 }
 
 
+.bg_card {
+  background-color: #171823;
+}
+
+
 .content_sinopsis_and_banner{
   padding: 0 1rem;
   /* background modo dark */  

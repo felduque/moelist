@@ -1,6 +1,7 @@
 import React from "react";
 import "./Navbar.css";
 import { RiHome4Fill } from "react-icons/ri";
+import { FaBars } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
 
@@ -15,6 +16,7 @@ export const Navbar = () => {
           <h1 className="title-logo-moelist-navbar">MoesList</h1>
         </Link>
       </div>
+      <div className="navbar-container__search d-none d-sm-block">
       <div className="navbar-container__search d-none d-sm-block">
         <input
           className="navbar-container__search__input"
