@@ -97,16 +97,11 @@
   list-style: none;
   font-size: 1.2rem;
   color: white;
-  color: white;
   font-weight: bold;
   margin-bottom: 1rem;
   background-color: var(--primary-color);
   border-radius: 30px;
   padding: 10px
-  background-color: var(--primary-color);
-  border-radius: 30px;
-  padding: 10px
-
 }
 
 /* Infos */
@@ -188,10 +183,7 @@
 
 .scan_list {
   top: 150px;
-.scan_list {
-  top: 150px;
 }
-
 .title_scans_list{
   color: #F45237;
   font-size: 2rem;
@@ -221,20 +213,7 @@
     column-gap: 10px;
     row-gap: 0;
   }
-@media (max-width: 576px) {
-  .afiliate_logo{ 
-    width: 100%;
-  }
-  .content_sinopsis__generos {
-    column-gap: 10px;
-    row-gap: 0;
-  }
 
-  .content_primary_card__img { 
-    width: 100%;
-    margin-bottom: 20px;
-  }
-}
   .content_primary_card__img { 
     width: 100%;
     margin-bottom: 20px;
