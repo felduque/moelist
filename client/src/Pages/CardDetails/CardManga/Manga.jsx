@@ -2,13 +2,11 @@ import React, { useEffect, useState } from "react";
 import style from "./Manga.module.css";
 import { useParams } from "react-router-dom";
 import { getMangasById } from "../../../Api/Mangas/mangas";
-
 export const Manga = () => {
   const [mangas, setMangas] = useState([]);
   const [scans, setScans] = useState([]);
 
   const { id } = useParams();
-
   useEffect(() => {
     const fetchMangas = async () => {
       const manga = await getMangasById(id);
@@ -192,7 +190,7 @@ export const Manga = () => {
                     style.content_primary_card__info__content__item__text
                   }
                 >
-                  Seinen
+                  {mangas.demography}
                 </p>
               </div>
             </div>

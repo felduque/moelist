@@ -7,10 +7,9 @@
   background-color: #1a1a1a;
   color: #fff;
   margin-bottom: 50px;
-  
 }
 
-.sidebar-container-cards{ 
+.sidebar-container-cards {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -22,38 +21,11 @@
   padding: 20px;
 }
 
-.sidebar-container-card{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
 
-}
-.sidebar-container-card-title {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 50px;
-
-}
-
-.sidebar-text-title-card {
-  font-size: 1.5rem;
+.sidebar-text-title-list-cards {
+  font-size: 2rem;
   font-weight: bold;
-  color: #fff;
-}
-.sidebar-container-card-imagen {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
+  color: #12ffd7;
 }
 
-.sidebar-container-card-imagen-banner{
-  width: 300px;
-  height: 250px;
-}
 

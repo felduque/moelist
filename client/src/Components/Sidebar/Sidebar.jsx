@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { CardItemSidebar } from "../CardItem/CardItemSidebar";
 import "./Sidebar.css";
-
 import { getAnimes } from "../../Api/Anime/anime";
 import { getManhuas } from "../../Api/Manhuas/mahuas";
 import { getManhwas } from "../../Api/Manhwas/manhwas";
 import { getMangas } from "../../Api/Mangas/mangas";
-
 export const Sidebar = () => {
   const [animes, setAnimes] = useState([]);
   const [mangas, setMangas] = useState([]);
@@ -33,33 +30,33 @@ export const Sidebar = () => {
     };
     fetchData();
   }, []);
-
   return (
     <div className="sidebar-container-rigth">
-      <div className="row row-cols-3 row-cols-lg-1 p-3 pt-5">
-        <h5>Ultimos Animes Agregados</h5>
-        {animes?.slice(0, 2).map((anime, index) => {
-          anime.type = "anime";
-          return <CardItemSidebar {...anime} />;
-        })}
+      <div className="sidebar-container-cards">
+        <div className="sidebar-content-title-list-cards">
+          <h2 className="sidebar-text-title-list-cards">Ultimos Agregados</h2>
+        </div>
+        <div className="row row-cols-3 row-cols-lg-1 p-3 pt-5">
+          {animes?.slice(0, 2).map((anime, index) => {
+            anime.type = "anime";
+            return <CardItemSidebar key={index} {...anime} />;
+          })}
 
-        <h5>Ultimos Mangas Agregados</h5>
-        {mangas.map((manga) => {
-          anime.type = "manga";
-          return <CardItem {...manga} />;
-        })}
+          {mangas.map((manga, index) => {
+            anime.type = "manga";
+            return <CardItem key={index} {...manga} />;
+          })}
 
-        <h5>Ultimos Manhwas Agregados</h5>
-        {manhwas.map((manhwa) => {
-          manhwa.type = "manwha";
-          return <CardItem {...manhwa} />;
-        })}
+          {manhwas.map((manhwa, index) => {
+            manhwa.type = "manwha";
+            return <CardItem key={index} {...manhwa} />;
+          })}
 
-        <h5>Ultimos Manhuas Agregados</h5>
-        {manhuas.map((manhua) => {
-          manhua.type = "manhua";
-          return <CardItem {...manhua} />;
-        })}
+          {manhuas.map((manhua, index) => {
+            manhua.type = "manhua";
+            return <CardItem key={index} {...manhua} />;
+          })}
+        </div>
       </div>
     </div>
   );

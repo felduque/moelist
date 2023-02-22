@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import style from "./Manhua.module.css";
 import { useParams } from "react-router-dom";
 import { getManhuasById } from "../../../Api/Manhuas/mahuas";
-
 export const Manhua = () => {
   const [manhuas, setManhuas] = useState([]);
   const [scans, setScans] = useState([]);
@@ -16,6 +15,7 @@ export const Manhua = () => {
     };
     fetchManhuas();
   }, []);
+
   return (
     <div className={`container-fluid ${style.bg_card}`}>
       <div className={`row pt-5 ${style.content_sinopsis_and_banner}`}>
@@ -190,7 +190,7 @@ export const Manhua = () => {
                     style.content_primary_card__info__content__item__text
                   }
                 >
-                  Seinen
+                  {manhuas?.demography}
                 </p>
               </div>
             </div>

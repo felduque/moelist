@@ -25,13 +25,13 @@ export const Anime = sequelize.define(
       type: DataTypes.STRING,
     },
     episodes: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
     },
     day: {
       type: DataTypes.STRING,
     },
     rating: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
     },
     premiered: {
       type: DataTypes.STRING,
@@ -55,7 +55,7 @@ export const Anime = sequelize.define(
       type: DataTypes.STRING,
     },
     score: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
     },
     popularity: {
       type: DataTypes.INTEGER,
@@ -70,7 +70,7 @@ export const Anime = sequelize.define(
       type: DataTypes.STRING,
     },
     favorites: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
     },
     season: {
       type: DataTypes.STRING,
@@ -79,6 +79,9 @@ export const Anime = sequelize.define(
       type: DataTypes.TEXT,
     },
     opening: {
+      type: DataTypes.TEXT,
+    },
+    urlContent: {
       type: DataTypes.TEXT,
     },
   },

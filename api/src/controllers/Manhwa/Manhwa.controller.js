@@ -19,6 +19,7 @@ export const createManhwa = async (req, res) => {
       rating,
       genres,
       authors,
+      urlContent,
       artists,
       score,
       popularity,
@@ -28,8 +29,10 @@ export const createManhwa = async (req, res) => {
     const img = req.files?.image;
     let pathImage = __dirname + "/../../public/manhwa/" + img?.name;
     img?.mv(pathImage);
-    let url = (pathImage = "http://localhost:3000/manhwa/" + img?.name);
-    if (!img) url = "google.com";
+    let url = (pathImage = "https://apix.moelist.online/manhwa/" + img?.name);
+    if (!img)
+      url =
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/2048px-No_image_available.svg.png";
     const manhwa = await Manhwa.create({
       title,
       description,
@@ -41,6 +44,7 @@ export const createManhwa = async (req, res) => {
       chapters,
       volumes,
       rating,
+      urlContent,
       genres,
       authors,
       artists,
@@ -65,11 +69,7 @@ export const createManhwa = async (req, res) => {
 
 export const getManhwas = async (req, res) => {
   try {
-    const manhwa = await Manhwa.findAll({
-      include: {
-        model: Scan,
-      },
-    });
+    const manhwa = await Manhwa.findAll();
     res.status(200).json(manhwa);
   } catch (error) {
     console.log(error);
@@ -81,11 +81,10 @@ export const getManhwasById = async (req, res) => {
     const { id } = req.params;
     const manhwa = await Manhwa.findOne({
       where: { id },
-      include: {
-        model: Scan,
-      },
     });
-    res.status(200).json(manhwa);
+
+    const scans = await manhwa.getScans();
+    res.status(200).json({ manhwa, scans });
   } catch (error) {
     console.log(error);
   }
@@ -115,8 +114,10 @@ export const updateManhwa = async (req, res) => {
     const img = req.files?.image;
     let pathImage = __dirname + "/../../public/manhwa/" + img?.name;
     img?.mv(pathImage);
-    let url = (pathImage = "http://localhost:3000/manhwa/" + img?.name);
-    if (!img) url = "google.com";
+    let url = (pathImage = "https://apix.moelist.online/manhwa/" + img?.name);
+    if (!img)
+      url =
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/2048px-No_image_available.svg.png";
 
     const manhwa = await Manhwa.update(
       {

@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import "./Main.css";
 import { getAnimes } from "../../Api/Anime/anime";
 import { getMangas } from "../../Api/Mangas/mangas";
 import { getManhuas } from "../../Api/Manhuas/mahuas";
 import { getManhwas } from "../../Api/Manhwas/manhwas";
-import { CardItem } from "../CardItem/CardItem";
-import "./Main.css";
 
 export const Main = () => {
   const [animes, setAnimes] = useState([]);
@@ -29,43 +28,53 @@ export const Main = () => {
 
   return (
     <div className="content-primary-main">
-      <div className="content-all-main container">
+      <div className="content-all-main pt-5 container">
+        <div className="alert_page">
+          <h2 className="alert_page_text">
+            Actualmente la pagina sigue en desarrollo activo, por lo que puede
+            que no se encuentren todos los animes, mangas, manhwas y manhuas. Si
+            encuentras algun bug o quieres sugerir alguna mejora, puedes
+            contactarme en mi discord:{" "}
+            <a href="https://discord.gg/UfdnmZ5DJE" target="_blank">
+              CLICK AQUI
+            </a>
+          </h2>
+        </div>
         <div className="conent-title-catogory one-category-main">
           <h2 className="text-white">Animes</h2>
         </div>
         <div className="row row-cols-1 row-cols-sm-3 row-cols-xl-4 row-cols-xxl-6">
           {animes.map((anime) => {
             anime.type = "anime";
-            return <CardItem {...anime} />;
+            return <CardItem key={anime.id} {...anime} />;
           })}
         </div>
-
         <div className="conent-title-catogory">
           <h2 className="text-white">Mangas</h2>
         </div>
         <div className="row row-cols-1 row-cols-sm-3 row-cols-xl-4 row-cols-xxl-6">
           {mangas.map((manga) => {
             anime.type = "manga";
-            return <CardItem {...manga} />;
+            return <CardItem key={manga.id} {...manga} />;
           })}
         </div>
-
         <div className="conent-title-catogory">
           <h2 className="text-white">Manhwas</h2>
         </div>
         <div className="row row-cols-1 row-cols-sm-3 row-cols-xl-4 row-cols-xxl-6">
           {manhwas.map((manhwa) => {
             manhwa.type = "manwha";
-            return <CardItem {...manhwa} />;
+            return <CardItem key={manhwa.id} {...manhwa} />;
           })}
         </div>
+
         <div className="conent-title-catogory">
           <h2 className="text-white">Manhuas</h2>
         </div>
         <div className="row row-cols-1 row-cols-sm-3 row-cols-xl-4 row-cols-xxl-6">
           {manhuas.map((manhua) => {
             manhua.type = "manhua";
-            return <CardItem {...manhua} />;
+            return <CardItem key={manhua.id} {...manhua} />;
           })}
         </div>
       </div>

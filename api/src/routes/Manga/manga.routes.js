@@ -6,11 +6,12 @@ import {
   updateManga,
   deleteManga,
 } from "../../controllers/Manga/manga.controller.js";
+import veryToleken from "../../Helpers/valide.js";
 const router = Router();
 
-router.get("/manga", getMangas);
+router.get("/mangas", getMangas);
 router.get("/manga/:id", getMangaById);
-router.post("/manga", createManga);
-router.patch("/manga/:id", updateManga);
-router.delete("/manga/:id", deleteManga);
+router.post("/manga", veryToleken, createManga);
+router.patch("/manga/:id", veryToleken, updateManga);
+router.delete("/manga/:id", veryToleken, deleteManga);
 export default router;

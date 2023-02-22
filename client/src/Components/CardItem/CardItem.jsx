@@ -2,7 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./CardItem.css";
 
-export const CardItem = ({ id, image, title, description, type }) => {
+export const CardItem = ({
+  id,
+  image,
+  title,
+  description,
+  type,
+  demography,
+}) => {
   return (
     <div className="col">
       <Link to={`/${type}/${id}`}>
@@ -10,9 +17,9 @@ export const CardItem = ({ id, image, title, description, type }) => {
           <div className="card-inner">
             <div className="card-image position-relative">
               <img
-                src="https://picsum.photos/200/300"
+                src={image}
                 className="content-card-main-banner"
-                alt="One Piece"
+                alt={title}
               />
 
               <span
@@ -22,28 +29,21 @@ export const CardItem = ({ id, image, title, description, type }) => {
               </span>
 
               <div className="demography text-white position-absolute text-center w-100">
-                Seinen
+                {demography}
               </div>
             </div>
 
-            <p className="title-card-main text-center mt-3">
-              One Piece efffffffe fe fe
-            </p>
+            <p className="title-card-main text-center mt-3">{title}</p>
           </div>
 
           <div className="hover-desc">
-            <strong className="text-white">One Piece</strong>
+            <strong className="text-white">{title}</strong>
             <span
               className={`badge rounded-pill ${type} my-3 d-block pill text-uppercase fw-bold`}
             >
               {type}
             </span>
-            <p className="desc">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Et sit
-              accusamus dolores. Sequi, aliquam ipsum! Cum debitis quaerat
-              praesentium harum reiciendis doloremque repudiandae, architecto
-              illum iusto repellat officia, laboriosam mollitia.
-            </p>
+            <p className="desc">{description}</p>
 
             <button
               type="button"

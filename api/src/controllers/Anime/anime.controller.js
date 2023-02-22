@@ -36,8 +36,11 @@ export const createAnime = async (req, res) => {
     const img = req.files?.image;
     let pathImage = __dirname + "/../../public/anime/" + img?.name;
     img?.mv(pathImage);
-    let url = (pathImage = "http://localhost:3000/anime/img/" + img?.name);
-    if (!img) url = "google.com";
+    let url = (pathImage =
+      "https://apix.moelist.online/anime/img/" + img?.name);
+    if (!img)
+      url =
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/2048px-No_image_available.svg.png";
 
     const anime = await Anime.create({
       title,
@@ -81,29 +84,20 @@ export const createAnime = async (req, res) => {
   }
 };
 
-export const getAnime = async (req, res) => {
-  try {
-    const anime = await Anime.findAll({
-      include: Scan,
-    });
-    res.status(200).json(anime);
-  } catch (error) {
-    console.log(error);
-  }
-};
-
 export const getAnimeById = async (req, res) => {
   try {
     const { id } = req.params;
+    // se busca el anime por id y se incluye los scans
     const anime = await Anime.findOne({
       where: {
         id,
       },
-      include: {
-        model: Scan,
-      },
     });
-    res.status(200).json(anime);
+
+    const scans = await anime.getScans();
+
+    res.status(200).json({ anime, scans });
+    console.log(anime.toJSON());
   } catch (error) {
     console.log(error);
   }
@@ -141,8 +135,10 @@ export const updateAnime = async (req, res) => {
     const img = req.files?.image;
     let pathImage = __dirname + "/../../public/anime/" + img?.name;
     img?.mv(pathImage);
-    let url = (pathImage = "http://localhost:3000/anime/" + img?.name);
-    if (!img) url = "google.com";
+    let url = (pathImage = "https://apix.moelist.online/anime/" + img?.name);
+    if (!img)
+      url =
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/2048px-No_image_available.svg.png";
 
     const anime = await Anime.update(
       {
@@ -189,6 +185,19 @@ export const deleteAnime = async (req, res) => {
     const anime = await Anime.destroy({
       where: {
         id,
+      },
+    });
+    res.status(200).json(anime);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getAllInfo = async (req, res) => {
+  try {
+    const anime = await Anime.findAll({
+      include: {
+        model: Scan,
       },
     });
     res.status(200).json(anime);

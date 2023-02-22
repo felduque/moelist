@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
+import style from "./Manhwa.module.css";
 import { getManhwasById } from "../../../Api/Manhwas/manhwas";
 import { useParams } from "react-router-dom";
-
-import style from "./Manhwa.module.css";
 export const Manhwa = () => {
   const [manhwas, setManhwas] = useState([]);
   const [scans, setScans] = useState([]);
@@ -190,7 +189,7 @@ export const Manhwa = () => {
                     style.content_primary_card__info__content__item__text
                   }
                 >
-                  Seinen
+                  {manhwas?.demography}
                 </p>
               </div>
             </div>

@@ -1,6 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
-// import cors from 'cors';
+import cors from "cors";
 import morgan from "morgan";
 import animeroutes from "./routes/Anime/anime.routes.js";
 import mangaroutes from "./routes/Manga/manga.routes.js";
@@ -65,6 +65,21 @@ app.use(
     tempFileDir: "/tmp/",
   })
 );
+
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "https://moelist.online");
+  // Se agrega el x-auth-token para que se pueda enviar el token en el header
+  res.header(
+    "Access-Control-Allow-Headers",
+    "x-auth-token, Origin, X-Requested-With, Content-Type, Accept"
+  );
+  res.header("Access-Control-Allow-Credentials", "true");
+  res.header(
+    "Access-Control-Allow-Methods",
+    "GET, POST, OPTIONS, PUT, DELETE, PATCH"
+  );
+  next();
+});
 
 app.use(animeroutes);
 app.use(mangaroutes);

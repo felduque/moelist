@@ -33,7 +33,6 @@ export const MobileMenu = () => {
           <Link>
             <RiHome4Fill className="mb-1" /> Explorar
           </Link>
-          <Link>Perfil</Link>
         </ul>
 
         <input className="form-control" type="text" placeholder="Search" />

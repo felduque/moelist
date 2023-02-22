@@ -3,8 +3,10 @@ import "./Navbar.css";
 import { RiHome4Fill } from "react-icons/ri";
 import { FaBars } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { MobileMenu } from "../MobileMenu/MobileMenu";
 
+import { MobileMenu } from "../MobileMenu/MobileMenu";
+// import { Login } from "../Log-in/Login";
+// import { Register } from "../sign-up/Register";
 export const Navbar = () => {
   return (
     <div className="navbar-container">
@@ -20,6 +22,14 @@ export const Navbar = () => {
           placeholder="Search"
         />
       </div>
+
+      {/* <div className="navbar-container__icons__profile">
+        <h2 className="navbar-text-profile">Login</h2>
+      </div>
+      <div className="navbar-container__icons__profile">
+        <h2 className="navbar-text-profile">Register</h2>
+      </div> */}
+
       <div className="nav-list">
         <div className="nav-list-link  d-none d-sm-block">
           <div className="navbar-container__icons__home">
@@ -27,11 +37,6 @@ export const Navbar = () => {
           </div>
           <div className="navbar-container__icons__explore">
             <h2 className="navbar-text-explorer">Explorar</h2>
-          </div>
-        </div>
-        <div className="nav-list-link d-none d-sm-block">
-          <div className="navbar-container__icons__profile">
-            <h2 className="navbar-text-profile">Profile</h2>
           </div>
         </div>
         <div className="nav-list-link d-sm-none">
