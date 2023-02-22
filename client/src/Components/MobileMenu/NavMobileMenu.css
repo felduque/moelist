@@ -1,0 +1,11 @@
+.nav-list-mobile {
+    list-style: none;
+}
+
+.nav-list-mobile a {
+    display: block;
+    text-decoration: none;
+    color: black;
+    font-weight: 700;
+    margin-bottom: 10px;
+}

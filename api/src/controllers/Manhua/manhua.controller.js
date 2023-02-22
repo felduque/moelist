@@ -17,6 +17,7 @@ export const createManhua = async (req, res) => {
       chapters,
       volumes,
       rating,
+      urlContent,
       genres,
       authors,
       artists,
@@ -28,8 +29,10 @@ export const createManhua = async (req, res) => {
     const img = req.files?.image;
     let pathImage = __dirname + "/../../public/manhua/" + img?.name;
     img?.mv(pathImage);
-    let url = (pathImage = "http://localhost:3000/manhua/" + img?.name);
-    if (!img) url = "google.com";
+    let url = (pathImage = "https://apix.moelist.online/manhua/" + img?.name);
+    if (!img)
+      url =
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/2048px-No_image_available.svg.png";
     const manga = await Manhua.create({
       title,
       description,
@@ -38,6 +41,7 @@ export const createManhua = async (req, res) => {
       day,
       type,
       source,
+      urlContent,
       chapters,
       volumes,
       rating,
@@ -81,11 +85,10 @@ export const getManhuaById = async (req, res) => {
     const { id } = req.params;
     const manhua = await Manhua.findOne({
       where: { id },
-      include: {
-        model: Scan,
-      },
     });
-    res.status(200).json(manhua);
+
+    const scans = await manhua.getScans();
+    res.status(200).json({ manhua, scans });
   } catch (error) {
     console.log(error);
   }
@@ -115,8 +118,10 @@ export const updateManhua = async (req, res) => {
     const img = req.files?.image;
     let pathImage = __dirname + "/../../public/manhua/" + img?.name;
     img?.mv(pathImage);
-    let url = (pathImage = "http://localhost:3000/manhua/" + img?.name);
-    if (!img) url = "google.com";
+    let url = (pathImage = "https://apix.moelist.online/manhua/" + img?.name);
+    if (!img)
+      url =
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/2048px-No_image_available.svg.png";
 
     const manhua = await Manhua.update(
       {

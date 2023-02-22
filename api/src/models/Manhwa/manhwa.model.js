@@ -29,13 +29,13 @@ export const Manhwa = sequelize.define("manhwas", {
     type: DataTypes.STRING,
   },
   chapters: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
   },
   volumes: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
   },
   rating: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
   },
   genres: {
     type: DataTypes.ARRAY(DataTypes.STRING),
@@ -47,12 +47,12 @@ export const Manhwa = sequelize.define("manhwas", {
     type: DataTypes.ARRAY(DataTypes.STRING),
   },
   score: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
   },
   popularity: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
   },
-  scans: {
-    type: DataTypes.ARRAY(DataTypes.STRING),
+  urlContent: {
+    type: DataTypes.TEXT,
   },
 });

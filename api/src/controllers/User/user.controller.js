@@ -7,7 +7,7 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
 export const createUser = async (req, res) => {
-  const { name, email, password } = req.body;
+  const { userName, email, password } = req.body;
   try {
     const verfiEmail = await User.findOne({ email });
 
@@ -19,7 +19,7 @@ export const createUser = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     const user = await User.create({
-      name,
+      userName,
       email,
       password: hashedPassword,
     });
@@ -34,11 +34,12 @@ export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
     // check if user exists
-    const veryEmail = await findOne({ email });
+    const veryEmail = await User.findOne({ where: { email } });
 
-    if (!veryEmail) {
+    if (!veryEmail)
       return res.status(400).json({ error: "Invalid credentials" });
-    }
+
+    console.log(veryEmail);
 
     // check if password is correct
     const isMatch = await bcrypt.compare(password, veryEmail.password);
@@ -49,56 +50,20 @@ export const loginUser = async (req, res) => {
 
     // create token
     const payload = {
-      user: {
-        id: veryEmail.id,
-      },
+      id: veryEmail.id,
+      role: veryEmail.role,
     };
     jwt.sign(
       payload,
-      process.env.JWT_SECRET,
+      "HOXmtwgjUmhOtDutUaXK/PQX5RGV4lSbgU1CbAq+wFc=",
       { expiresIn: 360000 },
       (err, token) => {
         if (err) throw err;
         res.json({ token });
       }
     );
-    res.status(200).json({ veryEmail });
   } catch (err) {
     console.log(err);
     res.status(500).json({ error: "Server error" });
   }
 };
-
-export const getUser = async (req, res) => {
-  try {
-    const id = req.params?.id;
-    const user = await User.findById(id).select("-password");
-
-    res.status(200).json({ user });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json({ error: "Server error" });
-  }
-};
-
-// export const updateUser = async (req, res) => {
-//   try{
-//     const id = req.params?.id;
-//     const  { name, email, password, newPassword } = req.body;
-//     const compare = await bcrypt.compare(password, password);
-//     if(!compare){
-//       return res.status(400).json({ error: "Invalid credentials" });
-//     }
-//     const salt = await bcrypt.genSalt(10);
-//     const hashedPassword = await bcrypt.hash(newPassword, salt);
-
-//     const user = await User.update(
-//       { name, email, password: hashedPassword },
-//       { where: { id } }
-//     );
-//     res.status(200).json({ user })
-//   }catch(err){
-//     console.log(err);
-//     res.status(500).json({ error: "Server error" });
-//   }
-// }

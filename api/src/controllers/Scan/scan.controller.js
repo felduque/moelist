@@ -7,11 +7,15 @@ const __dirname = dirname(__filename);
 export const createScan = async (req, res) => {
   try {
     const { name, url } = req.body;
+
     const img = req.files?.image;
     let pathImage = __dirname + "/../../public/afiliados/" + img?.name;
     img?.mv(pathImage);
-    let urlimg = (pathImage = "http://localhost:3000/afiliados/" + img?.name);
-    if (!img) urlimg = "google.com";
+    let urlimg = (pathImage =
+      "https://apix.moelist.online/afiliados/" + img?.name);
+    if (!img)
+      urlimg =
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/2048px-No_image_available.svg.png";
     const scan = await Scan.create({
       name,
       image: urlimg,
@@ -53,8 +57,11 @@ export const updateScan = async (req, res) => {
     const img = req.files?.image;
     let pathImage = __dirname + "/../../public/afiliados/" + img?.name;
     img?.mv(pathImage);
-    let urlimg = (pathImage = "http://localhost:3000/afiliados/" + img?.name);
-    if (!img) url = "google.com";
+    let urlimg = (pathImage =
+      "https://apix.moelist.online/afiliados/" + img?.name);
+    if (!img)
+      url =
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/2048px-No_image_available.svg.png";
     const scan = await Scan.update(
       {
         name,

@@ -2,7 +2,7 @@
   position: sticky;
   top: 0;
   width: 100%;
-  background-color: #e95b5b;
+  background-color: var(--primary-color);
   height: 100px;
   border-bottom: 1px solid #e5e5e5;
   text-align: center;
@@ -11,6 +11,7 @@
   flex-direction: row;
   justify-content: center;
   z-index: 100;
+  padding: 0 10px;
 }
 
 
@@ -107,4 +108,20 @@
   font-size: 1.5rem;
   font-weight: 500;
   margin: 0;
+}
+
+.nav-list {
+  display: flex;
+  align-items: end;
+}
+
+@media (max-width: 576px) {
+  .navbar-container {
+    justify-content: space-between;
+  
+  }
+
+  .nav-list {
+    align-items: center;
+  }
 }

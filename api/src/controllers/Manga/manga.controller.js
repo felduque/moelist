@@ -23,13 +23,16 @@ export const createManga = async (req, res) => {
       score,
       popularity,
       scans,
+      urlContent,
     } = req.body;
 
     const img = req.files?.image;
     let pathImage = __dirname + "/../../public/manga/" + img?.name;
     img?.mv(pathImage);
-    let url = (pathImage = "http://localhost:3000/manga/" + img?.name);
-    if (!img) url = "google.com";
+    let url = (pathImage = "https://apix.moelist.online/manga/" + img?.name);
+    if (!img)
+      url =
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/2048px-No_image_available.svg.png";
     const manga = await Manga.create({
       title,
       description,
@@ -47,6 +50,7 @@ export const createManga = async (req, res) => {
       score,
       popularity,
       scans,
+      urlContent,
     });
     const { scanId } = req.body;
     const scan = await Scan.findOne({
@@ -82,11 +86,10 @@ export const getMangaById = async (req, res) => {
     const { id } = req.params;
     const manga = await Manga.findOne({
       where: { id },
-      include: {
-        model: Scan,
-      },
     });
-    res.status(200).json(manga);
+
+    const scans = await manga.getScans();
+    res.status(200).json({ manga, scans });
   } catch (error) {
     res.status(500).json({
       message: error.message,
@@ -118,8 +121,10 @@ export const updateManga = async (req, res) => {
     const img = req.files?.image;
     let pathImage = __dirname + "/../../public/manga/" + img?.name;
     img?.mv(pathImage);
-    let url = (pathImage = "http://localhost:3000/manga/" + img?.name);
-    if (!img) url = "google.com";
+    let url = (pathImage = "https://apix.moelist.online/manga/" + img?.name);
+    if (!img)
+      url =
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/2048px-No_image_available.svg.png";
 
     const manga = await Manga.update(
       {
