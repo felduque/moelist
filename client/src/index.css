@@ -2,5 +2,14 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-family: 'Poppins', sans-serif;
+}
+
+:root {
+  --primary-color: #e95b5b;
+  --color-anime: #0d6efd;
+  --color-manga: rgb(255,0,0);
+  --color-manwha: rgb(255,165,0);
+  --color-manhua: rgba(128,0,128);
+  --dark-bg: #171823;
 }

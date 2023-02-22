@@ -1,210 +1,72 @@
 import React from "react";
+import { CardItem } from "../CardItem/CardItem";
 import "./Main.css";
 
 export const Main = () => {
+  const animes = [];
+  const mangas = [];
+  const manhwas = [];
+  const manhuas = [];
+
+  const propsA = {
+    type: "anime",
+  };
+
+  const propsM = {
+    type: "manga",
+  };
+
+  const PropsMan = {
+    type: "manwha",
+  };
+
+  const PropsMh = {
+    type: "manhua",
+  };
+
+  for (let i = 0; i < 6; i++) {
+    animes.push(i);
+    mangas.push(i);
+    manhwas.push(i);
+    manhuas.push(i);
+  }
+
   return (
     <div className="content-primary-main">
-      <div className="content-all-main">
+      <div className="content-all-main container">
         <div className="conent-title-catogory one-category-main">
-          <h2>Animes</h2>
+          <h2 className="text-white">Animes</h2>
         </div>
-        <div className="content-cards">
-          <div className="content-card-main">
-            <img
-              src="https://picsum.photos/200/300"
-              className="content-card-main-banner"
-              alt="One Piece"
-            />
+        <div className="row">
+          {animes.map((anime) => (
+            <CardItem {...propsA} />
+          ))}
+        </div>
 
-            <p className="title-card-main">One Piece efffffffe fe fe</p>
-          </div>
-          <div className="content-card-main">
-            <img
-              src="https://picsum.photos/200/300"
-              className="content-card-main-banner"
-              alt="One Piece"
-            />
+        <div className="conent-title-catogory">
+          <h2 className="text-white">Mangas</h2>
+        </div>
+        <div className="row">
+          {mangas.map((manga) => (
+            <CardItem {...propsM} />
+          ))}
+        </div>
 
-            <p className="title-card-main">One Piece</p>
-          </div>
-          <div className="content-card-main">
-            <img
-              src="https://picsum.photos/200/300"
-              className="content-card-main-banner"
-              alt="One Piece"
-            />
-
-            <p className="title-card-main">One Piece</p>
-          </div>
-          <div className="content-card-main">
-            <img
-              src="https://picsum.photos/200/300"
-              className="content-card-main-banner"
-              alt="One Piece"
-            />
-
-            <p className="title-card-main">One Piece</p>
-          </div>
-          <div className="content-card-main">
-            <img
-              src="https://picsum.photos/200/300"
-              className="content-card-main-banner"
-              alt="One Piece"
-            />
-
-            <p className="title-card-main">One Piece</p>
-          </div>
+        <div className="conent-title-catogory">
+          <h2 className="text-white">Manhwas</h2>
+        </div>
+        <div className="row">
+          {manhwas.map((manhwa) => (
+            <CardItem {...PropsMan} />
+          ))}
         </div>
         <div className="conent-title-catogory">
-          <h2>Mangas</h2>
+          <h2 className="text-white">Manhuas</h2>
         </div>
-
-        <div className="content-cards">
-          <div className="content-card-main">
-            <img
-              src="https://picsum.photos/200/300"
-              className="content-card-main-banner"
-              alt="One Piece"
-            />
-
-            <p className="title-card-main">One Piece</p>
-          </div>
-          <div className="content-card-main">
-            <img
-              src="https://picsum.photos/200/300"
-              className="content-card-main-banner"
-              alt="One Piece"
-            />
-
-            <p className="title-card-main">One Piece</p>
-          </div>
-          <div className="content-card-main">
-            <img
-              src="https://picsum.photos/200/300"
-              className="content-card-main-banner"
-              alt="One Piece"
-            />
-
-            <p className="title-card-main">One Piece</p>
-          </div>
-          <div className="content-card-main">
-            <img
-              src="https://picsum.photos/200/300"
-              className="content-card-main-banner"
-              alt="One Piece"
-            />
-
-            <p className="title-card-main">One Piece</p>
-          </div>
-          <div className="content-card-main">
-            <img
-              src="https://picsum.photos/200/300"
-              className="content-card-main-banner"
-              alt="One Piece"
-            />
-
-            <p className="title-card-main">One Piece</p>
-          </div>
-        </div>
-        <div className="conent-title-catogory">
-          <h2>Manhwas</h2>
-        </div>
-        <div className="content-cards">
-          <div className="content-card-main">
-            <img
-              src="https://picsum.photos/200/300"
-              className="content-card-main-banner"
-              alt="One Piece"
-            />
-
-            <p className="title-card-main">One Piece</p>
-          </div>
-          <div className="content-card-main">
-            <img
-              src="https://picsum.photos/200/300"
-              className="content-card-main-banner"
-              alt="One Piece"
-            />
-
-            <p className="title-card-main">One Piece</p>
-          </div>
-          <div className="content-card-main">
-            <img
-              src="https://picsum.photos/200/300"
-              className="content-card-main-banner"
-              alt="One Piece"
-            />
-
-            <p className="title-card-main">One Piece</p>
-          </div>
-          <div className="content-card-main">
-            <img
-              src="https://picsum.photos/200/300"
-              className="content-card-main-banner"
-              alt="One Piece"
-            />
-
-            <p className="title-card-main">One Piece</p>
-          </div>
-          <div className="content-card-main">
-            <img
-              src="https://picsum.photos/200/300"
-              className="content-card-main-banner"
-              alt="One Piece"
-            />
-
-            <p className="title-card-main">One Piece</p>
-          </div>
-        </div>
-        <div className="conent-title-catogory">
-          <h2>Manhuas</h2>
-        </div>
-        <div className="content-cards">
-          <div className="content-card-main">
-            <img
-              src="https://picsum.photos/200/300"
-              className="content-card-main-banner"
-              alt="One Piece"
-            />
-
-            <p className="title-card-main">One Piece</p>
-          </div>
-          <div className="content-card-main">
-            <img
-              src="https://picsum.photos/200/300"
-              className="content-card-main-banner"
-              alt="One Piece"
-            />
-
-            <p className="title-card-main">One Piece</p>
-          </div>
-          <div className="content-card-main">
-            <img
-              src="https://picsum.photos/200/300"
-              className="content-card-main-banner"
-              alt="One Piece"
-            />
-
-            <p className="title-card-main">One Piece</p>
-          </div>
-          <div className="content-card-main">
-            <img
-              src="https://picsum.photos/200/300"
-              className="content-card-main-banner"
-              alt="One Piece"
-            />
-
-            <p className="title-card-main">One Piece</p>
-          </div>
-          <div className="content-card-main">
-            <img
-              src="https://picsum.photos/200/300"
-              className="content-card-main-banner"
-              alt="One Piece"
-            />
-
-            <p className="title-card-main">One Piece</p>
-          </div>
+        <div className="row">
+          {manhuas.map((manhua) => (
+            <CardItem {...PropsMh} />
+          ))}
         </div>
       </div>
     </div>
