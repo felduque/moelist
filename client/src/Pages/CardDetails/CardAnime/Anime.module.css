@@ -31,7 +31,7 @@
 }
 
 .content_primary_card__img{
-  max-width: 350px;
+  width: 100%;
   max-width: 350px;
   height: 480px;
   object-fit: cover;
@@ -203,6 +203,13 @@
 .afiliate_logo{
   width: 350px;
   height: 262px;
+}
+
+@media (max-width: 1199px) {
+  .content_primary_card__img { 
+    max-width: 325px;
+  }
+ 
 }
 
 @media (max-width: 576px) {
