@@ -2,11 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./NavMobileMenu.css";
 import { RiHome4Fill } from "react-icons/ri";
+import { FaUserAlt } from "react-icons/fa";
+import { IoIosClose } from "react-icons/io";
 
 export const MobileMenu = () => {
   return (
     <div
-      class="offcanvas offcanvas-start"
+      class="offcanvas offcanvas-start bg-dark"
       tabindex="-1"
       id="mobileMenu"
       aria-labelledby="mobileMenu"
@@ -15,27 +17,41 @@ export const MobileMenu = () => {
         <h5 class="offcanvas-title" id="mobileMenuLabel">
           <Link
             to="/"
-            className="text-black fw-bold"
+            className="text-white fw-bold"
             style={{ textDecoration: "none", cursor: "pointer" }}
           >
             MoeList
           </Link>
         </h5>
-        <button
+        <IoIosClose
           type="button"
-          class="btn-close"
+          className="btn p-0 text-white fs-1"
           data-bs-dismiss="offcanvas"
           aria-label="Close"
-        ></button>
+        />
       </div>
       <div class="offcanvas-body">
-        <ul className="nav-list-mobile p-0 text-start">
+        <ul className="nav-list-mobile p-0 text-start ">
           <Link>
             <RiHome4Fill className="mb-1" /> Explorar
           </Link>
+          <li className="nav-list-mobile p-0 text-start fw-bold">
+            <button
+              type="button"
+              className="btn p-0 fw-bold text-white"
+              data-bs-toggle="modal"
+              data-bs-target="#modal"
+            >
+              <FaUserAlt className="mb-1" /> Cuenta
+            </button>
+          </li>
         </ul>
 
-        <input className="form-control" type="text" placeholder="Search" />
+        <input
+          className="form-control d-inline-block mt-1"
+          type="text"
+          placeholder="Search"
+        />
       </div>
     </div>
   );
