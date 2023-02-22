@@ -14,7 +14,9 @@ export const Sidebar = () => {
 
   return (
     <div className="sidebar-container-rigth">
-      <div className="sidebar-container-cards">{sidebarItems}</div>
+      <div className="row row-cols-3 row-cols-lg-1 p-3 pt-5">
+        {sidebarItems}
+      </div>
     </div>
   );
 };

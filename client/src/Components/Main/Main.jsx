@@ -37,7 +37,7 @@ export const Main = () => {
         <div className="conent-title-catogory one-category-main">
           <h2 className="text-white">Animes</h2>
         </div>
-        <div className="row">
+        <div className="row row-cols-1 row-cols-sm-3 row-cols-xl-4 row-cols-xxl-6">
           {animes.map((anime) => (
             <CardItem {...propsA} />
           ))}
@@ -46,7 +46,7 @@ export const Main = () => {
         <div className="conent-title-catogory">
           <h2 className="text-white">Mangas</h2>
         </div>
-        <div className="row">
+        <div className="row row-cols-1 row-cols-sm-3 row-cols-xl-4 row-cols-xxl-6">
           {mangas.map((manga) => (
             <CardItem {...propsM} />
           ))}
@@ -55,7 +55,7 @@ export const Main = () => {
         <div className="conent-title-catogory">
           <h2 className="text-white">Manhwas</h2>
         </div>
-        <div className="row">
+        <div className="row row-cols-1 row-cols-sm-3 row-cols-xl-4 row-cols-xxl-6">
           {manhwas.map((manhwa) => (
             <CardItem {...PropsMan} />
           ))}
@@ -63,7 +63,7 @@ export const Main = () => {
         <div className="conent-title-catogory">
           <h2 className="text-white">Manhuas</h2>
         </div>
-        <div className="row">
+        <div className="row row-cols-1 row-cols-sm-3 row-cols-xl-4 row-cols-xxl-6">
           {manhuas.map((manhua) => (
             <CardItem {...PropsMh} />
           ))}
