@@ -43,7 +43,7 @@ export const Main = () => {
         <div className="conent-title-catogory one-category-main">
           <h2 className="text-white">Animes</h2>
         </div>
-        <div className="row row-cols-1 row-cols-sm-2 row-cols-lg-4 row-cols-xxl-6">
+        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xxl-6">
           {animes.map((anime) => {
             anime.type = "anime";
             return <CardItem key={anime.id} {...anime} />;
@@ -52,7 +52,7 @@ export const Main = () => {
         <div className="conent-title-catogory">
           <h2 className="text-white">Mangas</h2>
         </div>
-        <div className="row row-cols-1 row-cols-sm-2 row-cols-lg-4 row-cols-xxl-6">
+        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xxl-6">
           {mangas.map((manga) => {
             anime.type = "manga";
             return <CardItem key={manga.id} {...manga} />;
@@ -61,7 +61,7 @@ export const Main = () => {
         <div className="conent-title-catogory">
           <h2 className="text-white">Manhwas</h2>
         </div>
-        <div className="row row-cols-1 row-cols-sm-2 row-cols-lg-4 row-cols-xxl-6">
+        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xxl-6">
           {manhwas.map((manhwa) => {
             manhwa.type = "manwha";
             return <CardItem key={manhwa.id} {...manhwa} />;
@@ -71,7 +71,7 @@ export const Main = () => {
         <div className="conent-title-catogory">
           <h2 className="text-white">Manhuas</h2>
         </div>
-        <div className="row row-cols-1 row-cols-sm-2 row-cols-lg-4 row-cols-xxl-6">
+        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xxl-6">
           {manhuas.map((manhua) => {
             manhua.type = "manhua";
             return <CardItem key={manhua.id} {...manhua} />;

@@ -32,11 +32,11 @@ export const Sidebar = () => {
   }, []);
   return (
     <div className="sidebar-container-rigth">
-      <div className="sidebar-container-cards">
+      <div className="sidebar-container-cards container">
         <div className="sidebar-content-title-list-cards">
           <h2 className="sidebar-text-title-list-cards">Ultimos Agregados</h2>
         </div>
-        <div className="row row-cols-1 row-cols-md-3 row-cols-lg-1 p-3">
+        <div className="row row-cols-1 row-cols-md-3 row-cols-lg-1 p-3 pt-4">
           {animes?.slice(0, 2).map((anime, index) => {
             anime.type = "anime";
             return <CardItemSidebar key={index} {...anime} />;
