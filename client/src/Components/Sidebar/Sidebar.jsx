@@ -36,7 +36,7 @@ export const Sidebar = () => {
         <div className="sidebar-content-title-list-cards">
           <h2 className="sidebar-text-title-list-cards">Ultimos Agregados</h2>
         </div>
-        <div className="row row-cols-1 row-cols-md-3 row-cols-lg-1 p-3 pt-4">
+        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-1 px-3 px-sm-0 pt-4">
           {animes?.slice(0, 2).map((anime, index) => {
             anime.type = "anime";
             return <CardItemSidebar key={index} {...anime} />;
