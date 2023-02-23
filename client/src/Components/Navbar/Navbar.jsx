@@ -38,14 +38,14 @@ export const Navbar = () => {
       </div> */}
 
         <div className="nav-list">
-          <div className="nav-list-link  d-none d-sm-block">
+          <Link to="/explorador" className="nav-list-link  d-none d-sm-block">
             <div className="navbar-container__icons__home">
               <RiHome4Fill className="navbar-container__icons_home__icon" />
             </div>
             <div className="navbar-container__icons__explore">
               <h2 className="navbar-text-explorer">Explorar</h2>
             </div>
-          </div>
+          </Link>
           <div className="nav-list-link  d-none d-sm-block">
             <div className="navbar-container__icons__home">
               <FaUserAlt className="navbar-container__icons_home__icon" />
