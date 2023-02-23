@@ -11,8 +11,9 @@ export const Anime = () => {
   useEffect(() => {
     const fetchAnimes = async () => {
       const animes = await getAnimeById(id);
-      setAnimes(animes?.data?.anime);
-      setScans(animes?.data?.scans);
+      console.log(animes);
+      setAnimes(animes?.data);
+      setScans(animes?.data?.Scan);
     };
     fetchAnimes();
   }, []);
@@ -262,21 +263,19 @@ export const Anime = () => {
             <div className={style.title_scans_list}>
               Disfruta de todo el contenido en las siguientes paginas
             </div>
-            {scans?.map((scan, index) => (
-              <div className="col-12 col-md-6 col-xl-4" key={index}>
-                <a href={animes?.urlContent} target="_blank">
-                  <div className={style.content_afiliates_logos}>
-                    <img
-                      className={style.afiliate_logo}
-                      src={scan?.image}
-                      alt={scan?.name}
-                    />
+            <div className="col-12 col-md-6 col-xl-4">
+              <a href={animes?.urlContent} target="_blank">
+                <div className={style.content_afiliates_logos}>
+                  <img
+                    className={style.afiliate_logo}
+                    src={scans?.image}
+                    alt={scans?.name}
+                  />
 
-                    <h3 className="text-white text-center">{scan?.name}</h3>
-                  </div>
-                </a>
-              </div>
-            ))}
+                  <h3 className="text-white text-center">{scans?.name}</h3>
+                </div>
+              </a>
+            </div>
           </div>
         </div>
         <div className={style.content_primary_card__info_all_content}></div>

@@ -10,8 +10,8 @@ export const Manhwa = () => {
   useEffect(() => {
     const fetchManhwas = async () => {
       const manhwa = await getManhwasById(id);
-      setManhwas(manhwa?.data?.manhwa);
-      setScans(manhwa?.data?.scans);
+      setManhwas(manhwa?.data);
+      setScans(manhwa?.data?.Scan);
     };
     fetchManhwas();
   }, []);
@@ -200,21 +200,19 @@ export const Manhwa = () => {
             <div className={style.title_scans_list}>
               Disfruta de todo el contenido en las siguientes paginas
             </div>
-            {scans?.map((scan, index) => (
-              <div className="col-12 col-md-6 col-xl-4" key={index}>
-                <a href={manhwas?.urlContent} target="_blank">
-                  <div className={style.content_afiliates_logos}>
-                    <img
-                      className={style.afiliate_logo}
-                      src={scan?.image}
-                      alt={scan?.name}
-                    />
+            <div className="col-12 col-md-6 col-xl-4">
+              <a href={manhwas?.urlContent} target="_blank">
+                <div className={style.content_afiliates_logos}>
+                  <img
+                    className={style.afiliate_logo}
+                    src={scans?.image}
+                    alt={scans?.name}
+                  />
 
-                    <h3 className="text-white text-center">{scan?.name}</h3>
-                  </div>
-                </a>
-              </div>
-            ))}
+                  <h3 className="text-white text-center">{scans?.name}</h3>
+                </div>
+              </a>
+            </div>
           </div>
         </div>
         <div className={style.content_primary_card__info_all_content}></div>

@@ -10,8 +10,8 @@ export const Manga = () => {
   useEffect(() => {
     const fetchMangas = async () => {
       const manga = await getMangasById(id);
-      setMangas(manga?.data?.manga);
-      setScans(manga?.data?.scans);
+      setMangas(manga?.data);
+      setScans(manga?.data?.Scan);
     };
     fetchMangas();
   }, []);
@@ -201,21 +201,20 @@ export const Manga = () => {
             <div className={style.title_scans_list}>
               Disfruta de todo el contenido en las siguientes paginas
             </div>
-            {scans?.map((scan, index) => (
-              <div className="col-12 col-md-6 col-xl-4" key={index}>
-                <a href={mangas?.urlContent} target="_blank">
-                  <div className={style.content_afiliates_logos}>
-                    <img
-                      className={style.afiliate_logo}
-                      src={scan?.image}
-                      alt={scan?.name}
-                    />
 
-                    <h3 className="text-white text-center">{scan?.name}</h3>
-                  </div>
-                </a>
-              </div>
-            ))}
+            <div className="col-12 col-md-6 col-xl-4">
+              <a href={mangas?.urlContent} target="_blank">
+                <div className={style.content_afiliates_logos}>
+                  <img
+                    className={style.afiliate_logo}
+                    src={scans.image}
+                    alt={scans?.name}
+                  />
+
+                  <h3 className="text-white text-center">{scans?.name}</h3>
+                </div>
+              </a>
+            </div>
           </div>
         </div>
         <div className={style.content_primary_card__info_all_content}></div>

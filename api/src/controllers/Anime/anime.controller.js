@@ -29,54 +29,58 @@ export const createAnime = async (req, res) => {
       artist,
       favorites,
       season,
+      urlContent,
       trailer,
       opening,
+      scanId,
     } = req.body;
 
     const img = req.files?.image;
     let pathImage = __dirname + "/../../public/anime/" + img?.name;
     img?.mv(pathImage);
     let url = (pathImage =
-      "https://apix.moelist.online/anime/img/" + img?.name);
-    if (!img)
-      url =
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/2048px-No_image_available.svg.png";
+      "http://localhost:3000/anime/img/" + img?.name);
+    if (!img) url = "google.com";
 
-    const anime = await Anime.create({
-      title,
-      description,
-      image: url,
-      status,
-      type,
-      episodes,
-      day,
-      rating,
-      premiered,
-      duration,
-      genres,
-      studios,
-      producers,
-      demography,
-      source,
-      score,
-      popularity,
-      members,
-      author,
-      artist,
-      favorites,
-      season,
-      trailer,
-      opening,
-    });
-
-    // se relaciona con Scan
-    const { scanId } = req.body;
-    const scan = await Scan.findOne({
-      where: {
-        id: scanId,
+    const anime = await Anime.create(
+      {
+        title,
+        description,
+        image: url,
+        status,
+        type,
+        episodes,
+        day,
+        rating,
+        premiered,
+        duration,
+        genres,
+        studios,
+        producers,
+        demography,
+        source,
+        score,
+        popularity,
+        members,
+        author,
+        artist,
+        favorites,
+        season,
+        trailer,
+        opening,
+        urlContent,
+        scanId,
       },
-    });
-    await anime.addScan(scan);
+      {
+        includes: [
+          {
+            model: Scan,
+            as: "scanId",
+            attributes: ["id"],
+          },
+        ],
+      }
+    );
 
     res.status(201).json(anime);
   } catch (error) {
@@ -87,17 +91,45 @@ export const createAnime = async (req, res) => {
 export const getAnimeById = async (req, res) => {
   try {
     const { id } = req.params;
-    // se busca el anime por id y se incluye los scans
     const anime = await Anime.findOne({
-      where: {
-        id,
-      },
+      where: { id },
+      attributes: [
+        "id",
+        "title",
+        "description",
+        "image",
+        "status",
+        "type",
+        "episodes",
+        "day",
+        "rating",
+        "premiered",
+        "duration",
+        "genres",
+        "studios",
+        "producers",
+        "demography",
+        "source",
+        "score",
+        "popularity",
+        "members",
+        "author",
+        "artist",
+        "favorites",
+        "season",
+        "trailer",
+        "opening",
+        "urlContent",
+      ],
+      include: [
+        {
+          model: Scan,
+          as: "Scan",
+          attributes: ["id", "name", "url", "image"],
+        },
+      ],
     });
-
-    const scans = await anime.getScans();
-
-    res.status(200).json({ anime, scans });
-    console.log(anime.toJSON());
+    res.json(anime);
   } catch (error) {
     console.log(error);
   }
@@ -129,16 +161,15 @@ export const updateAnime = async (req, res) => {
       favorites,
       season,
       trailer,
+      urlContent,
       opening,
     } = req.body;
 
     const img = req.files?.image;
     let pathImage = __dirname + "/../../public/anime/" + img?.name;
     img?.mv(pathImage);
-    let url = (pathImage = "https://apix.moelist.online/anime/" + img?.name);
-    if (!img)
-      url =
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/2048px-No_image_available.svg.png";
+    let url = (pathImage = "http://localhost:3000/anime/" + img?.name);
+    if (!img) url = "google.com";
 
     const anime = await Anime.update(
       {
@@ -162,6 +193,7 @@ export const updateAnime = async (req, res) => {
         members,
         author,
         artist,
+        urlContent,
         favorites,
         season,
         trailer,
@@ -196,11 +228,43 @@ export const deleteAnime = async (req, res) => {
 export const getAllInfo = async (req, res) => {
   try {
     const anime = await Anime.findAll({
-      include: {
-        model: Scan,
-      },
+      attributes: [
+        "id",
+        "title",
+        "description",
+        "image",
+        "status",
+        "type",
+        "episodes",
+        "day",
+        "rating",
+        "premiered",
+        "duration",
+        "genres",
+        "studios",
+        "producers",
+        "demography",
+        "source",
+        "score",
+        "popularity",
+        "members",
+        "author",
+        "artist",
+        "favorites",
+        "season",
+        "trailer",
+        "opening",
+        "urlContent",
+      ],
+      include: [
+        {
+          model: Scan,
+          as: "Scan",
+          attributes: ["id", "name", "url", "image"],
+        },
+      ],
     });
-    res.status(200).json(anime);
+    res.json(anime);
   } catch (error) {
     console.log(error);
   }

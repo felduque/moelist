@@ -29,30 +29,16 @@ dotenv.config();
 const app = express();
 
 // relations
-// relaciones de muchos a muchos
-Anime.belongsToMany(Scan, { foreignKey: "anime_scan", through: "anime_scan" });
-Scan.belongsToMany(Anime, { foreignKey: "anime_scan", through: "anime_scan" });
+Scan.hasMany(Anime, { foreignKey: "scanId" });
+Scan.hasMany(Manga, { foreignKey: "scanId" });
+Scan.hasMany(Manhua, { foreignKey: "scanId" });
+Scan.hasMany(Manhwa, { foreignKey: "scanId" });
 
-Manga.belongsToMany(Scan, { foreignKey: "manga_scan", through: "manga_scan" });
-Scan.belongsToMany(Manga, { foreignKey: "manga_scan", through: "manga_scan" });
-
-Manhua.belongsToMany(Scan, {
-  foreignKey: "manhua_scan",
-  through: "manhua_scan",
-});
-Scan.belongsToMany(Manhua, {
-  foreignKey: "manhua_scan",
-  through: "manhua_scan",
-});
-
-Manhwa.belongsToMany(Scan, {
-  foreignKey: "manhwa_scan",
-  through: "manhwa_scan",
-});
-Scan.belongsToMany(Manhwa, {
-  foreignKey: "manhwa_scan",
-  through: "manhwa_scan",
-});
+// relaciones de uno a muchos
+Anime.belongsTo(Scan, { foreignKey: "scanId" });
+Manga.belongsTo(Scan, { foreignKey: "scanId" });
+Manhua.belongsTo(Scan, { foreignKey: "scanId" });
+Manhwa.belongsTo(Scan, { foreignKey: "scanId" });
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -67,7 +53,7 @@ app.use(
 );
 
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "https://moelist.online");
+  res.header("Access-Control-Allow-Origin", "http://localhost:5173");
   // Se agrega el x-auth-token para que se pueda enviar el token en el header
   res.header(
     "Access-Control-Allow-Headers",

@@ -1,7 +1,7 @@
 import Sequelize from "sequelize";
 
 const sequelize = new Sequelize(
-  "postgres://postgres:sY99wFUv2*t3rQ@127.0.0.1:5432/postgres",
+  "postgres://hpvqdxkr:RnJpic9AxvzQZzJ9qrHbzAP1gAzAYAgY@drona.db.elephantsql.com/hpvqdxkr",
   {
     logging: true,
   }

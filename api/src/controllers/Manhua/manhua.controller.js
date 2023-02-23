@@ -22,46 +22,47 @@ export const createManhua = async (req, res) => {
       authors,
       artists,
       score,
+      scanId,
       popularity,
-      scans,
     } = req.body;
 
     const img = req.files?.image;
     let pathImage = __dirname + "/../../public/manhua/" + img?.name;
     img?.mv(pathImage);
-    let url = (pathImage = "https://apix.moelist.online/manhua/" + img?.name);
-    if (!img)
-      url =
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/2048px-No_image_available.svg.png";
-    const manga = await Manhua.create({
-      title,
-      description,
-      image: url,
-      status,
-      day,
-      type,
-      source,
-      urlContent,
-      chapters,
-      volumes,
-      rating,
-      genres,
-      authors,
-      artists,
-      score,
-      popularity,
-      scans,
-    });
-
-    // se relaciona con Scan
-    const { scanId } = req.body;
-    const scan = await Scan.findOne({
-      where: {
-        id: scanId,
+    let url = (pathImage = "http://localhost:3000/manhua/" + img?.name);
+    if (!img) url = "google.com";
+    const manhua = await Manhua.create(
+      {
+        title,
+        description,
+        image: url,
+        status,
+        day,
+        type,
+        source,
+        urlContent,
+        chapters,
+        volumes,
+        rating,
+        genres,
+        authors,
+        artists,
+        score,
+        popularity,
+        scanId,
       },
-    });
-    await manga.addScan(scan);
-    res.status(201).json(manga);
+      {
+        includes: [
+          {
+            model: Scan,
+            as: "scanId",
+            attributes: ["id"],
+          },
+        ],
+      }
+    );
+
+    res.status(201).json(manhua);
   } catch (error) {
     console.log(error);
   }
@@ -70,9 +71,32 @@ export const createManhua = async (req, res) => {
 export const getManhua = async (req, res) => {
   try {
     const manhua = await Manhua.findAll({
-      include: {
-        model: Scan,
-      },
+      attributes: [
+        "id",
+        "title",
+        "description",
+        "image",
+        "status",
+        "day",
+        "type",
+        "source",
+        "chapters",
+        "volumes",
+        "rating",
+        "genres",
+        "authors",
+        "artists",
+        "score",
+        "popularity",
+        "urlContent",
+      ],
+      include: [
+        {
+          model: Scan,
+          as: "Scan",
+          attributes: ["id", "name", "url", "image"],
+        },
+      ],
     });
     res.status(200).json(manhua);
   } catch (error) {
@@ -85,10 +109,34 @@ export const getManhuaById = async (req, res) => {
     const { id } = req.params;
     const manhua = await Manhua.findOne({
       where: { id },
+      attributes: [
+        "id",
+        "title",
+        "description",
+        "image",
+        "status",
+        "day",
+        "type",
+        "source",
+        "chapters",
+        "volumes",
+        "rating",
+        "genres",
+        "authors",
+        "artists",
+        "score",
+        "popularity",
+        "urlContent",
+      ],
+      include: [
+        {
+          model: Scan,
+          as: "Scan",
+          attributes: ["id", "name", "url", "image"],
+        },
+      ],
     });
-
-    const scans = await manhua.getScans();
-    res.status(200).json({ manhua, scans });
+    res.status(200).json(manhua);
   } catch (error) {
     console.log(error);
   }
@@ -118,10 +166,8 @@ export const updateManhua = async (req, res) => {
     const img = req.files?.image;
     let pathImage = __dirname + "/../../public/manhua/" + img?.name;
     img?.mv(pathImage);
-    let url = (pathImage = "https://apix.moelist.online/manhua/" + img?.name);
-    if (!img)
-      url =
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/2048px-No_image_available.svg.png";
+    let url = (pathImage = "http://localhost:3000/manhua/" + img?.name);
+    if (!img) url = "google.com";
 
     const manhua = await Manhua.update(
       {
