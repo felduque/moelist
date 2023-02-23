@@ -12,7 +12,7 @@ export const CardItem = ({
 }) => {
   return (
     <div className="col">
-      <Link to={`/${type}/${id}`}>
+      <Link className="text-decoration-none" to={`/${type}/${id}`}>
         <div className="card-item">
           <div className="card-inner">
             <div className="card-image position-relative">

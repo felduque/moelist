@@ -5,7 +5,7 @@ import "./CardItem.css";
 export const CardItemSidebar = ({ id, image, title, type, demography }) => {
   return (
     <div className="col">
-      <Link to={`/${type}/${id}`}>
+      <Link className="text-decoration-none" to={`/${type}/${id}`}>
         <div className="card-inner">
           <div className="position-relative">
             <div className="card-image position-relative">
