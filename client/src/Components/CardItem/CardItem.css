@@ -35,6 +35,10 @@
 
 .desc {
     font-size: 13px;
+    display: -webkit-box; 
+    overflow: hidden;
+    -webkit-line-clamp: 10;
+    -webkit-box-orient: vertical;
 }
 
 .button-desc {
