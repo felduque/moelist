@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { MdEmail } from "react-icons/md";
-import { FaLock } from "react-icons/fa";
-import { BiHide } from "react-icons/bi";
-import { BiShow } from "react-icons/bi";
+import { FaLock, FaUserAlt } from "react-icons/fa";
+import { BiHide, BiShow } from "react-icons/bi";
 
 export const RegisterForm = ({ setFormType }) => {
   const [show, setShow] = useState(false);
@@ -18,6 +17,11 @@ export const RegisterForm = ({ setFormType }) => {
   return (
     <form onSubmit={handleSubmit} className="p-4">
       <div className="mb-4 input-field">
+        <input type="text" placeholder="Escribe tu Nick" required />
+        <FaUserAlt className="input-icon" />
+      </div>
+
+      <div className="mb-4 input-field">
         <input type="email" placeholder="Escriba su Email" required />
         <MdEmail className="input-icon" />
       </div>
@@ -26,6 +30,22 @@ export const RegisterForm = ({ setFormType }) => {
         <input
           type={show ? "text" : "password"}
           placeholder="Escriba su Contraseña"
+          required
+        />
+        <FaLock className="input-icon" />
+        <div className="showHide" onClick={() => setShow(!show)}>
+          {show ? (
+            <BiShow className="input-icon show-hide-pw" />
+          ) : (
+            <BiHide className="input-icon show-hide-pw" />
+          )}
+        </div>
+      </div>
+
+      <div className="mb-4 input-field">
+        <input
+          type={show ? "text" : "password"}
+          placeholder="Confirmar Contraseña"
           required
         />
         <FaLock className="input-icon" />
