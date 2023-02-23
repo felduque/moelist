@@ -22,46 +22,48 @@ export const createManhwa = async (req, res) => {
       urlContent,
       artists,
       score,
+      scanId,
       popularity,
-      scans,
     } = req.body;
 
     const img = req.files?.image;
     let pathImage = __dirname + "/../../public/manhwa/" + img?.name;
     img?.mv(pathImage);
-    let url = (pathImage = "https://apix.moelist.online/manhwa/" + img?.name);
-    if (!img)
-      url =
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/2048px-No_image_available.svg.png";
-    const manhwa = await Manhwa.create({
-      title,
-      description,
-      image: url,
-      status,
-      day,
-      type,
-      source,
-      chapters,
-      volumes,
-      rating,
-      urlContent,
-      genres,
-      authors,
-      artists,
-      score,
-      popularity,
-      scans,
-    });
-
-    const { scanId } = req.body;
-    const scan = await Scan.findOne({
-      where: {
-        id: scanId,
+    let url = (pathImage = "http://localhost:3000/manhwa/" + img?.name);
+    if (!img) url = "google.com";
+    const manhwa = await Manhwa.create(
+      {
+        title,
+        description,
+        image: url,
+        status,
+        day,
+        type,
+        source,
+        chapters,
+        volumes,
+        rating,
+        urlContent,
+        genres,
+        authors,
+        artists,
+        score,
+        popularity,
+        scanId,
       },
-    });
-    await scan.addManhwa(manhwa);
 
-    res.status(201).json(manhwa);
+      {
+        includes: [
+          {
+            model: Scan,
+            as: "scanId",
+            attributes: ["id"],
+          },
+        ],
+      }
+    );
+
+    res.status(200).json(manhwa);
   } catch (error) {
     console.log(error);
   }
@@ -69,7 +71,34 @@ export const createManhwa = async (req, res) => {
 
 export const getManhwas = async (req, res) => {
   try {
-    const manhwa = await Manhwa.findAll();
+    const manhwa = await Manhwa.findAll({
+      attributes: [
+        "id",
+        "title",
+        "description",
+        "image",
+        "status",
+        "day",
+        "type",
+        "source",
+        "chapters",
+        "volumes",
+        "rating",
+        "genres",
+        "authors",
+        "artists",
+        "score",
+        "popularity",
+        "urlContent",
+      ],
+      include: [
+        {
+          model: Scan,
+          as: "Scan",
+          attributes: ["id", "name", "url", "image"],
+        },
+      ],
+    });
     res.status(200).json(manhwa);
   } catch (error) {
     console.log(error);
@@ -81,10 +110,34 @@ export const getManhwasById = async (req, res) => {
     const { id } = req.params;
     const manhwa = await Manhwa.findOne({
       where: { id },
+      attributes: [
+        "id",
+        "title",
+        "description",
+        "image",
+        "status",
+        "day",
+        "type",
+        "source",
+        "chapters",
+        "volumes",
+        "rating",
+        "genres",
+        "authors",
+        "artists",
+        "score",
+        "popularity",
+        "urlContent",
+      ],
+      include: [
+        {
+          model: Scan,
+          as: "Scan",
+          attributes: ["id", "name", "url", "image"],
+        },
+      ],
     });
-
-    const scans = await manhwa.getScans();
-    res.status(200).json({ manhwa, scans });
+    res.status(200).json(manhwa);
   } catch (error) {
     console.log(error);
   }
@@ -108,16 +161,13 @@ export const updateManhwa = async (req, res) => {
       artists,
       score,
       popularity,
-      scans,
     } = req.body;
 
     const img = req.files?.image;
     let pathImage = __dirname + "/../../public/manhwa/" + img?.name;
     img?.mv(pathImage);
-    let url = (pathImage = "https://apix.moelist.online/manhwa/" + img?.name);
-    if (!img)
-      url =
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/2048px-No_image_available.svg.png";
+    let url = (pathImage = "http://localhost:3000/manhwa/" + img?.name);
+    if (!img) url = "google.com";
 
     const manhwa = await Manhwa.update(
       {
@@ -136,7 +186,6 @@ export const updateManhwa = async (req, res) => {
         artists,
         score,
         popularity,
-        scans,
       },
       { where: { id } }
     );

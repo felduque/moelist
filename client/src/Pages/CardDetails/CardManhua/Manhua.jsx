@@ -10,8 +10,8 @@ export const Manhua = () => {
   useEffect(() => {
     const fetchManhuas = async () => {
       const manhua = await getManhuasById(id);
-      setManhuas(manhua?.data?.manhua);
-      setScans(manhua?.data?.scans);
+      setManhuas(manhua?.data);
+      setScans(manhua?.data?.Scan);
     };
     fetchManhuas();
   }, []);
@@ -201,21 +201,20 @@ export const Manhua = () => {
             <div className={style.title_scans_list}>
               Disfruta de todo el contenido en las siguientes paginas
             </div>
-            {scans?.map((scan, index) => (
-              <div className="col-12 col-md-6 col-xl-4" key={index}>
-                <a href={manhuas?.urlContent} target="_blank">
-                  <div className={style.content_afiliates_logos}>
-                    <img
-                      className={style.afiliate_logo}
-                      src={scan?.image}
-                      alt={scan?.name}
-                    />
 
-                    <h3 className="text-white text-center">{scan?.name}</h3>
-                  </div>
-                </a>
-              </div>
-            ))}
+            <div className="col-12 col-md-6 col-xl-4">
+              <a href={manhuas?.urlContent} target="_blank">
+                <div className={style.content_afiliates_logos}>
+                  <img
+                    className={style.afiliate_logo}
+                    src={scans?.image}
+                    alt={scans?.name}
+                  />
+
+                  <h3 className="text-white text-center">{scans?.name}</h3>
+                </div>
+              </a>
+            </div>
           </div>
         </div>
         <div className={style.content_primary_card__info_all_content}></div>

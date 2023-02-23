@@ -4,6 +4,7 @@ import { getAnimes } from "../../Api/Anime/anime";
 import { getMangas } from "../../Api/Mangas/mangas";
 import { getManhuas } from "../../Api/Manhuas/mahuas";
 import { getManhwas } from "../../Api/Manhwas/manhwas";
+import { CardItem } from "../CardItem/CardItem";
 
 export const Main = () => {
   const [animes, setAnimes] = useState([]);
@@ -17,6 +18,7 @@ export const Main = () => {
       const mangas = await getMangas();
       const manhwas = await getManhwas();
       const manhuas = await getManhuas();
+      console.log(animes, mangas, manhwas, manhuas);
       setManhuas(manhuas?.data);
       setManhwas(manhwas?.data);
       setMangas(mangas?.data);
@@ -54,7 +56,7 @@ export const Main = () => {
         </div>
         <div className="row row-cols-1 row-cols-sm-3 row-cols-xl-4 row-cols-xxl-6">
           {mangas.map((manga) => {
-            anime.type = "manga";
+            manga.type = "manga";
             return <CardItem key={manga.id} {...manga} />;
           })}
         </div>

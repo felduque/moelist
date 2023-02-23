@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const createScan = async (datos, token) => {
   try {
-    const res = await axios.post("https://apix.moelist.online/scans", datos, {
+    const res = await axios.post("http://localhost:3000/scans", datos, {
       headers: {
         "x-auth-token": token,
       },
