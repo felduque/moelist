@@ -65,7 +65,7 @@ export const Main = () => {
         </div>
         <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xxl-6">
           {manhwas.map((manhwa) => {
-            manhwa.type = "manwha";
+            manhwa.type = "manhwa";
             return <CardItem key={manhwa.id} {...manhwa} />;
           })}
         </div>
