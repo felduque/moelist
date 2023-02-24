@@ -12,6 +12,7 @@ specifiers:
   react-icons: ^4.7.1
   react-router-dom: ^6.8.1
   react-select: ^5.7.0
+  react-spinners: ^0.13.8
   sweetalert2: ^11.7.2
   vite: ^4.1.0
 
@@ -24,6 +25,7 @@ dependencies:
   react-icons: 4.7.1_react@18.2.0
   react-router-dom: 6.8.1_biqbaboplfbrettd7655fr4n2y
   react-select: 5.7.0_zula6vjvt3wdocc4mwcxqa6nzi
+  react-spinners: 0.13.8_biqbaboplfbrettd7655fr4n2y
   sweetalert2: 11.7.2
 
 devDependencies:
@@ -1100,6 +1102,16 @@ packages:
       use-isomorphic-layout-effect: 1.1.2_pmekkgnqduwlme35zpnqhenc34
     transitivePeerDependencies:
       - '@types/react'
+    dev: false
+
+  /react-spinners/0.13.8_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-3e+k56lUkPj0vb5NDXPVFAOkPC//XyhKPJjvcGjyMNPWsBKpplfeyialP74G7H7+It7KzhtET+MvGqbKgAqpZA==}
+    peerDependencies:
+      react: ^16.0.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
     dev: false
 
   /react-transition-group/4.4.5_biqbaboplfbrettd7655fr4n2y:

@@ -4,6 +4,7 @@ import "./NavMobileMenu.css";
 import { RiHome4Fill } from "react-icons/ri";
 import { FaUserAlt } from "react-icons/fa";
 import { IoIosClose } from "react-icons/io";
+import { Search } from "../Search/Search";
 
 export const MobileMenu = () => {
   return (
@@ -46,11 +47,7 @@ export const MobileMenu = () => {
           </li>
         </ul>
 
-        <input
-          className="form-control d-inline-block mt-1"
-          type="text"
-          placeholder="Search"
-        />
+        <Search />
       </div>
     </div>
   );
