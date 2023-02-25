@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { getAnimes } from "../../Api/Anime/anime";
 import { CardItem } from "../../Components/CardItem/CardItem";
 import { ExploradorOrder } from "../../Components/Explorador/ExploradorOrder/ExploradorOrder";
+import { ExploradorSearch } from "../../Components/Explorador/ExploradorSearch/ExploradorSearch";
 import { ExploradorSidebar } from "../../Components/Explorador/ExploradorSidebar/ExploradorSidebar";
 import { ExploradorContext } from "../../utils/context/ExploradorContext";
 
@@ -31,12 +32,7 @@ export const Explorador = () => {
     <ExploradorContext.Provider value={{ setItems, filters, setFilters }}>
       <section className="container-fluid bg-dark px-4 px-md-5 pb-5">
         <div className="row py-5">
-          <div className="col-lg-10 mb-2 mb-lg-0">
-            <input type="search" className="form-control" />
-          </div>
-          <div className="col-lg-2">
-            <button className="btn btn-primary w-100">Search</button>
-          </div>
+          <ExploradorSearch />
         </div>
         <div className="row">
           <div className="col-lg-3 text-white">
