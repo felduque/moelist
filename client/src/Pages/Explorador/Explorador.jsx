@@ -9,6 +9,14 @@ import "./Explorador.css";
 
 export const Explorador = () => {
   const [items, setItems] = useState([]);
+  const [filters, setFilters] = useState({
+    tipo: "todos",
+    demografia: "todos",
+    generos: [],
+    estado: "todos",
+    estreno: "",
+    orden: "estreno",
+  });
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -20,7 +28,7 @@ export const Explorador = () => {
   }, []);
 
   return (
-    <ExploradorContext.Provider value={{ setItems }}>
+    <ExploradorContext.Provider value={{ setItems, filters, setFilters }}>
       <section className="container-fluid bg-dark px-4 px-md-5 pb-5">
         <div className="row py-5">
           <div className="col-lg-10 mb-2 mb-lg-0">
