@@ -14,8 +14,8 @@ export const LoginRegisterModal = ({ formType, setFormType }) => {
     >
       <div className="modal-dialog bg-dark">
         <div className="modal-content bg-dark text-white">
-          <div class="modal-header ">
-            <h5 class="modal-title fs-2 form-title">{formType}</h5>
+          <div className="modal-header ">
+            <h5 className="modal-title fs-2 form-title">{formType}</h5>
             <IoIosClose
               type="button"
               className="btn p-0 text-white fs-1"

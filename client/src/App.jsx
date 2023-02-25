@@ -7,6 +7,7 @@ import { Manga } from "./Pages/CardDetails/CardManga/Manga";
 import { Manhua } from "./Pages/CardDetails/CardManhua/Manhua";
 import { Manhwa } from "./Pages/CardDetails/CardManhwa/Manhwa";
 import { NotFound } from "./Pages/NotFound/NotFound";
+import { Explorador } from "./Pages/Explorador/Explorador";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/manga/:id" element={<Manga />} />
         <Route path="/manhua/:id" element={<Manhua />} />
         <Route path="/manhwa/:id" element={<Manhwa />} />
+        <Route path="/explorador" element={<Explorador />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

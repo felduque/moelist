@@ -4,17 +4,17 @@ import "./NavMobileMenu.css";
 import { RiHome4Fill } from "react-icons/ri";
 import { FaUserAlt } from "react-icons/fa";
 import { IoIosClose } from "react-icons/io";
+import { Search } from "../Search/Search";
 
 export const MobileMenu = () => {
   return (
     <div
-      class="offcanvas offcanvas-start bg-dark"
-      tabindex="-1"
+      className="offcanvas offcanvas-start bg-dark"
       id="mobileMenu"
       aria-labelledby="mobileMenu"
     >
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="mobileMenuLabel">
+      <div className="offcanvas-header">
+        <h5 className="offcanvas-title" id="mobileMenuLabel">
           <Link
             to="/"
             className="text-white fw-bold"
@@ -30,7 +30,7 @@ export const MobileMenu = () => {
           aria-label="Close"
         />
       </div>
-      <div class="offcanvas-body">
+      <div className="offcanvas-body">
         <ul className="nav-list-mobile p-0 text-start ">
           <Link>
             <RiHome4Fill className="mb-1" /> Explorar
@@ -47,11 +47,7 @@ export const MobileMenu = () => {
           </li>
         </ul>
 
-        <input
-          className="form-control d-inline-block mt-1"
-          type="text"
-          placeholder="Search"
-        />
+        <Search />
       </div>
     </div>
   );

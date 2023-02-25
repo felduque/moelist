@@ -1,0 +1,9 @@
+.select__menu-list {
+    background-color: var(--dark-bg);
+}
+
+.select__control.select__control--is-focused,
+.select__control.select__control--is-focused:hover {
+    box-shadow: none;
+    border-color: var(--primary-color);
+}
