@@ -5,7 +5,7 @@ import { getManhuas } from "../../Api/Manhuas/mahuas";
 import { getManhwas } from "../../Api/Manhwas/manhwas";
 import { getMangas } from "../../Api/Mangas/mangas";
 import { CardItemSidebar } from "../CardItem/CardItemSidebar";
-import { CardItem } from "../CardItem/CardItem";
+
 export const Sidebar = () => {
   const [animes, setAnimes] = useState([]);
   const [mangas, setMangas] = useState([]);
