@@ -17,3 +17,13 @@
 html, body {
   overflow-x: clip;
 }
+
+body {
+  height: 100vh;
+  background-color: var(--dark-bg) !important;
+}
+
+.btn-primary {
+  background-color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
