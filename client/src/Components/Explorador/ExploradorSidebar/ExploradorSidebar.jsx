@@ -16,15 +16,7 @@ import { ExploradorContext } from "../../../utils/context/ExploradorContext";
 const animatedComponents = makeAnimated();
 
 export const ExploradorSidebar = () => {
-  const { setItems } = useContext(ExploradorContext);
-
-  const [filters, setFilters] = useState({
-    tipo: "todos",
-    demografia: "",
-    generos: [],
-    estado: "",
-    estreno: "",
-  });
+  const { setItems, filters, setFilters } = useContext(ExploradorContext);
 
   const tipos = [
     { value: "todos", label: "Todos" },
@@ -59,10 +51,10 @@ export const ExploradorSidebar = () => {
   };
 
   useEffect(() => {
+    console.log(filters);
     const fetchItems = async () => {
       const items = await getAnimes();
       setItems(items.data);
-      console.log("pasa");
     };
 
     fetchItems();
