@@ -26,6 +26,24 @@ export const ExploradorSidebar = () => {
     { value: "4", label: "Manhua" },
   ];
 
+  const demografia = [
+    { value: "todos", label: "Todos" },
+    { value: "1", label: "Shounen" },
+    { value: "2", label: "Seinen" },
+    { value: "3", label: "Shoujo" },
+  ];
+
+  const estado = [
+    { value: "todos", label: "Todos" },
+    { value: "1", label: "En emision" },
+    { value: "2", label: "Finalizado" },
+  ];
+
+  const generos = [
+    { id: "1", label: "Acción" },
+    { id: "2", label: "Aventura" },
+  ];
+
   const handleSelectChange = ({ filter, value }) => {
     setFilters({
       ...filters,
@@ -83,8 +101,8 @@ export const ExploradorSidebar = () => {
       <Select
         closeMenuOnSelect={true}
         components={animatedComponents}
-        defaultValue={[tipos[0]]}
-        options={tipos}
+        defaultValue={[demografia[0]]}
+        options={demografia}
         classNamePrefix="select"
         styles={selectStyles}
         onChange={(value) =>
@@ -96,8 +114,8 @@ export const ExploradorSidebar = () => {
       <Select
         closeMenuOnSelect={true}
         components={animatedComponents}
-        defaultValue={[tipos[0]]}
-        options={tipos}
+        defaultValue={[estado[0]]}
+        options={estado}
         classNamePrefix="select"
         styles={selectStyles}
         onChange={(value) => handleSelectChange({ ...value, filter: "estado" })}
@@ -113,26 +131,18 @@ export const ExploradorSidebar = () => {
         }
       />
       <h5 className="mt-4"> Generos </h5>
-      <div className="form-check">
-        <input
-          className="form-check-input"
-          type="checkbox"
-          value={1}
-          name="genero"
-          onChange={(e) => handleCheckBoxChange(e.target)}
-        />
-        <label className="form-check-label">Accion</label>
-      </div>
-      <div className="form-check">
-        <input
-          className="form-check-input"
-          type="checkbox"
-          value={2}
-          name="genero"
-          onChange={(e) => handleCheckBoxChange(e.target)}
-        />
-        <label className="form-check-label">Aventura</label>
-      </div>
+      {generos.map((genero) => (
+        <div key={genero.id} className="form-check">
+          <input
+            className="form-check-input"
+            type="checkbox"
+            value={genero.id}
+            name="genero"
+            onChange={(e) => handleCheckBoxChange(e.target)}
+          />
+          <label className="form-check-label">{genero.label}</label>
+        </div>
+      ))}
     </>
   );
 };
