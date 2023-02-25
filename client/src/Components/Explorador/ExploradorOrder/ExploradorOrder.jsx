@@ -15,11 +15,11 @@ export const ExploradorOrder = () => {
   }, [filters.orden]);
 
   return (
-    <div className="row align-items-center mt-3 mt-md-0">
+    <div className="row align-items-center mt-3 mt-lg-0">
       <div className="col-lg-10 text-start text-lg-end">Ordenar por</div>
       <div className="col-lg-2">
         <select
-          className="form-select bg-dark text-white mt-2 mt-md-0"
+          className="form-select bg-dark text-white mt-2 mt-lg-0"
           onChange={(e) => setFilters({ ...filters, orden: e.target.value })}
         >
           <option value="estreno">Fecha</option>
