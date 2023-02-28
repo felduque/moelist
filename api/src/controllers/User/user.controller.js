@@ -9,7 +9,8 @@ import bcrypt from "bcrypt";
 export const createUser = async (req, res) => {
   const { userName, email, password } = req.body;
   try {
-    const verfiEmail = await User.findOne({ email });
+    const verfiEmail = await User.findOne({ where: { email } });
+    console.log(userName, email, password);
 
     if (verfiEmail) {
       return res.status(400).json({ error: "Email already exists" });
@@ -23,7 +24,7 @@ export const createUser = async (req, res) => {
       email,
       password: hashedPassword,
     });
-    res.status(201).json({ user });
+    res.status(200).json({ user });
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Server error" });
@@ -34,6 +35,7 @@ export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
     // check if user exists
+    console.log(email, password);
     const veryEmail = await User.findOne({ where: { email } });
 
     if (!veryEmail)
@@ -59,11 +61,31 @@ export const loginUser = async (req, res) => {
       { expiresIn: 360000 },
       (err, token) => {
         if (err) throw err;
-        res.json({ token });
+        res.status(200).json({ token });
       }
     );
   } catch (err) {
     console.log(err);
+    res.status(500).json({ error: "Server error" });
+  }
+};
+
+export const getUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    console.log(req.params);
+
+    const user = await User.findOne({
+      where: { id },
+      attributes: { exclude: ["password"] },
+    });
+    if (!user) {
+      return res.status(400).json({ error: "User not found" });
+    }
+
+    res.status(200).json(user);
+  } catch (error) {
+    console.log(error);
     res.status(500).json({ error: "Server error" });
   }
 };

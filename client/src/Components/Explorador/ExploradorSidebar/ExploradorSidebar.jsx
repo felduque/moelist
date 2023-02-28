@@ -69,7 +69,6 @@ export const ExploradorSidebar = () => {
   };
 
   useEffect(() => {
-    console.log(filters);
     const fetchItems = async () => {
       const items = await getAnimes();
       setItems(items.data);

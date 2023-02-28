@@ -23,7 +23,6 @@ export const Sidebar = () => {
       const orderMangas = mangas?.data.sort((a, b) => b - a);
       const orderAnimes = anime?.data.sort((a, b) => b - a);
 
-      console.log(orderManhuas, orderManhwas, orderMangas, orderAnimes);
       setManhuas(orderManhuas);
       setManhwas(orderManhwas);
       setMangas(orderMangas);

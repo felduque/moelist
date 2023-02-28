@@ -18,7 +18,6 @@ export const Main = () => {
       const mangas = await getMangas();
       const manhwas = await getManhwas();
       const manhuas = await getManhuas();
-      console.log(animes, mangas, manhwas, manhuas);
       setManhuas(manhuas?.data);
       setManhwas(manhwas?.data);
       setMangas(mangas?.data);

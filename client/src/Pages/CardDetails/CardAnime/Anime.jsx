@@ -11,7 +11,6 @@ export const Anime = () => {
   useEffect(() => {
     const fetchAnimes = async () => {
       const animes = await getAnimeById(id);
-      console.log(animes);
       setAnimes(animes?.data);
       setScans(animes?.data?.Scan);
     };

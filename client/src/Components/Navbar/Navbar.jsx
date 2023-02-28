@@ -1,18 +1,36 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Navbar.css";
 import { RiHome4Fill } from "react-icons/ri";
 import { FaBars, FaUserAlt } from "react-icons/fa";
 import { BsDiscord } from "react-icons/bs";
 import { Link } from "react-router-dom";
-
 import { LoginRegisterModal } from "../LoginRegisterModal/LoginRegisterModal";
-
+import jwt_decode from "jwt-decode";
 import { MobileMenu } from "../MobileMenu/MobileMenu";
 import { useState } from "react";
 import { Search } from "../Search/Search";
+import { getUserById } from "../../Api/User/user";
 
 export const Navbar = () => {
   const [formType, setFormType] = useState("login");
+  const [show, setShow] = useState(false);
+  const [user, setUser] = useState([]);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      const decoded = jwt_decode(token);
+      if (decoded.exp * 1000 < Date.now()) {
+        localStorage.removeItem("token");
+      }
+      getUserById(decoded.id).then((res) => {
+        if (res) {
+          setUser(res);
+          setShow(true);
+        }
+      });
+    }
+  }, []);
 
   return (
     <>
@@ -42,19 +60,36 @@ export const Navbar = () => {
                   <h2 className="navbar-text-explorer">Explorar</h2>
                 </div>
               </Link>
-              <div className="nav-list-link  d-none d-sm-block">
-                <div className="navbar-container__icons__home">
-                  <FaUserAlt className="navbar-container__icons_home__icon" />
-                </div>
-                <button
-                  type="button"
-                  className="text-decoration-none btn p-0"
-                  data-bs-toggle="modal"
-                  data-bs-target="#modal"
+              {show ? (
+                <Link
+                  to={`/perfil/${user.id}`}
+                  className="nav-list-link d-none d-sm-block"
                 >
-                  <h2 className="navbar-text-explorer">Cuenta</h2>
-                </button>
-              </div>
+                  <div className="navbar-container__icons__explore">
+                    <img
+                      className="
+                    navbar-container__icons__explore__img
+                    "
+                      src={user.avatar}
+                      alt="user.name"
+                    />
+                  </div>
+                </Link>
+              ) : (
+                <div className="nav-list-link  d-none d-sm-block">
+                  <div className="navbar-container__icons__home">
+                    <FaUserAlt className="navbar-container__icons_home__icon" />
+                  </div>
+                  <button
+                    type="button"
+                    className="text-decoration-none btn p-0"
+                    data-bs-toggle="modal"
+                    data-bs-target="#modal"
+                  >
+                    <h2 className="navbar-text-explorer">Login</h2>
+                  </button>
+                </div>
+              )}
             </div>
           </div>
           <div className="col-3 d-flex justify-content-end align-items-center">

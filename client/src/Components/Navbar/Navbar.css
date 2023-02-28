@@ -8,7 +8,6 @@
   padding: 0 10px;
 }
 
-
 .navbar-container__logo {
   /* contaienr del texto del logo */
   display: flex;
@@ -79,6 +78,14 @@
   margin-left: 20px;
 }
 
+.navbar-container__icons__explore__img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin: 0 10px;
+  cursor: pointer;
+}
+
 .navbar-text-explorer {
   /* texto del logo */
   color: #fff;
@@ -107,19 +114,19 @@
 .nav-list {
   display: flex;
   align-items: end;
-  gap: 20px
+  gap: 20px;
 }
 
 .nav-list-link {
   text-decoration: none;
 }
 
-.discord {}
+.discord {
+}
 
 @media (max-width: 576px) {
   .navbar-container {
     justify-content: space-between;
-  
   }
 
   .nav-list {
