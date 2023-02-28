@@ -9,7 +9,14 @@ export const CardItem = ({
   description,
   type,
   demography,
+  index,
 }) => {
+  const isLastOfRow = index && (index + 1) % 6 === 0;
+
+  if ((index + 1) % 6 === 0) {
+    console.log((index + 1) % 6);
+  }
+
   return (
     <div className="col">
       <Link className="text-decoration-none" to={`/${type}/${id}`}>
@@ -36,7 +43,13 @@ export const CardItem = ({
             <p className="title-card-main text-center mt-3">{title}</p>
           </div>
 
-          <div className="hover-desc">
+          <div
+            className="hover-desc"
+            style={{
+              right: isLastOfRow ? "90%" : "unset",
+              left: !isLastOfRow ? "90%" : "unset",
+            }}
+          >
             <strong className="text-white">{title}</strong>
             <span
               className={`badge rounded-pill ${type} my-3 d-block pill text-uppercase fw-bold`}
