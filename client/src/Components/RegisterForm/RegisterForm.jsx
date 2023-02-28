@@ -63,84 +63,72 @@ export const RegisterForm = ({ setFormType }) => {
   };
   return (
     <form onSubmit={handleSubmit} className="p-4">
-      <div className="mb-4 input-field">
-        {errors.userName && <p className="error">{errors.userName}</p>}
-      </div>
-      <div className="mb-4 input-field">
-        <input
-          type="text"
-          name="userName"
-          onChange={handleChange}
-          placeholder="Escribe tu Nick"
-          required
-        />
-        <FaUserAlt className="input-icon" />
+      <div className="input-group">
+        <div className="mb-4 input-field">
+          <input
+            type="text"
+            name="userName"
+            onChange={handleChange}
+            placeholder="Escribe tu Nick"
+          />
+          <FaUserAlt className="input-icon" />
+        </div>
+        {errors.email && <p className="error">{errors.userName}</p>}
       </div>
 
-      <div className="mb-4 input-field">
+      <div className="input-group">
+        <div className="mb-4 input-field">
+          <input
+            onChange={handleChange}
+            type="email"
+            name="email"
+            placeholder="Escriba su Email"
+          />
+          <MdEmail className="input-icon" />
+        </div>
+
         {errors.email && <p className="error">{errors.email}</p>}
       </div>
-      <div className="mb-4 input-field">
-        <input
-          onChange={handleChange}
-          type="email"
-          name="email"
-          placeholder="Escriba su Email"
-          required
-        />
-        <MdEmail className="input-icon" />
-      </div>
-
-      <div
-        className="
-        mb-4 input-field
-        "
-      >
+      <div className="input-group">
+        <div className="mb-4 input-field">
+          <input
+            onChange={handleChange}
+            type={show ? "text" : "password"}
+            name="password"
+            placeholder="Escriba su Contraseña"
+          />
+          <FaLock className="input-icon" />
+          <div className="showHide" onClick={() => setShow(!show)}>
+            {show ? (
+              <BiShow className="input-icon show-hide-pw" />
+            ) : (
+              <BiHide className="input-icon show-hide-pw" />
+            )}
+          </div>
+        </div>
         {errors.password && <p className="error">{errors.password}</p>}
       </div>
-      <div className="mb-4 input-field">
-        <input
-          onChange={handleChange}
-          type={show ? "text" : "password"}
-          name="password"
-          placeholder="Escriba su Contraseña"
-          required
-        />
-        <FaLock className="input-icon" />
-        <div className="showHide" onClick={() => setShow(!show)}>
-          {show ? (
-            <BiShow className="input-icon show-hide-pw" />
-          ) : (
-            <BiHide className="input-icon show-hide-pw" />
-          )}
-        </div>
-      </div>
 
-      <div
-        className="
-        mb-4 input-field
-      "
-      >
+      <div className="input-group">
+        <div className="mb-4 input-field">
+          <input
+            onChange={handleChange}
+            type={show ? "text" : "password"}
+            name="passwordConfirm"
+            placeholder="Confirmar Contraseña"
+          />
+          <FaLock className="input-icon" />
+          <div className="showHide" onClick={() => setShow(!show)}>
+            {show ? (
+              <BiShow className="input-icon show-hide-pw" />
+            ) : (
+              <BiHide className="input-icon show-hide-pw" />
+            )}
+          </div>
+        </div>
         {errors.passwordConfirm && (
           <p className="error">{errors.passwordConfirm}</p>
         )}
-      </div>
-      <div className="mb-4 input-field">
-        <input
-          onChange={handleChange}
-          type={show ? "text" : "password"}
-          name="passwordConfirm"
-          placeholder="Confirmar Contraseña"
-          required
-        />
-        <FaLock className="input-icon" />
-        <div className="showHide" onClick={() => setShow(!show)}>
-          {show ? (
-            <BiShow className="input-icon show-hide-pw" />
-          ) : (
-            <BiHide className="input-icon show-hide-pw" />
-          )}
-        </div>
       </div>
 
       <input

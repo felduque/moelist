@@ -67,51 +67,47 @@ export const LoginForm = ({ setFormType }) => {
 
   return (
     <form onSubmit={handleSubmit} className="p-4">
-      <div
-        className="
-        mb-4 input-field
-        "
-      >
+      <div className="input-group">
+        <div className=" mb-4 input-field">
+          <input
+            name="email"
+            onChange={handleChange}
+            type="email"
+            placeholder="Escriba su Email"
+            required
+          />
+          <MdEmail className="input-icon" />
+        </div>
         {errors.email && (
           <div className="alert alert-danger" role="alert">
             {errors.email}
           </div>
         )}
       </div>
-      <div className="mb-4 input-field">
-        <input
-          name="email"
-          onChange={handleChange}
-          type="email"
-          placeholder="Escriba su Email"
-          required
-        />
-        <MdEmail className="input-icon" />
-      </div>
-      <div className="mb-4 input-field">
+
+      <div className="input-group">
+        <div className="mb-4 input-field">
+          <input
+            type={show ? "text" : "password"}
+            name="password"
+            onChange={handleChange}
+            placeholder="Escriba su Contraseña"
+            required
+          />
+          <FaLock className="input-icon" />
+          <div className="showHide" onClick={() => setShow(!show)}>
+            {show ? (
+              <BiShow className="input-icon show-hide-pw" />
+            ) : (
+              <BiHide className="input-icon show-hide-pw" />
+            )}
+          </div>
+        </div>
         {errors.password && (
           <div className="alert alert-danger" role="alert">
             {errors.password}
           </div>
         )}
-      </div>
-
-      <div className="mb-4 input-field">
-        <input
-          type={show ? "text" : "password"}
-          name="password"
-          onChange={handleChange}
-          placeholder="Escriba su Contraseña"
-          required
-        />
-        <FaLock className="input-icon" />
-        <div className="showHide" onClick={() => setShow(!show)}>
-          {show ? (
-            <BiShow className="input-icon show-hide-pw" />
-          ) : (
-            <BiHide className="input-icon show-hide-pw" />
-          )}
-        </div>
       </div>
 
       <input
