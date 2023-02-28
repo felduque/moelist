@@ -5,6 +5,10 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
+import { Anime } from "../../models/Anime/anime.model.js";
+import { Manga } from "../../models/Manga/manga.model.js";
+import { Manhua } from "../../models/Manhua/manhua.model.js";
+import { Manhwa } from "../../models/Manhwa/manhwa.model.js";
 
 export const createUser = async (req, res) => {
   const { userName, email, password } = req.body;
@@ -69,6 +73,91 @@ export const loginUser = async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 };
+
+export const addFavorite = async (req, res) => {
+  console.log(req.body);
+  try {
+    const { type, idContent, idUser } = req.body;
+
+    const userFound = await User.findByPk(idUser);
+
+    if (!userFound) {
+      return res.status(400).json({ error: "User not found" });
+    }
+
+    let content;
+    switch (type) {
+      case "anime":
+        content = await Anime.findByPk(idContent);
+        const anime = await userFound.addAnime(content);
+        break;
+      case "manga":
+        content = await Manga.findByPk(idContent);
+        const manga = await userFound.addManga(content);
+
+        break;
+      case "manhua":
+        content = await Manhua.findByPk(idContent);
+        const manhua = await userFound.addManhua(content);
+        break;
+      case "manhwa":
+        content = await Manhwa.findByPk(idContent);
+        const manhwa = await userFound.addManhwa(content);
+        break;
+      default:
+        break;
+    }
+
+    res.status(200).json({ content });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Server error" });
+  }
+};
+
+export const getFavorites = async (req, res) => {
+  try {
+    const { id } = req.params;
+    console.log(req.params);
+
+    const user = await User.findOne({
+      where: { id },
+      attributes: { exclude: ["password"] },
+      include: [
+        {
+          model: Anime,
+          attributes: ["id", "title", "description", "image"],
+          through: { attributes: [] },
+        },
+        {
+          model: Manga,
+          attributes: ["id", "title", "description", "image"],
+          through: { attributes: [] },
+        },
+        {
+          model: Manhua,
+          attributes: ["id", "title", "description", "image"],
+          through: { attributes: [] },
+        },
+        {
+          model: Manhwa,
+          attributes: ["id", "title", "description", "image"],
+          through: { attributes: [] },
+        },
+      ],
+    });
+    if (!user) {
+      return res.status(400).json({ error: "User not found" });
+    }
+
+    res.status(200).json(user);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Server error" });
+  }
+};
+
+export const removeFavorite = async (req, res) => {};
 
 export const getUser = async (req, res) => {
   try {

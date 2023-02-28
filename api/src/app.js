@@ -15,6 +15,12 @@ import { Anime } from "./models/Anime/anime.model.js";
 import { Manga } from "./models/Manga/manga.model.js";
 import { Manhua } from "./models/Manhua/manhua.model.js";
 import { Manhwa } from "./models/Manhwa/manhwa.model.js";
+import { User } from "./models/User/user.model.js";
+// relation models
+import { AnimeFav } from "./models/User/anime_fav.js";
+import { MangaFav } from "./models/User/manga_fav.js";
+import { ManhuaFav } from "./models/User/manhua_fav.js";
+import { ManhwaFav } from "./models/User/manhwa_fav.js";
 import fileUpload from "express-fileupload";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
@@ -39,6 +45,33 @@ Anime.belongsTo(Scan, { foreignKey: "scanId" });
 Manga.belongsTo(Scan, { foreignKey: "scanId" });
 Manhua.belongsTo(Scan, { foreignKey: "scanId" });
 Manhwa.belongsTo(Scan, { foreignKey: "scanId" });
+
+// relaciones de muchos a muchos
+Anime.belongsToMany(User, { through: AnimeFav });
+User.belongsToMany(Anime, { through: AnimeFav });
+
+Manga.belongsToMany(User, { through: MangaFav });
+User.belongsToMany(Manga, { through: MangaFav });
+
+Manhua.belongsToMany(User, { through: ManhuaFav });
+User.belongsToMany(Manhua, { through: ManhuaFav });
+
+Manhwa.belongsToMany(User, { through: ManhwaFav });
+User.belongsToMany(Manhwa, { through: ManhwaFav });
+
+// sync models
+// Scan.sync({ force: true });
+// Anime.sync({ force: true });
+// Manga.sync({ force: true });
+// Manhua.sync({ force: true });
+// Manhwa.sync({ force: true });
+// User.sync({ force: true });
+// AnimeFav.sync({ force: true });
+// MangaFav.sync({ force: true });
+// ManhuaFav.sync({ force: true });
+// ManhwaFav.sync({ force: true });
+
+// app.use(cors());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
