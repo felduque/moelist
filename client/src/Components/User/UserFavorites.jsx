@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getFavorites } from "../../../../api/src/controllers/User/user.controller";
+import { getFavorites } from "../../Api/User/user";
 import { CardItem } from "../CardItem/CardItem";
 
 export const UserFavorites = () => {
