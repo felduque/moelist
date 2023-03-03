@@ -1,6 +1,5 @@
 import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../utils/context/AuthContext";
-// import { getAuthUser } from "../utils/api";
 import jwt_decode from "jwt-decode";
 import { getUserById } from "../Api/User/user";
 
