@@ -1,6 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./CardItem.css";
+import { HiOutlineHeart } from "react-icons/hi";
+import { useContext } from "react";
+import { AuthContext } from "../../utils/context/AuthContext";
 
 export const CardItem = ({
   id,
@@ -9,7 +12,12 @@ export const CardItem = ({
   description,
   type,
   demography,
+  index,
 }) => {
+  const { user } = useContext(AuthContext);
+
+  const isLastOfRow = index && (index + 1) % 6 === 0;
+
   return (
     <div className="col">
       <Link className="text-decoration-none" to={`/${type}/${id}`}>
@@ -22,6 +30,9 @@ export const CardItem = ({
                 alt={title}
               />
 
+              {user && (
+                <HiOutlineHeart className="position-absolute favorite-heart" />
+              )}
               <span
                 className={`badge rounded-pill ${type} position-absolute pill text-uppercase fw-bold`}
               >
@@ -36,7 +47,13 @@ export const CardItem = ({
             <p className="title-card-main text-center mt-3">{title}</p>
           </div>
 
-          <div className="hover-desc">
+          <div
+            className="hover-desc"
+            style={{
+              right: isLastOfRow ? "100%" : "unset",
+              left: !isLastOfRow ? "100%" : "unset",
+            }}
+          >
             <strong className="text-white">{title}</strong>
             <span
               className={`badge rounded-pill ${type} my-3 d-block pill text-uppercase fw-bold`}

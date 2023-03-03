@@ -1,0 +1,23 @@
+.drop-zone {
+    min-width: 100% !important;
+    min-height: 300px;
+    border: 4px dashed;
+    border-color: var(--primary-color) !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+    cursor: pointer;
+}
+
+.drop-image > input {
+    left: 100% !important;
+}
+
+.drop-image span {
+    color: white !important;
+}
+
+
+

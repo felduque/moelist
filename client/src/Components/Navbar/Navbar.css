@@ -119,9 +119,7 @@
 
 .nav-list-link {
   text-decoration: none;
-}
-
-.discord {
+  position: relative;
 }
 
 @media (max-width: 576px) {

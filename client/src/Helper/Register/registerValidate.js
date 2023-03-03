@@ -1,13 +1,13 @@
 export function validateRegister(values) {
   let errors = {};
-  if (!values.userName) {
+
+  if (!values.userName || values.userName === "") {
     errors.userName = "Es necesario un nombre de usuario";
   } else if (values.userName.length < 3) {
     errors.userName = "El nombre de usuario debe tener al menos 3 caracteres";
   } else if (values.userName.length > 15) {
     errors.userName = "El nombre de usuario debe tener menos de 15 caracteres";
-  }
-  if (values.userName.includes(" ")) {
+  } else if (values.userName.includes(" ")) {
     errors.userName = "El nombre de usuario no puede tener espacios";
   }
 
@@ -33,5 +33,6 @@ export function validateRegister(values) {
   } else if (values.password.includes(" ")) {
     errors.password = "El password no puede tener espacios";
   }
+
   return errors;
 }

@@ -5,6 +5,10 @@
   font-family: 'Poppins', sans-serif;
 }
 
+a {
+  color: var(--primary-color) !important;
+}
+
 :root {
   --primary-color: #e95b5b;
   --color-anime: #0d6efd;
@@ -12,6 +16,7 @@
   --color-manwha: rgb(255,165,0);
   --color-manhua: rgba(128,0,128);
   --dark-bg: #171823;
+  --bs-nav-pills-link-active-bg: var(--primary-color) !important;
 }
 
 html, body {
@@ -26,4 +31,29 @@ body {
 .btn-primary {
   background-color: var(--primary-color) !important;
   border-color: var(--primary-color) !important;
+}
+
+.nav-pills .nav-link.active, 
+.nav-pills .show>.nav-link {
+  background-color: var(--primary-color) !important;
+
+}
+
+.select__menu-list {
+  background-color: var(--dark-bg) !important;
+}
+
+.select__control.select__control--is-focused,
+.select__control.select__control--is-focused:hover {
+  box-shadow: none !important;
+  border-color: var(--primary-color) !important;
+}
+
+
+input:disabled {
+  background-color: #ccc !important;    
+}
+
+.select__control--is-disabled {
+  background-color: #ccc;
 }

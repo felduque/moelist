@@ -13,36 +13,18 @@ import { getAnimes } from "../../../Api/Anime/anime";
 import { useContext } from "react";
 import { ExploradorContext } from "../../../utils/context/ExploradorContext";
 
+import {
+  tipos,
+  demografia,
+  estado,
+  generos,
+} from "../../../helpers/valoresParaSelects";
+import { handleMultiValues } from "../../../helpers/handleMultiValues";
+
 const animatedComponents = makeAnimated();
 
 export const ExploradorSidebar = () => {
   const { setItems, filters, setFilters } = useContext(ExploradorContext);
-
-  const tipos = [
-    { value: "todos", label: "Todos" },
-    { value: "1", label: "Manga" },
-    { value: "2", label: "Anime" },
-    { value: "3", label: "Manwha" },
-    { value: "4", label: "Manhua" },
-  ];
-
-  const demografia = [
-    { value: "todos", label: "Todos" },
-    { value: "1", label: "Shounen" },
-    { value: "2", label: "Seinen" },
-    { value: "3", label: "Shoujo" },
-  ];
-
-  const estado = [
-    { value: "todos", label: "Todos" },
-    { value: "1", label: "En emision" },
-    { value: "2", label: "Finalizado" },
-  ];
-
-  const generos = [
-    { id: "1", label: "Acción" },
-    { id: "2", label: "Aventura" },
-  ];
 
   const handleSelectChange = ({ filter, value }) => {
     setFilters({
@@ -52,20 +34,7 @@ export const ExploradorSidebar = () => {
   };
 
   const handleCheckBoxChange = ({ value }) => {
-    const generosArr = filters.generos;
-    const selectedGenre = generosArr.find((genreVal) => genreVal == value);
-
-    if (!selectedGenre) {
-      setFilters({
-        ...filters,
-        generos: [value, ...filters.generos],
-      });
-    } else {
-      setFilters({
-        ...filters,
-        generos: [...filters.generos.filter((genreVal) => genreVal !== value)],
-      });
-    }
+    handleMultiValues(value, setFilters, filters, "generos");
   };
 
   useEffect(() => {
@@ -73,6 +42,8 @@ export const ExploradorSidebar = () => {
       const items = await getAnimes();
       setItems(items.data);
     };
+
+    console.log(filters);
 
     fetchItems();
   }, [
@@ -131,11 +102,11 @@ export const ExploradorSidebar = () => {
       />
       <h5 className="mt-4"> Generos </h5>
       {generos.map((genero) => (
-        <div key={genero.id} className="form-check">
+        <div key={genero.value} className="form-check">
           <input
             className="form-check-input"
             type="checkbox"
-            value={genero.id}
+            value={genero.value}
             name="genero"
             onChange={(e) => handleCheckBoxChange(e.target)}
           />

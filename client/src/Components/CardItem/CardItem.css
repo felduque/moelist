@@ -7,9 +7,19 @@
 }
 
 
+.favorite-heart {
+    right: 15px;
+    top: 10px;
+    font-size: 30px;
+    color: white;
+    background-color: rgba(233, 91, 91, 0.6);
+    border-radius: 50%;
+    padding: 5px;
+}
+
+
 .hover-desc {
     width: 270px;
-    left: 90%;
     top: -10px;
     height: auto;
     background-color: #3b4348;

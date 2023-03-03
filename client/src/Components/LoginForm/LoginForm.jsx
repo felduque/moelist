@@ -7,8 +7,8 @@ import { BiShow } from "react-icons/bi";
 import { validateLogin } from "../../Helper/Login/loginvalidate";
 import Swal from "sweetalert2";
 import { loginUser } from "../../Api/Login/login";
-
 import "./LoginForm.css";
+import { useAuth } from "../../hooks/useAuth";
 
 export const LoginForm = ({ setFormType }) => {
   const [show, setShow] = useState(false);
@@ -17,6 +17,7 @@ export const LoginForm = ({ setFormType }) => {
     email: "",
     password: "",
   });
+  const { setToken } = useAuth();
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
@@ -35,83 +36,82 @@ export const LoginForm = ({ setFormType }) => {
         email: data.email,
         password: data.password,
       };
-      const res = await loginUser(newForm);
-      // Se guarda el token en el localStorage
-      localStorage.setItem("token", res.token);
-      if (res) {
-        Swal.fire({
-          icon: "success",
-          title: "Usuario logueado con exito",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        setFormType("login");
-      } else {
+
+      try {
+        const res = await loginUser(newForm);
+        if (res) {
+          Swal.fire({
+            icon: "success",
+            title: "Usuario logueado con exito",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          localStorage.setItem("token", res.token);
+          setToken(res.token);
+          setFormType("login");
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "El Email o el Password son incorrectos, corrige los campos",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      } catch (error) {
+        console.log(error);
         Swal.fire({
           icon: "error",
           title: "Error al loguear el usuario",
-          text: "El email ya esta registrado",
+          text: "Error inesperado",
           showConfirmButton: false,
           timer: 1500,
         });
       }
-    } else {
-      Swal.fire({
-        icon: "error",
-        title: "Al parecer hay un error en el formulario, corrige los campos",
-        showConfirmButton: false,
-        timer: 1500,
-      });
     }
   };
-
   return (
     <form onSubmit={handleSubmit} className="p-4">
-      <div
-        className="
-        mb-4 input-field
-        "
-      >
+      <div className="input-group">
+        <div className=" mb-4 input-field">
+          <input
+            name="email"
+            onChange={handleChange}
+            type="email"
+            placeholder="Escriba su Email"
+            required
+          />
+          <MdEmail className="input-icon" />
+        </div>
         {errors.email && (
           <div className="alert alert-danger" role="alert">
             {errors.email}
           </div>
         )}
       </div>
-      <div className="mb-4 input-field">
-        <input
-          name="email"
-          onChange={handleChange}
-          type="email"
-          placeholder="Escriba su Email"
-          required
-        />
-        <MdEmail className="input-icon" />
-      </div>
-      <div className="mb-4 input-field">
+
+      <div className="input-group">
+        <div className="mb-4 input-field">
+          <input
+            type={show ? "text" : "password"}
+            name="password"
+            onChange={handleChange}
+            placeholder="Escriba su Contraseña"
+            required
+          />
+          <FaLock className="input-icon" />
+          <div className="showHide" onClick={() => setShow(!show)}>
+            {show ? (
+              <BiShow className="input-icon show-hide-pw" />
+            ) : (
+              <BiHide className="input-icon show-hide-pw" />
+            )}
+          </div>
+        </div>
         {errors.password && (
           <div className="alert alert-danger" role="alert">
             {errors.password}
           </div>
         )}
-      </div>
-
-      <div className="mb-4 input-field">
-        <input
-          type={show ? "text" : "password"}
-          name="password"
-          onChange={handleChange}
-          placeholder="Escriba su Contraseña"
-          required
-        />
-        <FaLock className="input-icon" />
-        <div className="showHide" onClick={() => setShow(!show)}>
-          {show ? (
-            <BiShow className="input-icon show-hide-pw" />
-          ) : (
-            <BiHide className="input-icon show-hide-pw" />
-          )}
-        </div>
       </div>
 
       <input

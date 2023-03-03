@@ -40,9 +40,9 @@ export const Explorador = () => {
           </div>
           <div className="col-lg-9 text-white">
             <ExploradorOrder />
-            <div className="row mt-4 ms-xl-3 row-cols-1 row-cols-sm-2 row-cols-lg-4 row-cols-xxl-6">
-              {items.map((item) => (
-                <CardItem key={item.id} {...item} />
+            <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xxl-6 mt-5 mt-xl-3">
+              {items.map((item, index) => (
+                <CardItem key={item.id} {...item} index={index} />
               ))}
             </div>
           </div>
