@@ -1,6 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./CardItem.css";
+import { HiOutlineHeart } from "react-icons/hi";
+import { useContext } from "react";
+import { AuthContext } from "../../utils/context/AuthContext";
 
 export const CardItem = ({
   id,
@@ -11,11 +14,9 @@ export const CardItem = ({
   demography,
   index,
 }) => {
-  const isLastOfRow = index && (index + 1) % 6 === 0;
+  const { user } = useContext(AuthContext);
 
-  if ((index + 1) % 6 === 0) {
-    console.log((index + 1) % 6);
-  }
+  const isLastOfRow = index && (index + 1) % 6 === 0;
 
   return (
     <div className="col">
@@ -29,6 +30,9 @@ export const CardItem = ({
                 alt={title}
               />
 
+              {user && (
+                <HiOutlineHeart className="position-absolute favorite-heart" />
+              )}
               <span
                 className={`badge rounded-pill ${type} position-absolute pill text-uppercase fw-bold`}
               >
@@ -46,8 +50,8 @@ export const CardItem = ({
           <div
             className="hover-desc"
             style={{
-              right: isLastOfRow ? "90%" : "unset",
-              left: !isLastOfRow ? "90%" : "unset",
+              right: isLastOfRow ? "100%" : "unset",
+              left: !isLastOfRow ? "100%" : "unset",
             }}
           >
             <strong className="text-white">{title}</strong>
