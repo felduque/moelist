@@ -17,38 +17,40 @@ export const UserPage = () => {
           <UserSidebar {...{ userName, email, avatar }} />
         </div>
         <div className="col-9 ps-5">
-          <ul class="nav nav-pills nav-fill nav-user">
-            <li class="nav-item me-4 bg-dark">
+          <ul className="nav nav-pills nav-fill nav-user">
+            <li className="nav-item me-4 bg-dark">
               <Link
                 to="/user/settings"
                 onClick={() => setTab("configurar")}
-                class={`nav-link ${currentTab === "configurar" && "active"}`}
+                className={`nav-link ${
+                  currentTab === "configurar" && "active"
+                }`}
                 aria-current="page"
-                href="#"
               >
                 Configurar Perfil
               </Link>
             </li>
-            <li class="nav-item bg-dark">
+            <li className="nav-item bg-dark">
               <Link
                 to="/user/favoritos"
                 onClick={() => setTab("favorito")}
-                class={`nav-link ${currentTab === "favorito" && "active"}`}
-                href="#"
+                className={`nav-link ${currentTab === "favorito" && "active"}`}
               >
                 Favoritos
               </Link>
             </li>
             {role === "Author" && (
-              <Link to="/user/publicar" class="nav-item">
-                <a
+              <li className="nav-item bg-dark ms-4">
+                <Link
+                  to="/user/publicar"
                   onClick={() => setTab("publicar")}
-                  class={`nav-link ${currentTab === "publicar" && "active"}`}
-                  href="#"
+                  className={`nav-link ${
+                    currentTab === "publicar" && "active"
+                  }`}
                 >
                   publicar
-                </a>
-              </Link>
+                </Link>
+              </li>
             )}
           </ul>
           <div className="py-4">
