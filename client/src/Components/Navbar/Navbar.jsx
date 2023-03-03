@@ -1,18 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./Navbar.css";
 import { RiHome4Fill } from "react-icons/ri";
-import { FaBars, FaUserAlt } from "react-icons/fa";
+import { FaBars } from "react-icons/fa";
 import { BsDiscord } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { LoginRegisterModal } from "../LoginRegisterModal/LoginRegisterModal";
 import { MobileMenu } from "../MobileMenu/MobileMenu";
 import { Search } from "../Search/Search";
-import { useAuth } from "../../hooks/useAuth";
 import { UserNav } from "./UserNav/UserNav";
+import { AuthContext } from "../../utils/context/AuthContext";
 
 export const Navbar = () => {
   const [formType, setFormType] = useState("login");
-  const { user } = useAuth();
+  const { user } = useContext(AuthContext);
 
   return (
     <>
