@@ -26,8 +26,20 @@ export const UserFavorites = () => {
   );
 
   useEffect(() => {
-    console.log(favorites);
-  }, [filters.generos]);
+    console.log(filters);
+    if (filters.tipo != "todos") {
+      setSortedFavorites(
+        favorites.filter((favorite) => favorite.contentType === filters.tipo)
+      );
+    } else {
+      setSortedFavorites(favorites);
+    }
+  }, [
+    filters.tipo,
+    filters.demografia,
+    filters.estado,
+    filters.generos.length,
+  ]);
 
   return (
     <>
@@ -61,26 +73,25 @@ export const UserFavorites = () => {
                       id="tipos"
                       styles={selectStyles}
                       placeholder="Todos"
-                      defaultValue={tipos[0]}
+                      defaultValue={filters.tipo}
                       options={tipos}
-                      onChange={({ value }) =>
-                        setFilters({ ...filters, tipo: value })
+                      onChange={({ label }) =>
+                        setFilters({ ...filters, tipo: label.toLowerCase() })
                       }
                       classNamePrefix="select"
                     />
                   </div>
 
                   <div className="col-12 col-md-6 col-xl-3">
-                    <label htmlFor="generos">Demografia</label>
+                    <label htmlFor="demografia">Demografia</label>
                     <Select
-                      isMulti
                       className="mt-2"
-                      id="generos"
+                      id="demografia"
                       styles={selectStyles}
                       placeholder="Todos"
                       options={demografia}
-                      onChange={(value) =>
-                        setFilters({ ...filters, generos: value })
+                      onChange={({ label }) =>
+                        setFilters({ ...filters, demografia: label })
                       }
                       classNamePrefix="select"
                     />
@@ -89,10 +100,12 @@ export const UserFavorites = () => {
                   <div className="col-12 col-md-6 col-xl-3 mt-4 mt-xl-0">
                     <label htmlFor="estado">Estado</label>
                     <Select
-                      isMulti
                       className="mt-2"
                       id="estado"
                       styles={selectStyles}
+                      onChange={({ value }) =>
+                        setFilters({ ...filters, estado: value })
+                      }
                       placeholder="Todos"
                       options={estado}
                       classNamePrefix="select"
@@ -108,6 +121,9 @@ export const UserFavorites = () => {
                       styles={selectStyles}
                       placeholder="Todos"
                       options={generos}
+                      onChange={(value) =>
+                        setFilters({ ...filters, generos: value })
+                      }
                       classNamePrefix="select"
                     />
                   </div>
