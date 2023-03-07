@@ -27,7 +27,7 @@ export const UserPublication = () => {
   const [one, two, ...sources] = tipos;
 
   const [loading, setLoading] = useState(false);
-  const [errors, setErrors] = useState();
+  const [errors, setErrors] = useState({});
   const [preview, setPreview] = useState();
   const [data, setData] = useState({
     tipo: tiposSelect[0].value,
@@ -66,8 +66,6 @@ export const UserPublication = () => {
 
     setData({ ...data, image });
   };
-
-  useEffect(() => {}, [errors]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -120,7 +118,7 @@ export const UserPublication = () => {
       </div>
 
       <div className="row mb-4">
-        <div className="col-4">
+        <div className="col-12 col-md-4">
           <label htmlFor="">Tipo</label>
           <Select
             placeholder="Seleccione un tipo"
@@ -132,7 +130,7 @@ export const UserPublication = () => {
           />
         </div>
 
-        <div className="col-4">
+        <div className="col-12 col-sm-6 col-md-4 mt-4 mt-md-0">
           <label htmlFor="">Demografia</label>
           <Select
             placeholder="Seleccione una demografia"
@@ -144,7 +142,7 @@ export const UserPublication = () => {
           />
         </div>
 
-        <div className="col-4">
+        <div className="col-12 col-sm-6 col-md-4 mt-4 mt-md-0">
           <label htmlFor="">Estado</label>
           <Select
             placeholder="Seleccione un estado"
@@ -158,7 +156,7 @@ export const UserPublication = () => {
       </div>
 
       <div className="row mb-4">
-        <div className="col-6">
+        <div className="col-12 col-md-5 mb-3">
           <label htmlFor="">Titulo</label>
           <input
             type="text"
@@ -170,7 +168,7 @@ export const UserPublication = () => {
             <span className="text-danger mt-2 d-block">{errors.titulo}</span>
           )}
         </div>
-        <div className="col-2">
+        <div className="col-12 col-sm-4 col-md-3 col-lg-3">
           <label htmlFor="">Source</label>
           <Select
             placeholder="Seleccione un tipo"
@@ -184,7 +182,7 @@ export const UserPublication = () => {
           />
         </div>
 
-        <div className="col-2">
+        <div className="col-12 col-sm-4 col-md-2 col-lg-2 mt-4 mt-sm-0">
           <label htmlFor="">Capitulos</label>
           <input
             type="number"
@@ -196,7 +194,7 @@ export const UserPublication = () => {
             <span className="text-danger mt-2 d-block">{errors.capitulos}</span>
           )}
         </div>
-        <div className="col-2">
+        <div className="col-12 col-sm-4 col-md-2 col-lg-2 mt-4 mt-sm-0">
           <label htmlFor="">Volumenes</label>
           <input
             type="number"
@@ -211,8 +209,8 @@ export const UserPublication = () => {
         </div>
       </div>
 
-      <div className="row  mb-4">
-        <div className="col-4">
+      <div className="row mb-4">
+        <div className="col-12 col-sm-6 col-md-4 mb-4 mb-sm-0">
           <label htmlFor="">Estreno</label>
           <DatePicker
             name="estreno"
@@ -232,7 +230,7 @@ export const UserPublication = () => {
           )}
         </div>
 
-        <div className="col-4">
+        <div className="col-12 col-sm-6 col-md-4">
           <label htmlFor="">Duración</label>
           <input
             type="text"
@@ -246,7 +244,7 @@ export const UserPublication = () => {
           )}
         </div>
 
-        <div className="col-4">
+        <div className="col-12 col-md-4 mt-4 mt-md-0">
           <label htmlFor="">Temporada</label>
           <input
             type="text"
@@ -260,7 +258,7 @@ export const UserPublication = () => {
       </div>
 
       <div className="row  mb-4">
-        <div className="col-4">
+        <div className="col-12 col-sm-4">
           <label htmlFor="">Estudio</label>
           <input
             type="text"
@@ -274,7 +272,7 @@ export const UserPublication = () => {
           )}
         </div>
 
-        <div className="col-4">
+        <div className="col-12 col-sm-4 my-4 my-sm-0">
           <label htmlFor="">Autor</label>
           <input
             type="text"
@@ -286,7 +284,7 @@ export const UserPublication = () => {
           )}
         </div>
 
-        <div className="col-4">
+        <div className="col-12 col-sm-4">
           <label htmlFor="">Artista</label>
           <input
             type="text"
@@ -300,7 +298,7 @@ export const UserPublication = () => {
       </div>
 
       <div className="row mb-4">
-        <div className="col-4">
+        <div className="col-sm-12 col-lg-4 mb-4 mb-lg-0">
           <label htmlFor="">Productoras</label>
           <Creatable
             name="producers"
@@ -319,7 +317,7 @@ export const UserPublication = () => {
             <span className="text-danger mt-2 d-block">{errors.producers}</span>
           )}
         </div>
-        <div className="col-4">
+        <div className="col-sm-6 col-lg-4">
           <label htmlFor="">Generos</label>
           <Select
             name="generos"
@@ -335,7 +333,7 @@ export const UserPublication = () => {
           )}
         </div>
 
-        <div className="col-4">
+        <div className="col-sm-6 col-lg-4 mt-4 mt-sm-0">
           <label htmlFor="">Scans</label>
           <Select
             name="scans"
@@ -369,7 +367,7 @@ export const UserPublication = () => {
         </div>
       </div>
 
-      <div className="col-12 mt-4">
+      <div className="col mt-4">
         <button
           className="btn btn-primary w-25 d-flex justify-content-center gap-3"
           type="submit"

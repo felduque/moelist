@@ -20,3 +20,9 @@
 .nav-user .nav-link:visited {
     color: white !important;
 }
+
+@media (max-width: 499px) {
+    .nav-user {
+        flex-direction: column;
+    }
+}
