@@ -89,6 +89,7 @@ export const getMangas = async (req, res) => {
         "score",
         "popularity",
         "urlContent",
+        "contentType",
       ],
       include: [
         {

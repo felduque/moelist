@@ -38,8 +38,7 @@ export const createAnime = async (req, res) => {
     const img = req.files?.image;
     let pathImage = __dirname + "/../../public/anime/" + img?.name;
     img?.mv(pathImage);
-    let url = (pathImage =
-      "http://localhost:3000/anime/img/" + img?.name);
+    let url = (pathImage = "http://localhost:3000/anime/img/" + img?.name);
     if (!img) url = "google.com";
 
     const anime = await Anime.create(
@@ -255,6 +254,7 @@ export const getAllInfo = async (req, res) => {
         "trailer",
         "opening",
         "urlContent",
+        "contentType",
       ],
       include: [
         {

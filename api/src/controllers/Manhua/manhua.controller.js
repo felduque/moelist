@@ -89,6 +89,7 @@ export const getManhua = async (req, res) => {
         "score",
         "popularity",
         "urlContent",
+        "contentType",
       ],
       include: [
         {
