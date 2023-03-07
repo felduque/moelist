@@ -108,7 +108,7 @@ export const addFavorite = async (req, res) => {
         break;
     }
 
-    res.status(200).json({ content });
+    res.status(200).json(content);
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Server error" });
@@ -116,6 +116,82 @@ export const addFavorite = async (req, res) => {
 };
 
 export const getFavorites = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const user = await User.findOne({
+      where: { id },
+      attributes: { exclude: ["password"] },
+      include: [
+        {
+          model: Anime,
+          attributes: [
+            "id",
+            "title",
+            "description",
+            "image",
+            "contentType",
+            "genres",
+          ],
+          through: { attributes: [] },
+        },
+        {
+          model: Manga,
+          attributes: [
+            "id",
+            "title",
+            "description",
+            "image",
+            "contentType",
+            "genres",
+          ],
+          through: { attributes: [] },
+        },
+        {
+          model: Manhua,
+          attributes: [
+            "id",
+            "title",
+            "description",
+            "image",
+            "contentType",
+            "genres",
+          ],
+          through: { attributes: [] },
+        },
+        {
+          model: Manhwa,
+          attributes: [
+            "id",
+            "title",
+            "description",
+            "image",
+            "contentType",
+            "genres",
+          ],
+          through: { attributes: [] },
+        },
+      ],
+    });
+    if (!user) {
+      return res.status(400).json({ error: "User not found" });
+    }
+
+    const favorites = [
+      ...user.animes,
+      ...user.mangas,
+      ...user.manhuas,
+      ...user.manhwas,
+    ];
+
+    res.status(200).json(favorites);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Server error" });
+  }
+};
+
+export const getUser = async (req, res) => {
   try {
     const { id } = req.params;
     console.log(req.params);
@@ -126,53 +202,39 @@ export const getFavorites = async (req, res) => {
       include: [
         {
           model: Anime,
-          attributes: ["id", "title", "description", "image"],
+          attributes: ["id", "title", "description", "image", "contentType"],
           through: { attributes: [] },
         },
         {
           model: Manga,
-          attributes: ["id", "title", "description", "image"],
+          attributes: ["id", "title", "description", "image", "contentType"],
           through: { attributes: [] },
         },
         {
           model: Manhua,
-          attributes: ["id", "title", "description", "image"],
+          attributes: ["id", "title", "description", "image", "contentType"],
           through: { attributes: [] },
         },
         {
           model: Manhwa,
-          attributes: ["id", "title", "description", "image"],
+          attributes: ["id", "title", "description", "image", "contentType"],
           through: { attributes: [] },
         },
       ],
     });
+
     if (!user) {
       return res.status(400).json({ error: "User not found" });
     }
 
-    res.status(200).json(user);
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: "Server error" });
-  }
-};
+    const favorites = [
+      ...user.animes,
+      ...user.mangas,
+      ...user.manhuas,
+      ...user.manhwas,
+    ];
 
-export const removeFavorite = async (req, res) => {};
-
-export const getUser = async (req, res) => {
-  try {
-    const { id } = req.params;
-    console.log(req.params);
-
-    const user = await User.findOne({
-      where: { id },
-      attributes: { exclude: ["password"] },
-    });
-    if (!user) {
-      return res.status(400).json({ error: "User not found" });
-    }
-
-    res.status(200).json(user);
+    res.status(200).json({ user, favorites });
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Server error" });
