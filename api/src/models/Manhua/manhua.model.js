@@ -55,4 +55,13 @@ export const Manhua = sequelize.define("manhuas", {
   urlContent: {
     type: DataTypes.TEXT,
   },
+  contentType: {
+    type: DataTypes.VIRTUAL,
+    get() {
+      return `manhua`;
+    },
+    set(value) {
+      throw new Error("Do not try to set contentType");
+    },
+  },
 });
