@@ -8,7 +8,7 @@ export const useAuth = () => {
   const controller = new AbortController();
   const [loading, setLoading] = useState(true);
   const [token, setToken] = useState(tokenStorage);
-  const { user, setUser } = useContext(AuthContext);
+  const { user, setUser, setFavorites } = useContext(AuthContext);
 
   useEffect(() => {
     setLoading(true);
@@ -20,7 +20,8 @@ export const useAuth = () => {
       getUserById(decoded.id)
         .then((res) => {
           console.log(res);
-          setUser(res);
+          setUser(res.user);
+          setFavorites(res.favorites);
           setTimeout(() => setLoading(false), 700);
         })
         .catch((err) => {

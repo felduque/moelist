@@ -17,3 +17,17 @@ export const getFavorites = async (id) => {
     console.log(error);
   }
 };
+
+export const addFavorite = async (type, idContent, idUser) => {
+  try {
+    const res = await axios.post(`http://localhost:3000/addfavorite`, {
+      type,
+      idContent,
+      idUser,
+    });
+
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
+};
