@@ -84,6 +84,15 @@ export const Anime = sequelize.define(
     urlContent: {
       type: DataTypes.TEXT,
     },
+    contentType: {
+      type: DataTypes.VIRTUAL,
+      get() {
+        return `anime`;
+      },
+      set(value) {
+        throw new Error("Do not try to set contentType");
+      },
+    },
   },
   {
     timestamps: false,

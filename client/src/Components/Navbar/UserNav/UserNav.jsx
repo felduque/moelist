@@ -28,8 +28,13 @@ export const UserNav = ({ user }) => {
               Ver Perfil
             </Link>
             {user.role === "Author" && (
-              <li className="dropdown-item text-white">Publicar</li>
+              <Link to="/user/publicar" className="dropdown-item text-white">
+                Publicar
+              </Link>
             )}
+            <Link to="/user/favoritos" className="dropdown-item text-white">
+              Ver Favoritos
+            </Link>
             <li className="dropdown-item text-white">Cerrar sesion</li>
           </ul>
         </div>

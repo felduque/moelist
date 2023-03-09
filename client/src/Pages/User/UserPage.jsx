@@ -1,55 +1,48 @@
-import React, { useState, useContext } from "react";
-import { Link, Outlet } from "react-router-dom";
+import React, { useContext } from "react";
+import { NavLink } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { UserSidebar } from "../../Components/User/UserSidebar";
 import { AuthContext } from "../../utils/context/AuthContext";
-
 import "./UserPage.css";
 
 export const UserPage = () => {
-  const [currentTab, setTab] = useState("configurar");
   const { user } = useContext(AuthContext);
-
   const { id, userName, email, role, avatar } = user;
+
   return (
-    <section className="container-fluid py-5 px-5 text-white">
+    <section className="container-fluid py-5 px-3 p-sm-5 text-white ">
       <div className="row gap">
-        <div className="col-3 ">
+        <div className="col-12 col-xl-3 ">
           <UserSidebar {...{ userName, email, avatar }} />
         </div>
-        <div className="col-9 ps-5">
-          <ul className="nav nav-pills nav-fill nav-user">
-            <li className="nav-item me-4 bg-dark">
-              <Link
-                to="/user/settings"
-                onClick={() => setTab("configurar")}
-                className={`nav-link ${
-                  currentTab === "configurar" && "active"
-                }`}
+        <div className="col-12 col-xl-9 px-3 pt-5 pt-xl-0 ps-xl-5">
+          <ul className="nav nav-pills nav-fill nav-user gap-3 gap-sm-4">
+            <li className="nav-item bg-dark">
+              <NavLink
+                to="/user/configurar"
+                className={`nav-link ${({ isActive }) => isActive && "active"}`}
                 aria-current="page"
               >
                 Configurar Perfil
-              </Link>
+              </NavLink>
             </li>
             <li className="nav-item bg-dark">
-              <Link
+              <NavLink
                 to="/user/favoritos"
-                onClick={() => setTab("favorito")}
-                className={`nav-link ${currentTab === "favorito" && "active"}`}
+                className={`nav-link ${({ isActive }) => isActive && "active"}`}
               >
                 Favoritos
-              </Link>
+              </NavLink>
             </li>
             {role === "Author" && (
-              <li className="nav-item bg-dark ms-4">
-                <Link
+              <li className="nav-item bg-dark">
+                <NavLink
                   to="/user/publicar"
-                  onClick={() => setTab("publicar")}
-                  className={`nav-link ${
-                    currentTab === "publicar" && "active"
-                  }`}
+                  className={`nav-link ${({ isActive }) =>
+                    isActive && "active"}`}
                 >
                   publicar
-                </Link>
+                </NavLink>
               </li>
             )}
           </ul>

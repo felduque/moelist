@@ -58,4 +58,13 @@ export const Manhwa = sequelize.define("manhwas", {
   urlContent: {
     type: DataTypes.TEXT,
   },
+  contentType: {
+    type: DataTypes.VIRTUAL,
+    get() {
+      return `manhwa`;
+    },
+    set(value) {
+      throw new Error("Do not try to set contentType");
+    },
+  },
 });

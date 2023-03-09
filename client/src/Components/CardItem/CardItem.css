@@ -7,7 +7,7 @@
 }
 
 
-.favorite-heart {
+.action {
     right: 15px;
     top: 10px;
     font-size: 30px;
@@ -33,6 +33,10 @@
     opacity: 0;
     visibility: hidden;
     z-index: 10;
+}
+
+.added {
+    color: #e91e63
 }
 
 @media (min-width: 1020px) {

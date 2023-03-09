@@ -102,6 +102,7 @@ export const getManhwas = async (req, res) => {
         "demography",
         "popularity",
         "urlContent",
+        "contentType",
       ],
       include: [
         {

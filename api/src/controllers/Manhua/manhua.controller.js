@@ -100,6 +100,7 @@ export const getManhua = async (req, res) => {
         "demography",
         "popularity",
         "urlContent",
+        "contentType",
       ],
       include: [
         {

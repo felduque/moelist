@@ -263,6 +263,7 @@ export const getAllInfo = async (req, res) => {
         "trailer",
         "opening",
         "urlContent",
+        "contentType",
       ],
       include: [
         {
