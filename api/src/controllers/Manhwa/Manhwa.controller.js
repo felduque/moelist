@@ -1,5 +1,7 @@
 import { Manhwa } from "../../models/Manhwa/manhwa.model.js";
 import { Scan } from "../../models/Scan/scan.model.js";
+import { User } from "../../models/User/user.model.js";
+
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 const __filename = fileURLToPath(import.meta.url);
@@ -23,6 +25,8 @@ export const createManhwa = async (req, res) => {
       artists,
       score,
       scanId,
+      authorId,
+      demography,
       popularity,
     } = req.body;
 
@@ -47,8 +51,10 @@ export const createManhwa = async (req, res) => {
         genres,
         authors,
         artists,
+        authorId,
         score,
         popularity,
+        demography,
         scanId,
       },
 
@@ -57,6 +63,11 @@ export const createManhwa = async (req, res) => {
           {
             model: Scan,
             as: "scanId",
+            attributes: ["id"],
+          },
+          {
+            model: User,
+            as: "authorId",
             attributes: ["id"],
           },
         ],
@@ -88,6 +99,7 @@ export const getManhwas = async (req, res) => {
         "authors",
         "artists",
         "score",
+        "demography",
         "popularity",
         "urlContent",
       ],
@@ -125,6 +137,7 @@ export const getManhwasById = async (req, res) => {
         "genres",
         "authors",
         "artists",
+        "demography",
         "score",
         "popularity",
         "urlContent",
@@ -159,6 +172,7 @@ export const updateManhwa = async (req, res) => {
       genres,
       authors,
       artists,
+      demography,
       score,
       popularity,
     } = req.body;
@@ -183,6 +197,7 @@ export const updateManhwa = async (req, res) => {
         rating,
         genres,
         authors,
+        demography,
         artists,
         score,
         popularity,

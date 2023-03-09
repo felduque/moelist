@@ -1,5 +1,6 @@
 import { Manhua } from "../../models/Manhua/manhua.model.js";
 import { Scan } from "../../models/Scan/scan.model.js";
+import { User } from "../../models/User/user.model.js";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 const __filename = fileURLToPath(import.meta.url);
@@ -22,6 +23,8 @@ export const createManhua = async (req, res) => {
       authors,
       artists,
       score,
+      demography,
+      authorId,
       scanId,
       popularity,
     } = req.body;
@@ -46,7 +49,9 @@ export const createManhua = async (req, res) => {
         rating,
         genres,
         authors,
+        demography,
         artists,
+        authorId,
         score,
         popularity,
         scanId,
@@ -56,6 +61,11 @@ export const createManhua = async (req, res) => {
           {
             model: Scan,
             as: "scanId",
+            attributes: ["id"],
+          },
+          {
+            model: User,
+            as: "authorId",
             attributes: ["id"],
           },
         ],
@@ -87,6 +97,7 @@ export const getManhua = async (req, res) => {
         "authors",
         "artists",
         "score",
+        "demography",
         "popularity",
         "urlContent",
       ],
@@ -126,6 +137,7 @@ export const getManhuaById = async (req, res) => {
         "artists",
         "score",
         "popularity",
+        "demography",
         "urlContent",
       ],
       include: [
@@ -158,6 +170,7 @@ export const updateManhua = async (req, res) => {
       genres,
       authors,
       artists,
+      demography,
       score,
       popularity,
       scans,
@@ -186,6 +199,7 @@ export const updateManhua = async (req, res) => {
         artists,
         score,
         popularity,
+        demography,
         scans,
       },
       { where: { id } }

@@ -1,5 +1,6 @@
 import { Manga } from "../../models/Manga/manga.model.js";
 import { Scan } from "../../models/Scan/scan.model.js";
+import { User } from "../../models/User/user.model.js";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 const __filename = fileURLToPath(import.meta.url);
@@ -21,8 +22,10 @@ export const createManga = async (req, res) => {
       authors,
       artists,
       scanId,
+      demography,
       score,
       popularity,
+      authorId,
       urlContent,
     } = req.body;
 
@@ -50,12 +53,19 @@ export const createManga = async (req, res) => {
         scanId,
         popularity,
         urlContent,
+        authorId,
+        demography,
       },
       {
         includes: [
           {
             model: Scan,
             as: "scanId",
+            attributes: ["id"],
+          },
+          {
+            model: User,
+            as: "authorId",
             attributes: ["id"],
           },
         ],
@@ -89,6 +99,7 @@ export const getMangas = async (req, res) => {
         "score",
         "popularity",
         "urlContent",
+        "demography",
       ],
       include: [
         {
@@ -127,6 +138,7 @@ export const getMangaById = async (req, res) => {
         "score",
         "popularity",
         "urlContent",
+        "demography",
       ],
       include: [
         {
@@ -160,11 +172,13 @@ export const updateManga = async (req, res) => {
       genres,
       authors,
       artists,
+      demography,
       score,
       popularity,
     } = req.body;
 
     const img = req.files?.image;
+    console.log(img, id);
     let pathImage = __dirname + "/../../public/manga/" + img?.name;
     img?.mv(pathImage);
     let url = (pathImage = "http://localhost:3000/manga/" + img?.name);
@@ -187,6 +201,7 @@ export const updateManga = async (req, res) => {
         artists,
         score,
         popularity,
+        demography,
       },
       { where: { id } }
     );

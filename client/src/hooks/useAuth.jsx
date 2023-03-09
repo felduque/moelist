@@ -19,12 +19,10 @@ export const useAuth = () => {
       }
       getUserById(decoded.id)
         .then((res) => {
-          console.log(res);
           setUser(res);
           setTimeout(() => setLoading(false), 700);
         })
         .catch((err) => {
-          console.log(err);
           setTimeout(() => setLoading(false), 700);
         });
     }
