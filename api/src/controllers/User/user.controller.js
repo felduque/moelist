@@ -119,72 +119,29 @@ export const getFavorites = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const user = await User.findOne({
-      where: { id },
-      attributes: { exclude: ["password"] },
-      include: [
-        {
-          model: Anime,
-          attributes: [
-            "id",
-            "title",
-            "description",
-            "image",
-            "contentType",
-            "genres",
-          ],
-          through: { attributes: [] },
-        },
-        {
-          model: Manga,
-          attributes: [
-            "id",
-            "title",
-            "description",
-            "image",
-            "contentType",
-            "genres",
-          ],
-          through: { attributes: [] },
-        },
-        {
-          model: Manhua,
-          attributes: [
-            "id",
-            "title",
-            "description",
-            "image",
-            "contentType",
-            "genres",
-          ],
-          through: { attributes: [] },
-        },
-        {
-          model: Manhwa,
-          attributes: [
-            "id",
-            "title",
-            "description",
-            "image",
-            "contentType",
-            "genres",
-          ],
-          through: { attributes: [] },
-        },
-      ],
-    });
-    if (!user) {
+    const userFound = await User.findByPk(id);
+
+    if (!userFound) {
       return res.status(400).json({ error: "User not found" });
     }
 
-    const favorites = [
-      ...user.animes,
-      ...user.mangas,
-      ...user.manhuas,
-      ...user.manhwas,
-    ];
+    const anime = await userFound.getAnimes({
+      attributes: ["id", "title", "description", "image", "contentType"],
+    });
 
-    res.status(200).json(favorites);
+    const manga = await userFound.getMangas({
+      attributes: ["id", "title", "description", "image", "contentType"],
+    });
+
+    const manhua = await userFound.getManhuas({
+      attributes: ["id", "title", "description", "image", "contentType"],
+    });
+
+    const manhwa = await userFound.getManhwas({
+      attributes: ["id", "title", "description", "image", "contentType"],
+    });
+
+    res.status(200).json({ anime, manga, manhua, manhwa });
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Server error" });
