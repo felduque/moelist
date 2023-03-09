@@ -343,27 +343,27 @@ export const UserPublication = () => {
           />
         </div>
 
-
         <div className="col-12 col-sm-6 col-md-4 mt-4 mt-md-0">
           <label htmlFor="">Estado</label>
-        {data.tipo === "Manga" ||
-        data.tipo === "Manhwa" ||
-        data.tipo === "Manhua" ? (
-          <div className="col-4">
-            <label htmlFor="">Artistas</label>
-            <Creatable
-              name="artista"
-              placeholder="Escriba los Artistas"
-              isMulti
-              value={artistsView}
-              styles={selectStyles}
-              classNamePrefix="select"
-              onChange={(val) => handlePush(val, "artista")}
-            />
-          </div>
-        ) : null}
+          {data.tipo === "Manga" ||
+          data.tipo === "Manhwa" ||
+          data.tipo === "Manhua" ? (
+            <div className="col-4">
+              <label htmlFor="">Artistas</label>
+              <Creatable
+                name="artista"
+                placeholder="Escriba los Artistas"
+                isMulti
+                value={artistsView}
+                styles={selectStyles}
+                classNamePrefix="select"
+                onChange={(val) => handlePush(val, "artista")}
+              />
+            </div>
+          ) : null}
+        </div>
 
-        <div className="col-4">
+        <div className="col-12 col-sm-6 col-md-4 mt-4 mt-md-0">
           <label htmlFor="">Estado de la Obra</label>
 
           <Select
@@ -377,10 +377,7 @@ export const UserPublication = () => {
       </div>
 
       <div className="row mb-4">
-
         <div className="col-12 col-md-5 mb-3">
-        <div className="col-5">
-
           <label htmlFor="">Titulo</label>
           <input
             type="text"
@@ -394,8 +391,6 @@ export const UserPublication = () => {
         </div>
 
         <div className="col-12 col-sm-4 col-md-3 col-lg-3">
-        <div className="col-3">
-
           <label htmlFor="">Source</label>
           <Select
             placeholder="Seleccione un tipo"
@@ -408,7 +403,6 @@ export const UserPublication = () => {
         </div>
 
         <div className="col-12 col-sm-4 col-md-2 col-lg-2 mt-4 mt-sm-0">
-        <div className="col-2">
           {data.tipo === "Anime" ? (
             <label htmlFor="">Capitulos</label>
           ) : (
@@ -433,13 +427,10 @@ export const UserPublication = () => {
             className="form-control bg-dark text-white"
             onChange={(e) => setData({ ...data, volumenes: e.target.value })}
           />
-          {errors.volumenes && (
-            <span className="text-danger mt-2 d-block">{errors.volumenes}</span>
           {errors?.capitulos && (
             <span className="text-danger mt-2 d-block">
               {errors?.capitulos}
             </span>
-
           )}
         </div>
         {/* Si Manga, Manhua o Manhwa existe muestra volumes */}
@@ -463,24 +454,9 @@ export const UserPublication = () => {
         ) : null}
       </div>
 
-      <div className="row mb-4">
-        <div className="col-12 col-sm-6 col-md-4 mb-4 mb-sm-0">
-          <label htmlFor="">Estreno</label>
-          <DatePicker
-            name="estreno"
-            placeholderText="Ingrese una fecha"
-            selected={data.estreno}
-            className="form-control bg-dark text-white"
-            onChange={(date) => {
-              setData({
-                ...data,
-                estreno: date,
-              });
-            }}
-          />
       {data.tipo === "Anime" && (
         <div className="row  mb-4">
-          <div className="col-4">
+          <div className="col-12 col-sm-6 col-md-4 mb-4 mb-sm-0">
             <label htmlFor="">Estreno</label>
             <DatePicker
               name="estreno"
@@ -502,15 +478,7 @@ export const UserPublication = () => {
             )}
           </div>
 
-        <div className="col-12 col-sm-6 col-md-4">
-          <label htmlFor="">Duración</label>
-          <input
-            type="text"
-            className="form-control bg-dark text-white"
-            disabled={data.tipo !== "2" && true}
-            onChange={(e) => setData({ ...data, duracion: e.target.value })}
-          />
-          <div className="col-4">
+          <div className="col-12 col-sm-6 col-md-4">
             <label htmlFor="">Duración</label>
             <input
               type="text"
@@ -525,17 +493,7 @@ export const UserPublication = () => {
             )}
           </div>
 
-        <div className="col-12 col-md-4 mt-4 mt-md-0">
-          <label htmlFor="">Temporada</label>
-          <input
-            type="text"
-            className="form-control bg-dark text-white"
-            onChange={(e) => setData({ ...data, temporada: e.target.value })}
-          />
-          {errors.temporada && (
-            <span className="text-danger mt-2 d-block">{errors.temporada}</span>
-          )}
-          <div className="col-4">
+          <div className="col-12 col-md-4 mt-4 mt-md-0">
             <label htmlFor="">Temporada</label>
             <input
               type="text"
@@ -551,18 +509,9 @@ export const UserPublication = () => {
         </div>
       )}
 
-      <div className="row  mb-4">
-        <div className="col-12 col-sm-4">
-          <label htmlFor="">Estudio</label>
-          <input
-            type="text"
-            disabled={data.tipo !== "2" && true}
-            className="form-control bg-dark text-white"
-            onChange={(e) => setData({ ...data, estudio: e.target.value })}
-          />
       {data.tipo === "Anime" && (
         <div className="row  mb-4">
-          <div className="col-4">
+          <div className="col-12 col-sm-4">
             <label htmlFor="">Estudio</label>
             <Creatable
               placeholder="Seleccione un estudio"
@@ -580,79 +529,62 @@ export const UserPublication = () => {
             )}
           </div>
 
-        <div className="col-12 col-sm-4 my-4 my-sm-0">
-          <label htmlFor="">Autor</label>
-          <input
-            type="text"
-            className="form-control bg-dark text-white"
-            onChange={(e) => setData({ ...data, autor: e.target.value })}
-          />
-          {errors.autor && (
-            <span className="text-danger mt-2 d-block">{errors.autor}</span>
-          )}
-        </div>
-
-        <div className="col-12 col-sm-4">
-          <label htmlFor="">Artista</label>
-          <input
-            type="text"
-            className="form-control bg-dark text-white"
-            onChange={(e) => setData({ ...data, artista: e.target.value })}
-          />
-          {errors.artista && (
-            <span className="text-danger mt-2 d-block">{errors.artista}</span>
-          )}
-          <div className="col-4">
+          <div className="col-12 col-sm-4 my-4 my-sm-0">
             <label htmlFor="">Autor</label>
             <input
               type="text"
               className="form-control bg-dark text-white"
               onChange={(e) => setData({ ...data, autor: e.target.value })}
             />
-            {errors?.autor && (
-              <span className="text-danger mt-2 d-block">{errors?.autor}</span>
+            {errors.autor && (
+              <span className="text-danger mt-2 d-block">{errors.autor}</span>
             )}
           </div>
 
-          <div className="col-4">
+          <div className="col-12 col-sm-4">
             <label htmlFor="">Artista</label>
             <input
               type="text"
               className="form-control bg-dark text-white"
               onChange={(e) => setData({ ...data, artista: e.target.value })}
             />
-            {errors?.artista && (
-              <span className="text-danger mt-2 d-block">
-                {errors?.artista}
-              </span>
+            {errors.artista && (
+              <span className="text-danger mt-2 d-block">{errors.artista}</span>
             )}
+            <div className="col-4">
+              <label htmlFor="">Autor</label>
+              <input
+                type="text"
+                className="form-control bg-dark text-white"
+                onChange={(e) => setData({ ...data, autor: e.target.value })}
+              />
+              {errors?.autor && (
+                <span className="text-danger mt-2 d-block">
+                  {errors?.autor}
+                </span>
+              )}
+            </div>
+
+            <div className="col-4">
+              <label htmlFor="">Artista</label>
+              <input
+                type="text"
+                className="form-control bg-dark text-white"
+                onChange={(e) => setData({ ...data, artista: e.target.value })}
+              />
+              {errors?.artista && (
+                <span className="text-danger mt-2 d-block">
+                  {errors?.artista}
+                </span>
+              )}
+            </div>
           </div>
         </div>
       )}
 
       <div className="row mb-4">
-        <div className="col-sm-12 col-lg-4 mb-4 mb-lg-0">
-          <label htmlFor="">Productoras</label>
-          <Creatable
-            name="producers"
-            placeholder="Introduzca las productoras"
-            isMulti
-            value={data.producers}
-            isDisabled={data.tipo !== "2" && true}
-            styles={selectStyles}
-            classNamePrefix="select"
-            onChange={(val) => {
-              console.log(val);
-              setData({ ...data, producers: val });
-            }}
-          />
-          {errors.producers && (
-            <span className="text-danger mt-2 d-block">{errors.producers}</span>
-          )}
-        </div>
-        <div className="col-sm-6 col-lg-4">
         {data.tipo === "Anime" && (
-          <div className="col-4">
+          <div className="col-sm-12 col-lg-4 mb-4 mb-lg-0">
             <label htmlFor="">Productoras</label>
             <Creatable
               name="producers"
@@ -674,7 +606,7 @@ export const UserPublication = () => {
         {data.tipo === "Manga" ||
         data.tipo === "Manhwa" ||
         data.tipo === "Manhua" ? (
-          <div className="col-4">
+          <div className="col-sm-12 col-lg-4 mb-4 mb-lg-0">
             <label htmlFor="">Autor(es)</label>
             <Creatable
               name="autor"

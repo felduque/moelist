@@ -199,40 +199,35 @@ export const getUser = async (req, res) => {
     const user = await User.findOne({
       where: { id },
       attributes: { exclude: ["password"] },
-      include: [
-        {
-          model: Anime,
-          attributes: ["id", "title", "description", "image", "contentType"],
-          through: { attributes: [] },
-        },
-        {
-          model: Manga,
-          attributes: ["id", "title", "description", "image", "contentType"],
-          through: { attributes: [] },
-        },
-        {
-          model: Manhua,
-          attributes: ["id", "title", "description", "image", "contentType"],
-          through: { attributes: [] },
-        },
-        {
-          model: Manhwa,
-          attributes: ["id", "title", "description", "image", "contentType"],
-          through: { attributes: [] },
-        },
-      ],
+      // include: [
+      // {
+      //   model: Anime,
+      //   attributes: ["id", "title", "description", "image"],
+      //   through: { attributes: [] },
+      // },
+      // {
+      //   model: Manga,|
+      //   attributes: ["id", "title", "description", "image"],
+      //   through: { attributes: [] },
+      // },
+      // {
+      //   model: Manhua,
+      //   attributes: ["id", "title", "description", "image"],
+      //   through: { attributes: [] },
+      // },
+      // {
+      //   model: Manhwa,
+      //   attributes: ["id", "title", "description", "image"],
+      //   through: { attributes: [] },
+      // },
+      // ],
     });
 
     if (!user) {
       return res.status(400).json({ error: "User not found" });
     }
 
-    const favorites = [
-      ...user.animes,
-      ...user.mangas,
-      ...user.manhuas,
-      ...user.manhwas,
-    ];
+    const favorites = [];
 
     res.status(200).json({ user, favorites });
   } catch (error) {
