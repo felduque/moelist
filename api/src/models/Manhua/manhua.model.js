@@ -19,6 +19,9 @@ export const Manhua = sequelize.define("manhuas", {
   status: {
     type: DataTypes.STRING,
   },
+  demography: {
+    type: DataTypes.STRING,
+  },
   source: {
     type: DataTypes.STRING,
   },

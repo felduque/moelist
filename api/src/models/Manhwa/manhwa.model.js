@@ -34,6 +34,9 @@ export const Manhwa = sequelize.define("manhwas", {
   volumes: {
     type: DataTypes.STRING,
   },
+  demography: {
+    type: DataTypes.STRING,
+  },
   rating: {
     type: DataTypes.STRING,
   },

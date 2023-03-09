@@ -1,5 +1,6 @@
 import { Anime } from "../../models/Anime/anime.model.js";
 import { Scan } from "../../models/Scan/scan.model.js";
+import { User } from "../../models/User/user.model.js";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 const __filename = fileURLToPath(import.meta.url);
@@ -8,34 +9,35 @@ const __dirname = dirname(__filename);
 export const createAnime = async (req, res) => {
   try {
     const {
-      title,
-      description,
-      status,
-      type,
-      episodes,
-      day,
+      title, // ✔️
+      description, // ✔️
+      status, // ✔️
+      type, // ✔️
+      episodes, // ✔️
+      day, // ✔️
       rating,
-      premiered,
-      duration,
-      genres,
-      studios,
-      producers,
-      demography,
-      source,
+      premiered, // ✔️
+      duration, // ✔️
+      genres, // ✔️
+      studios, // ✔️
+      producers, // ✔️
+      demography, // ✔️
+      source, // ✔️
       score,
       popularity,
       members,
-      author,
-      artist,
+      author, // ✔️
+      artist, // ✔️
       favorites,
-      season,
-      urlContent,
+      season, // ✔️
+      urlContent, // ✔️
       trailer,
+      authorId,
       opening,
-      scanId,
+      scanId, // ✔️
     } = req.body;
 
-    const img = req.files?.image;
+    const img = req.files?.image; // ✔️
     let pathImage = __dirname + "/../../public/anime/" + img?.name;
     img?.mv(pathImage);
     let url = (pathImage = "http://localhost:3000/anime/img/" + img?.name);
@@ -62,6 +64,7 @@ export const createAnime = async (req, res) => {
         popularity,
         members,
         author,
+        authorId,
         artist,
         favorites,
         season,
@@ -77,11 +80,16 @@ export const createAnime = async (req, res) => {
             as: "scanId",
             attributes: ["id"],
           },
+          {
+            model: User,
+            as: "authorId",
+            attributes: ["id"],
+          },
         ],
       }
     );
 
-    res.status(201).json(anime);
+    res.status(200).json(anime);
   } catch (error) {
     console.log(error);
   }
@@ -165,6 +173,7 @@ export const updateAnime = async (req, res) => {
     } = req.body;
 
     const img = req.files?.image;
+
     let pathImage = __dirname + "/../../public/anime/" + img?.name;
     img?.mv(pathImage);
     let url = (pathImage = "http://localhost:3000/anime/" + img?.name);

@@ -6,6 +6,7 @@ import animeroutes from "./routes/Anime/anime.routes.js";
 import mangaroutes from "./routes/Manga/manga.routes.js";
 import manhuaroutes from "./routes/Manhua/manhua.routes.js";
 import manhwaroutes from "./routes/Manhwa/manhwas.routes.js";
+import filterroutes from "./routes/Filter/filter.routes.js";
 import scans from "./routes/Scan/scan.routes.js";
 import users from "./routes/User/user.routes.js";
 
@@ -34,19 +35,18 @@ dotenv.config();
 
 const app = express();
 
-// relations
+// relaciones Scan con anime, manga, manhua y manhwa
 Scan.hasMany(Anime, { foreignKey: "scanId" });
 Scan.hasMany(Manga, { foreignKey: "scanId" });
 Scan.hasMany(Manhua, { foreignKey: "scanId" });
 Scan.hasMany(Manhwa, { foreignKey: "scanId" });
 
-// relaciones de uno a muchos
 Anime.belongsTo(Scan, { foreignKey: "scanId" });
 Manga.belongsTo(Scan, { foreignKey: "scanId" });
 Manhua.belongsTo(Scan, { foreignKey: "scanId" });
 Manhwa.belongsTo(Scan, { foreignKey: "scanId" });
 
-// relaciones de muchos a muchos
+// relaciones de muchos a muchos para favoritos
 Anime.belongsToMany(User, { through: AnimeFav });
 User.belongsToMany(Anime, { through: AnimeFav });
 
@@ -58,6 +58,17 @@ User.belongsToMany(Manhua, { through: ManhuaFav });
 
 Manhwa.belongsToMany(User, { through: ManhwaFav });
 User.belongsToMany(Manhwa, { through: ManhwaFav });
+
+// relaciones para autores con anime, manga, manhua y manhwa
+User.hasMany(Anime, { foreignKey: "authorId" });
+User.hasMany(Manga, { foreignKey: "authorId" });
+User.hasMany(Manhua, { foreignKey: "authorId" });
+User.hasMany(Manhwa, { foreignKey: "authorId" });
+
+Anime.belongsTo(User, { foreignKey: "authorId" });
+Manga.belongsTo(User, { foreignKey: "authorId" });
+Manhua.belongsTo(User, { foreignKey: "authorId" });
+Manhwa.belongsTo(User, { foreignKey: "authorId" });
 
 // sync models
 // Scan.sync({ force: true });
@@ -102,6 +113,7 @@ app.use((req, res, next) => {
 
 app.use(animeroutes);
 app.use(mangaroutes);
+app.use(filterroutes);
 app.use(manhuaroutes);
 app.use(users);
 app.use(manhwaroutes);
