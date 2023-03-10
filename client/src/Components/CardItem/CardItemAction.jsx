@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { HiHeart, HiOutlineHeart } from "react-icons/hi";
 import { BsTrashFill } from "react-icons/bs";
-import { addFavorite } from "../../Api/User/user";
+import { addFavorite, deleteFavorite, getFavorites } from "../../Api/User/user";
 import { AuthContext } from "../../utils/context/AuthContext";
 import "./CardItem.css";
 
@@ -31,11 +31,28 @@ export const CardItemAction = ({
       ]);
   };
 
+  const removeFromFavorites = async () => {
+    const deleted = await deleteFavorite(type, contentId, userId);
+
+    if (deleted.status === 200) {
+      const favCopy = [...favorites];
+      const favIndex = favCopy.findIndex(
+        (fav) => fav.id == contentId && fav.contentType == type
+      );
+      favCopy.splice(favIndex, 1);
+
+      setFavorites(favCopy);
+    }
+  };
+
   return isAdded ? (
     action === "add" ? (
       <HiHeart className="position-absolute action added" />
     ) : (
-      <BsTrashFill className="position-absolute action" />
+      <BsTrashFill
+        className="position-absolute action"
+        onClick={() => removeFromFavorites()}
+      />
     )
   ) : (
     <HiOutlineHeart

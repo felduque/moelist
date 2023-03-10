@@ -4,7 +4,7 @@ import { getAnimes } from "../../Api/Anime/anime";
 import { getManhuas } from "../../Api/Manhuas/mahuas";
 import { getManhwas } from "../../Api/Manhwas/manhwas";
 import { getMangas } from "../../Api/Mangas/mangas";
-import { CardItemSidebar } from "../CardItem/CardItemSidebar";
+import { CardItem } from "../CardItem/CardItem";
 
 export const Sidebar = () => {
   const [animes, setAnimes] = useState([]);
@@ -39,23 +39,19 @@ export const Sidebar = () => {
         </div>
         <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-1 px-3 px-sm-0 pt-4">
           {animes?.slice(0, 2).map((anime, index) => {
-            anime.type = "anime";
-            return <CardItemSidebar key={index} {...anime} />;
+            return <CardItem key={index} {...anime} showHover={false} />;
           })}
 
           {mangas.slice(0, 2).map((manga, index) => {
-            manga.type = "manga";
-            return <CardItemSidebar key={index} {...manga} />;
+            return <CardItem key={index} {...manga} showHover={false} />;
           })}
 
           {manhwas.slice(0, 2).map((manhwa, index) => {
-            manhwa.type = "manwha";
-            return <CardItemSidebar key={index} {...manhwa} />;
+            return <CardItem key={index} {...manhwa} showHover={false} />;
           })}
 
           {manhuas.slice(0, 2).map((manhua, index) => {
-            manhua.type = "manhua";
-            return <CardItemSidebar key={index} {...manhua} />;
+            return <CardItem key={index} {...manhua} showHover={false} />;
           })}
         </div>
       </div>

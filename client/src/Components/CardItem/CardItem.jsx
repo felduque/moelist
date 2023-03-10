@@ -15,6 +15,7 @@ export const CardItem = ({
   index,
   contentType,
   action = "add",
+  showHover = true,
 }) => {
   const { user, favorites } = useContext(AuthContext);
 
@@ -26,7 +27,7 @@ export const CardItem = ({
       <div className="card-item text-decoration-none">
         <div className="card-inner text-center">
           <div className="card-image position-relative mb-2">
-            <Link to={`${contentType}/${id}`}>
+            <Link to={`/${contentType}/${id}`}>
               <img
                 src={image}
                 className="content-card-main-banner"
@@ -56,35 +57,37 @@ export const CardItem = ({
           </div>
 
           <Link
-            to={`${contentType}/${id}`}
+            to={`/${contentType}/${id}`}
             className="fw-bold text-white text-center w-100"
           >
             {title}
           </Link>
         </div>
 
-        <div
-          className="hover-desc"
-          style={{
-            right: isLastOfRow ? "100%" : "unset",
-            left: !isLastOfRow ? "100%" : "unset",
-          }}
-        >
-          <strong className="text-white">{title}</strong>
-          <span
-            className={`badge rounded-pill ${contentType} my-3 d-block pill text-uppercase fw-bold`}
+        {showHover && (
+          <div
+            className="hover-desc"
+            style={{
+              right: isLastOfRow ? "100%" : "unset",
+              left: !isLastOfRow ? "100%" : "unset",
+            }}
           >
-            {contentType}
-          </span>
-          <p className="desc">{description}</p>
+            <strong className="text-white">{title}</strong>
+            <span
+              className={`badge rounded-pill ${contentType} my-3 d-block pill text-uppercase fw-bold`}
+            >
+              {contentType}
+            </span>
+            <p className="desc">{description}</p>
 
-          <button
-            type="button"
-            className={`btn text-uppercase text-white fw-bold d-block ms-auto ${contentType} button-desc`}
-          >
-            ver {contentType}
-          </button>
-        </div>
+            <button
+              type="button"
+              className={`btn text-uppercase text-white fw-bold d-block ms-auto ${contentType} button-desc`}
+            >
+              ver {contentType}
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

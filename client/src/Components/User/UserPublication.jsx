@@ -19,11 +19,33 @@ import { createManhua, updateManhua } from "../../Api/Manhuas/mahuas";
 import { createManhwa, updateManhwa } from "../../Api/Manhwas/manhwas";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-// import moment from "moment";
 import Select from "react-select";
-// import { validatePublication } from "../../helpers/validatePublication";
 import { FileUploader } from "react-drag-drop-files";
 import { RiImageAddFill } from "react-icons/ri";
+import { validatePublication } from "../../helpers/validatePublication";
+
+const initFormState = {
+  tipo: "",
+  image: null,
+  demografia: "",
+  estado: "",
+  titulo: "",
+  source: "",
+  capitulos: 0,
+  volumenes: 0,
+  estreno: "",
+  duracion: "",
+  temporada: "",
+  estudio: [],
+  autor: "",
+  artista: "",
+  sinopsis: "",
+  producers: [],
+  generos: [],
+  scans: "",
+  day: "",
+  urlContent: "",
+};
 
 export const UserPublication = () => {
   const fileTypes = ["JPG", "PNG", "GIF", "WEBP", "AVIF", "JPEG"];
@@ -34,32 +56,10 @@ export const UserPublication = () => {
   const [artistsView, setArtistsView] = useState([]);
   const [id, setId] = useState();
   const { user } = useContext(AuthContext);
-
-  const [loading, setLoading] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [errors, setErrors] = useState();
   const [preview, setPreview] = useState();
-  const [data, setData] = useState({
-    tipo: "",
-    image: {},
-    demografia: "",
-    estado: "",
-    titulo: "",
-    source: "",
-    capitulos: 0,
-    volumenes: 0,
-    estreno: "",
-    duracion: "",
-    temporada: "",
-    estudio: [],
-    autor: "",
-    artista: "",
-    sinopsis: "",
-    producers: [],
-    generos: [],
-    scans: "",
-    day: "",
-    urlContent: "",
-  });
+  const [data, setData] = useState(initFormState);
 
   const handleImage = (image) => {
     const reader = new FileReader();
@@ -71,27 +71,10 @@ export const UserPublication = () => {
     reader.readAsDataURL(image);
   };
 
-  useEffect(() => {
-    let { id } = user;
-    console.log(id);
-    setId(id);
-  }, []);
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    savePublication();
-    console.log(data);
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      Swal.fire({
-        icon: "success",
-        title: "Publicación creada con éxito",
-        text: "Felicidades ya puede ir a revisar tu publicacion :D",
-        showConfirmButton: false,
-        timer: 1500,
-      });
-    }, 3000);
+    setSubmitting(true);
+    setErrors(validatePublication(data));
   };
 
   const handlePush = (datos, type) => {
@@ -286,6 +269,57 @@ export const UserPublication = () => {
     // window.location.href = "/";
   };
 
+  useEffect(() => {
+    let { id } = user;
+    console.log(id);
+    setId(id);
+  }, []);
+
+  useEffect(() => {
+    if (data.tipo !== "Anime") {
+      setData({ ...data, autor: [], artista: [] });
+      setErrors((currentErrors) => {
+        const copy = { ...currentErrors };
+
+        delete copy["source"];
+        delete copy["duracion"];
+        delete copy["estreno"];
+        delete copy["temporada"];
+        delete copy["estudio"];
+        delete copy["producers"];
+
+        return copy;
+
+        /*Remueve los errores relacionados a anime*/
+      });
+    } else {
+      setData({ ...data, autor: "", artista: "" });
+    } /*se cambio el tipo de dato del valor de acuerdo al tipo seleccionado para que la validacion lo procese correctamente*/
+  }, [data.tipo]);
+
+  /*se ejecuta este codigo cuando uno le da a publicar */
+  useEffect(() => {
+    console.log(errors, submitting);
+
+    if (errors && submitting) {
+      if (Object.keys(errors).length !== 0) {
+        Swal.fire({
+          icon: "error",
+          title: "hay campos invalidos",
+          timer: 1500,
+        });
+      } else {
+        savePublication();
+        Swal.fire({
+          icon: "success",
+          title: `${data.tipo} Publicado`,
+        });
+      }
+
+      setSubmitting(false);
+    }
+  }, [JSON.stringify(errors), submitting]);
+
   return (
     <form onSubmit={handleSubmit}>
       <h1 className="fw-bold">Publicacion </h1>
@@ -321,60 +355,8 @@ export const UserPublication = () => {
         )}
       </div>
 
-      <div className="row mb-4">
-        <div className="col-4">
-          <label htmlFor="">Tipo</label>
-          <Select
-            placeholder="Seleccione un tipo"
-            options={tipos}
-            styles={selectStyles}
-            onChange={(val) => setData({ ...data, tipo: val.label })}
-            classNamePrefix="select"
-          />
-        </div>
-
-        <div className="col-4">
-          <label htmlFor="">Demografia</label>
-          <Select
-            placeholder="Seleccione una demografia"
-            options={demografia}
-            styles={selectStyles}
-            onChange={(val) => setData({ ...data, demografia: val.label })}
-            classNamePrefix="select"
-          />
-        </div>
-
-        {data.tipo === "Manga" ||
-        data.tipo === "Manhwa" ||
-        data.tipo === "Manhua" ? (
-          <div className="col-4">
-            <label htmlFor="">Artistas</label>
-            <Creatable
-              name="artista"
-              placeholder="Escriba los Artistas"
-              isMulti
-              value={artistsView}
-              styles={selectStyles}
-              classNamePrefix="select"
-              onChange={(val) => handlePush(val, "artista")}
-            />
-          </div>
-        ) : null}
-
-        <div className="col-4">
-          <label htmlFor="">Estado de la Obra</label>
-          <Select
-            placeholder="Seleccione un estado"
-            options={estado}
-            styles={selectStyles}
-            classNamePrefix="select"
-            onChange={(val) => setData({ ...data, estado: val.label })}
-          />
-        </div>
-      </div>
-
-      <div className="row mb-4">
-        <div className="col-5">
+      <div className="row fields-container">
+        <div className="col-12">
           <label htmlFor="">Titulo</label>
           <input
             type="text"
@@ -386,19 +368,94 @@ export const UserPublication = () => {
             <span className="text-danger mt-2 d-block">{errors?.titulo}</span>
           )}
         </div>
-        <div className="col-3">
-          <label htmlFor="">Source</label>
+        <div className="col-12 col-md-6 col-lg-4">
+          <label htmlFor="">Tipo</label>
           <Select
             placeholder="Seleccione un tipo"
-            name="source"
-            options={source}
+            options={tipos}
             styles={selectStyles}
+            onChange={(val) => setData({ ...data, tipo: val.label })}
             classNamePrefix="select"
-            onChange={(val) => setData({ ...data, source: val.label })}
           />
+          {errors?.tipo && (
+            <span className="text-danger mt-2 d-block">{errors.tipo}</span>
+          )}
         </div>
 
-        <div className="col-2">
+        <div className="col-12 col-md-6 col-lg-4">
+          <label htmlFor="">Demografia</label>
+          <Select
+            placeholder="Seleccione una demografia"
+            options={demografia}
+            styles={selectStyles}
+            onChange={(val) => setData({ ...data, demografia: val.label })}
+            classNamePrefix="select"
+          />
+          {errors?.demografia && (
+            <span className="text-danger mt-2 d-block">
+              {errors?.demografia}
+            </span>
+          )}
+        </div>
+
+        {data.tipo === "Manga" ||
+        data.tipo === "Manhwa" ||
+        data.tipo === "Manhua" ? (
+          <div className="col-12 col-md-6 col-lg-4">
+            <label htmlFor="">Artistas</label>
+            <Creatable
+              name="artista"
+              placeholder="Escriba los Artistas"
+              isMulti
+              value={artistsView}
+              styles={selectStyles}
+              classNamePrefix="select"
+              onChange={(val) => handlePush(val, "artista")}
+            />
+            {errors?.artista && (
+              <span className="text-danger mt-2 d-block">
+                {errors?.artista}
+              </span>
+            )}
+          </div>
+        ) : null}
+
+        <div className="col-12 col-md-6 col-lg-4">
+          <label htmlFor="">Estado de la Obra</label>
+          <Select
+            placeholder="Seleccione un estado"
+            options={estado}
+            styles={selectStyles}
+            classNamePrefix="select"
+            onChange={(val) => setData({ ...data, estado: val.label })}
+          />
+          {errors?.estado && (
+            <span className="text-danger mt-2 d-block">{errors?.estado}</span>
+          )}
+        </div>
+
+        {data.tipo === "Anime" && (
+          <>
+            <div className="col-12 col-md-6 col-lg-4">
+              <label htmlFor="">Source</label>
+              <Select
+                placeholder="Seleccione un Source"
+                name="source"
+                options={source}
+                styles={selectStyles}
+                classNamePrefix="select"
+                onChange={(val) => setData({ ...data, source: val.label })}
+              />
+              {errors?.source && (
+                <span className="text-danger mt-2 d-block">
+                  {errors.source}
+                </span>
+              )}
+            </div>
+          </>
+        )}
+
+        <div className="col-12 col-md-6 col-lg-4">
           {data.tipo === "Anime" ? (
             <label htmlFor="">Capitulos</label>
           ) : (
@@ -411,16 +468,15 @@ export const UserPublication = () => {
             onChange={(e) => setData({ ...data, capitulos: e.target.value })}
           />
           {errors?.capitulos && (
-            <span className="text-danger mt-2 d-block">
-              {errors?.capitulos}
-            </span>
+            <span className="text-danger mt-2 d-block">{errors.capitulos}</span>
           )}
         </div>
+
         {/* Si Manga, Manhua o Manhwa existe muestra volumes */}
         {data.tipo === "Manga" ||
         data.tipo === "Manhua" ||
         data.tipo === "Manhwa" ? (
-          <div className="col-2">
+          <div className="col-12 col-md-6 col-lg-4">
             <label htmlFor="">Volumenes</label>
             <input
               type="number"
@@ -435,114 +491,114 @@ export const UserPublication = () => {
             )}
           </div>
         ) : null}
-      </div>
 
-      {data.tipo === "Anime" && (
-        <div className="row  mb-4">
-          <div className="col-4">
-            <label htmlFor="">Estreno</label>
-            <DatePicker
-              name="estreno"
-              placeholderText="Ingrese una fecha"
-              selected={data.estreno}
-              className="form-control bg-dark text-white"
-              onChange={(date) => {
-                setData({
-                  ...data,
-                  estreno: date,
-                });
-              }}
-            />
-
-            {errors?.estreno && (
-              <span className="text-danger mt-2 d-block">
-                {errors?.estreno}
-              </span>
-            )}
-          </div>
-
-          <div className="col-4">
-            <label htmlFor="">Duración</label>
-            <input
-              type="text"
-              className="form-control bg-dark text-white"
-              onChange={(e) => setData({ ...data, duracion: e.target.value })}
-            />
-
-            {errors?.duracion && (
-              <span className="text-danger mt-2 d-block">
-                {errors?.duracion}
-              </span>
-            )}
-          </div>
-
-          <div className="col-4">
-            <label htmlFor="">Temporada</label>
-            <input
-              type="text"
-              className="form-control bg-dark text-white"
-              onChange={(e) => setData({ ...data, temporada: e.target.value })}
-            />
-            {errors?.temporada && (
-              <span className="text-danger mt-2 d-block">
-                {errors?.temporada}
-              </span>
-            )}
-          </div>
-        </div>
-      )}
-
-      {data.tipo === "Anime" && (
-        <div className="row  mb-4">
-          <div className="col-4">
-            <label htmlFor="">Estudio</label>
-            <Creatable
-              placeholder="Seleccione un estudio"
-              isMulti
-              value={estudioView}
-              styles={selectStyles}
-              onChange={(val) => handlePush(val, "estudio")}
-              classNamePrefix="select"
-            />
-
-            {errors?.estudio && (
-              <span className="text-danger mt-2 d-block">
-                {errors?.estudio}
-              </span>
-            )}
-          </div>
-
-          <div className="col-4">
-            <label htmlFor="">Autor</label>
-            <input
-              type="text"
-              className="form-control bg-dark text-white"
-              onChange={(e) => setData({ ...data, autor: e.target.value })}
-            />
-            {errors?.autor && (
-              <span className="text-danger mt-2 d-block">{errors?.autor}</span>
-            )}
-          </div>
-
-          <div className="col-4">
-            <label htmlFor="">Artista</label>
-            <input
-              type="text"
-              className="form-control bg-dark text-white"
-              onChange={(e) => setData({ ...data, artista: e.target.value })}
-            />
-            {errors?.artista && (
-              <span className="text-danger mt-2 d-block">
-                {errors?.artista}
-              </span>
-            )}
-          </div>
-        </div>
-      )}
-
-      <div className="row mb-4">
         {data.tipo === "Anime" && (
-          <div className="col-4">
+          <>
+            <div className="col-12 col-md-6 col-lg-4">
+              <label htmlFor="">Estreno</label>
+              <DatePicker
+                name="estreno"
+                placeholderText="Ingrese una fecha"
+                selected={data.estreno}
+                className="form-control bg-dark text-white"
+                onChange={(date) => {
+                  setData({
+                    ...data,
+                    estreno: date,
+                  });
+                }}
+              />
+
+              {errors?.estreno && (
+                <span className="text-danger mt-2 d-block">
+                  {errors?.estreno}
+                </span>
+              )}
+            </div>
+
+            <div className="col-12 col-md-6 col-lg-4">
+              <label htmlFor="">Duración</label>
+              <input
+                type="text"
+                className="form-control bg-dark text-white"
+                onChange={(e) => setData({ ...data, duracion: e.target.value })}
+              />
+
+              {errors?.duracion && (
+                <span className="text-danger mt-2 d-block">
+                  {errors?.duracion}
+                </span>
+              )}
+            </div>
+
+            <div className="col-12 col-md-6 col-lg-4">
+              <label htmlFor="">Temporada</label>
+              <input
+                type="text"
+                className="form-control bg-dark text-white"
+                onChange={(e) =>
+                  setData({ ...data, temporada: e.target.value })
+                }
+              />
+              {errors?.temporada && (
+                <span className="text-danger mt-2 d-block">
+                  {errors?.temporada}
+                </span>
+              )}
+            </div>
+          </>
+        )}
+
+        {data.tipo === "Anime" && (
+          <>
+            <div className="col-12 col-md-6 col-lg-4">
+              <label htmlFor="">Estudio</label>
+              <Creatable
+                placeholder="Seleccione un estudio"
+                isMulti
+                value={estudioView}
+                styles={selectStyles}
+                onChange={(val) => handlePush(val, "estudio")}
+                classNamePrefix="select"
+              />
+
+              {errors?.estudio && (
+                <span className="text-danger mt-2 d-block">
+                  {errors?.estudio}
+                </span>
+              )}
+            </div>
+
+            <div className="col-12 col-sm-6 col-lg-4">
+              <label htmlFor="">Autor</label>
+              <input
+                type="text"
+                className="form-control bg-dark text-white"
+                onChange={(e) => setData({ ...data, autor: e.target.value })}
+              />
+              {errors?.autor && (
+                <span className="text-danger mt-2 d-block">{errors.autor}</span>
+              )}
+            </div>
+
+            <div className="col-12 col-sm-6 col-lg-4">
+              <label htmlFor="">Artista</label>
+              <input
+                type="text"
+                className="form-control bg-dark text-white"
+                onChange={(e) => setData({ ...data, artista: e.target.value })}
+              />
+              {errors?.artista && (
+                <span className="text-danger mt-2 d-block">
+                  {errors?.artista}
+                </span>
+              )}
+            </div>
+          </>
+        )}
+
+        {data.tipo === "Anime" && (
+          <div className="col-12 col-md-6 col-lg-4">
             <label htmlFor="">Productoras</label>
             <Creatable
               name="producers"
@@ -561,10 +617,8 @@ export const UserPublication = () => {
           </div>
         )}
 
-        {data.tipo === "Manga" ||
-        data.tipo === "Manhwa" ||
-        data.tipo === "Manhua" ? (
-          <div className="col-4">
+        {data.tipo !== "Anime" ? (
+          <div className="col-12 col-md-6 col-lg-4">
             <label htmlFor="">Autor(es)</label>
             <Creatable
               name="autor"
@@ -575,10 +629,13 @@ export const UserPublication = () => {
               classNamePrefix="select"
               onChange={(val) => handlePush(val, "autor")}
             />
+            {errors?.autor && (
+              <span className="text-danger mt-2 d-block">{errors.autor}</span>
+            )}
           </div>
         ) : null}
 
-        <div className="col-4">
+        <div className="col-12 col-md-6 col-lg-4">
           <label htmlFor="">Generos</label>
           <Select
             name="generos"
@@ -594,7 +651,7 @@ export const UserPublication = () => {
           )}
         </div>
 
-        <div className="col-4">
+        <div className="col-12 col-md-6 col-lg-4">
           <label htmlFor="">Scans</label>
           <Select
             name="scans"
@@ -609,10 +666,8 @@ export const UserPublication = () => {
             <span className="text-danger mt-2 d-block">{errors?.scans}</span>
           )}
         </div>
-      </div>
 
-      <div className="row mb-2">
-        <div className="col-6">
+        <div className="col-12 col-md-6 col-lg-4">
           <label htmlFor="">Url Para ver el contenido</label>
           <input
             type="text"
@@ -620,13 +675,13 @@ export const UserPublication = () => {
             placeholder="ejemplo: https://animefenix.tv/revenger"
             onChange={(e) => setData({ ...data, urlContent: e.target.value })}
           />
-          {errors?.url && (
+          {errors?.urlContent && (
             <span className="text-danger mt-2 d-block">
               {errors?.urlContent}
             </span>
           )}
         </div>
-        <div className="col-6">
+        <div className="col-12 col-md-6 col-lg-4">
           <label htmlFor="">Dia de la semana que sale capitulo</label>
           <Select
             name="dia"
@@ -637,9 +692,11 @@ export const UserPublication = () => {
             onChange={(val) => setData({ ...data, day: val.label })}
             styles={selectStyles}
           />
+          {errors?.day && (
+            <span className="text-danger mt-2 d-block">{errors?.day}</span>
+          )}
         </div>
-      </div>
-      <div className="row">
+
         <div className="col-12">
           <label htmlFor="">Sinopsis</label>
           <textarea
@@ -660,10 +717,10 @@ export const UserPublication = () => {
         <button
           className="btn btn-primary w-25 d-flex justify-content-center gap-3"
           type="submit"
-          disabled={loading && true}
+          disabled={submitting && true}
         >
           Publicar
-          {loading && (
+          {submitting && (
             <div
               className="spinner-border"
               role="status"

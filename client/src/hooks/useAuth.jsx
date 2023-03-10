@@ -20,8 +20,7 @@ export const useAuth = () => {
       getUserById(decoded.id)
         .then((res) => {
           setUser(res.user);
-          setFavorites(res.favorites);
-          setUser(res);
+          setFavorites(res.favorites || []);
           setTimeout(() => setLoading(false), 700);
         })
         .catch((err) => {

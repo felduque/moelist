@@ -28,7 +28,7 @@ export const demografia = [
 ];
 
 export const estado = [
-  { value: "1", label: "En emision" },
+  { value: "1", label: "Emision" },
   { value: "2", label: "Finalizado" },
   { value: "3", label: "Cancelado" },
   { value: "4", label: "Pendiente" },

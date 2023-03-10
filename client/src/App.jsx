@@ -10,11 +10,12 @@ import { NotFound } from "./Pages/NotFound/NotFound";
 import { Explorador } from "./Pages/Explorador/Explorador";
 import { AuthContext } from "./utils/context/AuthContext";
 import { UserPage } from "./Pages/User/UserPage";
-import { AuthenticatedRoute } from "./Components/AuthenticatedRoute";
+import { AuthenticatedRoute } from "./Components/ProtectedRoutes/AuthenticatedRoute";
 import { UserPublication } from "./Components/User/UserPublication";
 import { UserFavorites } from "./Components/User/UserFavorites";
 import { UserSettings } from "./Components/User/UserSettings";
 import { Navigate } from "react-router-dom";
+import { AuthorOnlyRoutes } from "./Components/ProtectedRoutes/AuthorOnlyRoutes";
 
 function App() {
   const [user, setUser] = useState();
@@ -39,9 +40,16 @@ function App() {
               </AuthenticatedRoute>
             }
           >
-            <Route path="publicar" element={<UserPublication />} />
-            <Route path="favoritos" element={<UserFavorites />} />
             <Route path="configurar" element={<UserSettings />} />
+            <Route path="favoritos" element={<UserFavorites />} />
+            <Route
+              path="publicar"
+              element={
+                <AuthorOnlyRoutes>
+                  <UserPublication />
+                </AuthorOnlyRoutes>
+              }
+            />
             <Route index element={<Navigate to="configurar" />} />
           </Route>
 

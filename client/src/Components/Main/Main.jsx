@@ -46,7 +46,6 @@ export const Main = () => {
         </div>
         <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xxl-6">
           {animes.map((anime) => {
-            anime.type = "anime";
             return <CardItem key={anime.id} {...anime} />;
           })}
         </div>
@@ -55,7 +54,6 @@ export const Main = () => {
         </div>
         <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xxl-6">
           {mangas.map((manga) => {
-            manga.type = "manga";
             return <CardItem key={manga.id} {...manga} />;
           })}
         </div>
@@ -64,7 +62,6 @@ export const Main = () => {
         </div>
         <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xxl-6">
           {manhwas.map((manhwa) => {
-            manhwa.type = "manhwa";
             return <CardItem key={manhwa.id} {...manhwa} />;
           })}
         </div>
@@ -74,7 +71,6 @@ export const Main = () => {
         </div>
         <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xxl-6">
           {manhuas.map((manhua) => {
-            manhua.type = "manhua";
             return <CardItem key={manhua.id} {...manhua} />;
           })}
         </div>

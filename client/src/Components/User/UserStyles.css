@@ -19,5 +19,6 @@
     color: white !important;
 }
 
-
-
+.fields-container > div {
+    margin-bottom: 20px;
+}

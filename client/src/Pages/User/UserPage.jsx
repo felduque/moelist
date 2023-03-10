@@ -7,13 +7,18 @@ import "./UserPage.css";
 
 export const UserPage = () => {
   const { user } = useContext(AuthContext);
-  const { id, userName, email, role, avatar } = user;
+
+  console.log(user);
 
   return (
     <section className="container-fluid py-5 px-3 p-sm-5 text-white ">
       <div className="row gap">
         <div className="col-12 col-xl-3 ">
-          <UserSidebar {...{ userName, email, avatar }} />
+          <UserSidebar
+            userName={user?.userName}
+            avatar={user?.avatar}
+            email={user?.email}
+          />
         </div>
         <div className="col-12 col-xl-9 px-3 pt-5 pt-xl-0 ps-xl-5">
           <ul className="nav nav-pills nav-fill nav-user gap-3 gap-sm-4">
@@ -34,7 +39,7 @@ export const UserPage = () => {
                 Favoritos
               </NavLink>
             </li>
-            {role === "Author" && (
+            {user?.role === "Author" && (
               <li className="nav-item bg-dark">
                 <NavLink
                   to="/user/publicar"
