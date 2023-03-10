@@ -126,22 +126,56 @@ export const getFavorites = async (req, res) => {
     }
 
     const anime = await userFound.getAnimes({
-      attributes: ["id", "title", "description", "image", "contentType"],
+      attributes: [
+        "id",
+        "title",
+        "description",
+        "image",
+        "contentType",
+        "demography",
+        "genres",
+      ],
     });
 
     const manga = await userFound.getMangas({
-      attributes: ["id", "title", "description", "image", "contentType"],
+      attributes: [
+        "id",
+        "title",
+        "description",
+        "image",
+        "contentType",
+        "demography",
+        "genres",
+      ],
     });
 
     const manhua = await userFound.getManhuas({
-      attributes: ["id", "title", "description", "image", "contentType"],
+      attributes: [
+        "id",
+        "title",
+        "description",
+        "image",
+        "contentType",
+        "demography",
+        "genres",
+      ],
     });
 
     const manhwa = await userFound.getManhwas({
-      attributes: ["id", "title", "description", "image", "contentType"],
+      attributes: [
+        "id",
+        "title",
+        "description",
+        "image",
+        "contentType",
+        "demography",
+        "genres",
+      ],
     });
 
-    res.status(200).json({ anime, manga, manhua, manhwa });
+    const favorites = [...anime, ...manga, ...manhua, ...manhwa];
+
+    res.status(200).json(favorites);
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Server error" });
@@ -156,28 +190,107 @@ export const getUser = async (req, res) => {
     });
 
     const animes = await userFound.getAnimes({
-      attributes: ["id", "title", "description", "image", "contentType"],
+      attributes: [
+        "id",
+        "title",
+        "description",
+        "image",
+        "contentType",
+        "contentType",
+        "demography",
+        "genres",
+        "status",
+      ],
     });
 
     const mangas = await userFound.getMangas({
-      attributes: ["id", "title", "description", "image", "contentType"],
+      attributes: [
+        "id",
+        "title",
+        "description",
+        "image",
+        "contentType",
+        "contentType",
+        "demography",
+        "genres",
+        "status",
+      ],
     });
 
     const manhuas = await userFound.getManhuas({
-      attributes: ["id", "title", "description", "image", "contentType"],
+      attributes: [
+        "id",
+        "title",
+        "description",
+        "image",
+        "contentType",
+        "contentType",
+        "demography",
+        "genres",
+        "status",
+      ],
     });
 
     const manhwas = await userFound.getManhwas({
-      attributes: ["id", "title", "description", "image", "contentType"],
+      attributes: [
+        "id",
+        "title",
+        "description",
+        "image",
+        "contentType",
+        "contentType",
+        "demography",
+        "genres",
+        "status",
+      ],
     });
 
     if (!userFound) {
       return res.status(400).json({ error: "User not found" });
     }
 
-    const favorites = [...animes, ...mangas, manhuas, manhwas];
+    const favorites = [...animes, ...mangas, ...manhuas, ...manhwas];
 
     res.status(200).json({ user: userFound, favorites });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Server error" });
+  }
+};
+
+export const deleteFavorite = async (req, res) => {
+  try {
+    const { type, idContent, idUser } = req.body;
+    console.log(type, idContent, idUser);
+
+    const userFound = await User.findByPk(idUser);
+
+    if (!userFound) {
+      return res.status(400).json({ error: "User not found" });
+    }
+    let content;
+    switch (type) {
+      case "anime":
+        content = await Anime.findByPk(idContent);
+        const anime = await userFound.removeAnime(content);
+        break;
+      case "manga":
+        content = await Manga.findByPk(idContent);
+        const manga = await userFound.removeManga(content);
+        break;
+      case "manhua":
+        content = await Manhua.findByPk(idContent);
+        const manhua = await userFound.removeManhua(content);
+        break;
+      case "manhwa":
+        content = await Manhwa.findByPk(idContent);
+        const manhwa = await userFound.removeManhwa(content);
+        break;
+      default:
+        break;
+    }
+
+    res.status(200).json(content);
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Server error" });
