@@ -39,19 +39,19 @@ export const Sidebar = () => {
         </div>
         <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-1 px-3 px-sm-0 pt-4">
           {animes?.slice(0, 2).map((anime, index) => {
-            return <CardItem key={index} {...anime} />;
+            return <CardItem key={index} {...anime} showHover={false} />;
           })}
 
           {mangas.slice(0, 2).map((manga, index) => {
-            return <CardItem key={index} {...manga} />;
+            return <CardItem key={index} {...manga} showHover={false} />;
           })}
 
           {manhwas.slice(0, 2).map((manhwa, index) => {
-            return <CardItem key={index} {...manhwa} />;
+            return <CardItem key={index} {...manhwa} showHover={false} />;
           })}
 
           {manhuas.slice(0, 2).map((manhua, index) => {
-            return <CardItem key={index} {...manhua} />;
+            return <CardItem key={index} {...manhua} showHover={false} />;
           })}
         </div>
       </div>
