@@ -15,26 +15,13 @@ import {
 export const UserFavorites = () => {
   const { favorites } = useContext(AuthContext);
   const [filters, setFilters] = useState({
-    tipo: tipos[0].value,
+    tipo: "todos",
     demografia: demografia[0].value,
     generos: [],
     estado: demografia[0].value,
   });
 
-  const [sortedFavorites, setSortedFavorites] = useState(
-    favorites.slice(0, 24)
-  );
-
-  useEffect(() => {
-    console.log(filters);
-    if (filters.tipo != "todos") {
-      setSortedFavorites(
-        favorites.filter((favorite) => favorite.contentType === filters.tipo)
-      );
-    } else {
-      setSortedFavorites(favorites);
-    }
-  }, [
+  useEffect(() => {}, [
     filters.tipo,
     filters.demografia,
     filters.estado,
@@ -136,9 +123,9 @@ export const UserFavorites = () => {
         <div className="col-9 d-flex justify-content-end gap-3"></div>
       </div>
       <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6">
-        {sortedFavorites.map((favorite, index) => (
+        {favorites?.map((favorite, index) => (
           <CardItem
-            key={`${favorite.id}` + favorite.contentType}
+            key={`${favorite.id}` + favorite.contentType + index}
             {...favorite}
             index={index}
             action="remove"

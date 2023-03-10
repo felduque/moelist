@@ -9,6 +9,21 @@ export const getUserById = async (id) => {
   }
 };
 
+export const deleteFavorite = async (type, idContent, idUser) => {
+  try {
+    const res = await axios.delete("http://localhost:3000/deletefavorite/", {
+      data: {
+        type,
+        idContent,
+        idUser,
+      },
+    });
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const getFavorites = async (id) => {
   try {
     const res = await axios.get(`http://localhost:3000/getfavorites/${id}`);
