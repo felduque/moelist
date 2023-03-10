@@ -27,7 +27,7 @@ export const CardItem = ({
       <div className="card-item text-decoration-none">
         <div className="card-inner text-center">
           <div className="card-image position-relative mb-2">
-            <Link to={`${contentType}/${id}`}>
+            <Link to={`/${contentType}/${id}`}>
               <img
                 src={image}
                 className="content-card-main-banner"
@@ -57,7 +57,7 @@ export const CardItem = ({
           </div>
 
           <Link
-            to={`${contentType}/${id}`}
+            to={`/${contentType}/${id}`}
             className="fw-bold text-white text-center w-100"
           >
             {title}
