@@ -12,21 +12,61 @@ import {
   estado,
 } from "../../helpers/valoresParaSelects";
 
+const filtersInitState = {
+  tipo: "",
+  demografia: "",
+  generos: [],
+  estado: "",
+};
+
 export const UserFavorites = () => {
   const { favorites } = useContext(AuthContext);
-  const [filters, setFilters] = useState({
-    tipo: "todos",
-    demografia: demografia[0].value,
-    generos: [],
-    estado: demografia[0].value,
-  });
+  const [filteredFavs, setFilterFavs] = useState(favorites);
+  const [filters, setFilters] = useState(filtersInitState);
 
-  useEffect(() => {}, [
+  // console.log(favorites);
+  console.log(favorites);
+
+  const filtrar = () => {
+    const filtersConditions = {
+      tipo: (item) => (!filters.tipo ? true : filters.tipo == item.contentType),
+      demografia: (item) =>
+        !filters.demografia ? true : filters.demografia == item.demography,
+      estado: (item) =>
+        !filters.estado
+          ? true
+          : filters.estado == item.status || item.status == "Emision",
+      generos: (item) =>
+        filters.generos.length == 0
+          ? true
+          : filters.generos.every((g) => item.genres.includes(g.label)),
+    };
+
+    const selectedT = [
+      filtersConditions.tipo,
+      filtersConditions.demografia,
+      filtersConditions.generos,
+      filtersConditions.estado,
+    ];
+
+    const result = favorites.filter((fav) => selectedT.every((f) => f(fav)));
+
+    setFilterFavs(result);
+  };
+
+  useEffect(() => {
+    filtrar();
+  }, [
     filters.tipo,
     filters.demografia,
     filters.estado,
     filters.generos.length,
   ]);
+
+  useEffect(() => {
+    setFilterFavs(favorites);
+    filtrar();
+  }, [favorites]);
 
   return (
     <>
@@ -115,6 +155,12 @@ export const UserFavorites = () => {
                     />
                   </div>
                 </div>
+                <button
+                  className="btn btn-primary mt-3"
+                  onClick={() => setFilters(filtersInitState)}
+                >
+                  Limpiar Filtros
+                </button>
               </div>
             </div>
           </div>
@@ -123,7 +169,7 @@ export const UserFavorites = () => {
         <div className="col-9 d-flex justify-content-end gap-3"></div>
       </div>
       <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6">
-        {favorites?.map((favorite, index) => (
+        {filteredFavs?.map((favorite, index) => (
           <CardItem
             key={`${favorite.id}` + favorite.contentType + index}
             {...favorite}
