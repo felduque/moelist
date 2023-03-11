@@ -15,7 +15,7 @@
 .alert_page {
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: start;
   text-align: center;
   align-items: center;
 }
@@ -23,6 +23,7 @@
 .alert_page_text {
   font-size: 1.5rem;
   color: #8d7438;
+  text-align: left;
 }
 
 .content-cards {

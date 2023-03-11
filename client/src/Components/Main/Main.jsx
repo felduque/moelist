@@ -32,13 +32,17 @@ export const Main = () => {
       <div className="content-all-main pt-5 container">
         <div className="alert_page">
           <h2 className="alert_page_text">
-            Actualmente la pagina sigue en desarrollo activo, por lo que puede
-            que no se encuentren todos los animes, mangas, manhwas y manhuas. Si
-            encuentras algun bug o quieres sugerir alguna mejora, puedes
-            contactarme en mi discord:{" "}
-            <a href="https://discord.gg/UfdnmZ5DJE" target="_blank">
-              CLICK AQUI
-            </a>
+            Estas son las <span className="txt-primary">novedades:</span>
+            <ul className="mt-3">
+              <li>Ya puedes registrarte </li>
+              <li>
+                Guarda tu contenido favorito y accede a el desde cualquier
+                dispositivo
+              </li>
+              <li>Explora todos los contenidos de la página</li>
+              <li>Diseños más amigables</li>
+              <li>Conviértete en Autor y empezá a publicar contenido</li>
+            </ul>
           </h2>
         </div>
         <div className="conent-title-catogory one-category-main">
