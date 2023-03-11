@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import "./Navbar.css";
 import { RiHome4Fill } from "react-icons/ri";
-import { FaBars } from "react-icons/fa";
+import { FaBars, FaInfoCircle } from "react-icons/fa";
 import { BsDiscord } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { LoginRegisterModal } from "../LoginRegisterModal/LoginRegisterModal";
@@ -16,6 +16,15 @@ export const Navbar = () => {
 
   return (
     <>
+      <div className="bg-warning py-2 d-flex px-3 px-lg-5 justify-content-center top-header">
+        <span>
+          <FaInfoCircle className="fs-5 me-2" />
+        </span>
+        <span className="top-header-text">
+          Este sitio aún se encuentra en fase de desarrollo. Por favor,
+          notifique cualquier error que encuentre
+        </span>
+      </div>
       <div className="container-fluid navbar-container py-3">
         <div className="row align-items-center">
           <div className="offset-xl-3 col-9 col-xl-6 d-flex align-items-center ">
