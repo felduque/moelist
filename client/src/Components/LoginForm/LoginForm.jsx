@@ -10,13 +10,14 @@ import { loginUser } from "../../Api/Login/login";
 import "./LoginForm.css";
 import { useAuth } from "../../hooks/useAuth";
 
-export const LoginForm = ({ setFormType }) => {
+export const LoginForm = ({ setFormType, modalRef }) => {
   const [show, setShow] = useState(false);
   const [errors, setErrors] = useState({});
   const [data, setData] = useState({
     email: "",
     password: "",
   });
+
   const { setToken } = useAuth();
 
   const handleChange = (e) => {
@@ -40,6 +41,7 @@ export const LoginForm = ({ setFormType }) => {
       try {
         const res = await loginUser(newForm);
         if (res) {
+          modalRef.current.click();
           Swal.fire({
             icon: "success",
             title: "Usuario logueado con exito",
@@ -48,7 +50,6 @@ export const LoginForm = ({ setFormType }) => {
           });
           localStorage.setItem("token", res.token);
           setToken(res.token);
-          setFormType("login");
         } else {
           Swal.fire({
             icon: "error",
