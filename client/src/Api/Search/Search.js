@@ -12,3 +12,15 @@ export const search = async (type, demography, status, genres) => {
   );
   return response;
 };
+
+export const searchTitle = async (title) => {
+  const response = await axios.get(
+    `http://localhost:3000/filter/title?title=${title}`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  return response;
+};

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import ScaleLoader from "react-spinners/ScaleLoader";
-import { getAnimes } from "../../Api/Anime/anime";
 import "./Search.css";
+import { searchTitle } from "../../Api/Search/Search";
 import { SearchItem } from "./SearchItem";
 
 export const Search = () => {
@@ -14,26 +14,24 @@ export const Search = () => {
   const [typingTimer, setTypingTimer] = useState();
 
   useEffect(() => {
-    if (!search) return;
+    if (search.length < 2) return;
 
     setSearchItems([]); // vacia el search
     setLoading(true);
 
     const fetchSearch = async () => {
-      const items = await getAnimes();
+      const items = await searchTitle(search);
       setLoading(false);
       setSearchItems(items?.data);
     };
 
-    clearTimeout(typingTimer); // se limpia el timeout
+    clearTimeout(typingTimer);
 
     setTypingTimer(
       setTimeout(() => {
         fetchSearch();
       }, 1000)
     );
-
-    // un
   }, [search]);
 
   return (
