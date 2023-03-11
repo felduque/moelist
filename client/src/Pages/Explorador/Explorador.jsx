@@ -10,26 +10,9 @@ import "./Explorador.css";
 
 export const Explorador = () => {
   const [items, setItems] = useState([]);
-  const [filters, setFilters] = useState({
-    tipo: "todos",
-    demografia: "todos",
-    generos: [],
-    estado: "todos",
-    estreno: "",
-    orden: "estreno",
-  });
-
-  useEffect(() => {
-    const fetchItems = async () => {
-      const items = await getAnimes();
-      setItems(items.data);
-    };
-
-    fetchItems();
-  }, []);
 
   return (
-    <ExploradorContext.Provider value={{ setItems, filters, setFilters }}>
+    <ExploradorContext.Provider value={{ setItems, items }}>
       <section className="container-fluid bg-dark px-4 px-md-5 pb-5">
         <div className="row py-5">
           <ExploradorSearch />
@@ -41,8 +24,8 @@ export const Explorador = () => {
           <div className="col-lg-9 text-white">
             <ExploradorOrder />
             <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xxl-6 mt-5 mt-xl-3">
-              {items.map((item, index) => (
-                <CardItem key={item.id} {...item} index={index} />
+              {items?.map((item, index) => (
+                <CardItem key={index} {...item} index={index} />
               ))}
             </div>
           </div>

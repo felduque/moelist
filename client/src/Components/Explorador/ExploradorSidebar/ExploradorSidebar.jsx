@@ -3,12 +3,11 @@ import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import { selectStyles } from "../../../helpers/selectStyles";
 
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 import "./ExploradorSidebar.css";
 
-import { getAnimes } from "../../../Api/Anime/anime";
+import { search } from "../../../Api/Search/Search";
 
 import { useContext } from "react";
 import { ExploradorContext } from "../../../utils/context/ExploradorContext";
@@ -19,40 +18,37 @@ import {
   estado,
   generos,
 } from "../../../helpers/valoresParaSelects";
-import { handleMultiValues } from "../../../helpers/handleMultiValues";
 
 const animatedComponents = makeAnimated();
 
 export const ExploradorSidebar = () => {
-  const { setItems, filters, setFilters } = useContext(ExploradorContext);
-
-  const handleSelectChange = ({ filter, value }) => {
-    setFilters({
-      ...filters,
-      [filter]: value,
-    });
-  };
-
-  const handleCheckBoxChange = ({ value }) => {
-    handleMultiValues(value, setFilters, filters, "generos");
+  const { setItems } = useContext(ExploradorContext);
+  const [data, setData] = useState({
+    type: "",
+    demography: "",
+    status: "",
+    genres: [],
+  });
+  const handlePushGenres = (e) => {
+    console.log(e);
+    //se usa set para que nose repitan los generos
+    setData({ ...data, genres: [...new Set([...data.genres, e])] });
   };
 
   useEffect(() => {
     const fetchItems = async () => {
-      const items = await getAnimes();
+      const items = await search(
+        data.type,
+        data.demography,
+        data.status,
+        data.genres
+      );
       setItems(items.data);
     };
 
-    console.log(filters);
-
     fetchItems();
-  }, [
-    filters.tipo,
-    filters.demografia,
-    filters.generos,
-    filters.estado,
-    filters.estreno,
-  ]);
+    console.log("hola");
+  }, [data.type, data.demography, data.status, data.genres, setItems]);
 
   return (
     <>
@@ -60,45 +56,30 @@ export const ExploradorSidebar = () => {
       <Select
         closeMenuOnSelect={true}
         components={animatedComponents}
-        defaultValue={[tipos[0]]}
         options={tipos}
         classNamePrefix="select"
         styles={selectStyles}
-        onChange={(value) => handleSelectChange({ ...value, filter: "tipo" })}
+        onChange={(value) => setData({ ...data, type: value.label })}
       />
 
       <h5 className="mt-4">Demografia</h5>
       <Select
         closeMenuOnSelect={true}
         components={animatedComponents}
-        defaultValue={[demografia[0]]}
         options={demografia}
         classNamePrefix="select"
         styles={selectStyles}
-        onChange={(value) =>
-          handleSelectChange({ ...value, filter: "demografia" })
-        }
+        onChange={(value) => setData({ ...data, demography: value.label })}
       />
 
       <h5 className="mt-4">Estado</h5>
       <Select
         closeMenuOnSelect={true}
         components={animatedComponents}
-        defaultValue={[estado[0]]}
         options={estado}
         classNamePrefix="select"
         styles={selectStyles}
-        onChange={(value) => handleSelectChange({ ...value, filter: "estado" })}
-      />
-
-      <h5 className="mt-4">Estreno</h5>
-      <DatePicker
-        placeholderText="Ingrese una fecha"
-        selected={filters.estreno}
-        className="form-control bg-dark text-white"
-        onChange={(date) =>
-          handleSelectChange({ filter: "estreno", value: date })
-        }
+        onChange={(value) => setData({ ...data, status: value.label })}
       />
       <h5 className="mt-4"> Generos </h5>
       {generos.map((genero) => (
@@ -106,9 +87,21 @@ export const ExploradorSidebar = () => {
           <input
             className="form-check-input"
             type="checkbox"
-            value={genero.value}
+            value={genero.label}
             name="genero"
-            onChange={(e) => handleCheckBoxChange(e.target)}
+            // cuando se marca se agrega el genero al array de generos si se desmarca se elimina
+            onChange={(e) => {
+              if (e.target.checked) {
+                handlePushGenres(e.target.value);
+              } else {
+                setData({
+                  ...data,
+                  genres: data.genres.filter((item) => item !== e.target.value),
+                });
+              }
+            }}
+
+            // onChange={(e) => handlePushGenres(e.target.value)}
           />
           <label className="form-check-label">{genero.label}</label>
         </div>

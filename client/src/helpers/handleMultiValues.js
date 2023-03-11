@@ -1,11 +1,11 @@
 export const handleMultiValues = (val, setValue, data, parameter) => {
   const arr = data[parameter];
-  const selectedVal = arr.find((selected) => selected == val);
+  const selectedVal = arr?.find((selected) => selected == val);
 
   if (!selectedVal) {
     setValue({
       ...data,
-      [parameter]: [val, ...data.generos],
+      [parameter]: [val, ...data?.generos],
     });
   } else {
     setValue({
