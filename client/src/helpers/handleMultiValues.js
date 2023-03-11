@@ -1,14 +1,14 @@
-export const handleMultiValues = (val, func, data, parameter) => {
+export const handleMultiValues = (val, setValue, data, parameter) => {
   const arr = data[parameter];
   const selectedVal = arr.find((selected) => selected == val);
 
   if (!selectedVal) {
-    func({
+    setValue({
       ...data,
       [parameter]: [val, ...data.generos],
     });
   } else {
-    func({
+    setValue({
       ...data,
       [parameter]: [
         ...data[parameter].filter((valInparameter) => valInparameter !== val),

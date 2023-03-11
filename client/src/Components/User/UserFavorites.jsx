@@ -101,6 +101,7 @@ export const UserFavorites = () => {
                       styles={selectStyles}
                       placeholder="Todos"
                       defaultValue={filters.tipo}
+                      value={{ label: filters.tipo, value: filters.tipo }}
                       options={tipos}
                       onChange={({ label }) =>
                         setFilters({ ...filters, tipo: label.toLowerCase() })
@@ -116,6 +117,10 @@ export const UserFavorites = () => {
                       id="demografia"
                       styles={selectStyles}
                       placeholder="Todos"
+                      value={{
+                        label: filters.demografia,
+                        value: filters.demografia,
+                      }}
                       options={demografia}
                       onChange={({ label }) =>
                         setFilters({ ...filters, demografia: label })
@@ -130,9 +135,13 @@ export const UserFavorites = () => {
                       className="mt-2"
                       id="estado"
                       styles={selectStyles}
-                      onChange={({ value }) =>
-                        setFilters({ ...filters, estado: value })
+                      onChange={({ label }) =>
+                        setFilters({ ...filters, estado: label })
                       }
+                      value={{
+                        label: filters.estado,
+                        value: filters.estado,
+                      }}
                       placeholder="Todos"
                       options={estado}
                       classNamePrefix="select"
@@ -148,6 +157,7 @@ export const UserFavorites = () => {
                       styles={selectStyles}
                       placeholder="Todos"
                       options={generos}
+                      value={filters.generos}
                       onChange={(value) =>
                         setFilters({ ...filters, generos: value })
                       }
