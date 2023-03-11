@@ -1,22 +1,26 @@
 import React, { useState } from "react";
 import { useContext } from "react";
-import { getAnimes } from "../../../Api/Anime/anime";
 import { ExploradorContext } from "../../../utils/context/ExploradorContext";
+import Swal from "sweetalert2";
 
 export const ExploradorSearch = () => {
-  const { setItems } = useContext(ExploradorContext);
-  const [search, setSearch] = useState();
+  const { setItems, items } = useContext(ExploradorContext);
+  const [busqueda, setBusqueda] = useState("");
 
   const handleSearch = () => {
-    if (search) {
-      const fetchItems = async () => {
-        const items = await getAnimes();
-        setItems(items.data);
-      };
-      fetchItems();
+    if (busqueda.length < 2) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Necesitamos al menos 2 palabras para realizar la busqueda",
+      });
+      return;
     }
+    const filtered = items.filter((item) => {
+      return item.title.toLowerCase().includes(busqueda.toLowerCase());
+    });
 
-    setSearch("");
+    setItems(filtered);
   };
 
   return (
@@ -25,9 +29,14 @@ export const ExploradorSearch = () => {
         <input
           type="search"
           className="form-control"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          onKeyDown={(e) => e.key == "Enter" && handleSearch(e.target.value)}
+          placeholder="Search"
+          value={busqueda}
+          onChange={(e) => setBusqueda(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleSearch();
+            }
+          }}
         />
       </div>
       <div className="col-lg-2">

@@ -1,8 +1,14 @@
 import axios from "axios";
 
-export const search = async (searchTerm) => {
+export const search = async (type, demography, status, genres) => {
+  console.log(type, demography, status, genres, "holaaaaaaaa");
   const response = await axios.get(
-    `http://localhost:3000/search/${searchTerm}`
+    `http://localhost:3000/filter?type=${type}&demography=${demography}&status=${status}&genres=${genres}`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
   );
   return response;
 };
