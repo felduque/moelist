@@ -45,6 +45,7 @@ export const Search = () => {
       <input
         className="navbar-container__search__input"
         type="search"
+        value={search}
         placeholder="Search"
         onChange={(e) => setSearch(e.target.value)}
       />
