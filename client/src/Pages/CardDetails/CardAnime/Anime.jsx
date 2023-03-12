@@ -5,6 +5,8 @@ import { useParams } from "react-router-dom";
 
 import { AuthorBar } from "../../../Components/AuthorBar/AuthorBar";
 
+import moment from "moment";
+
 export const Anime = () => {
   const [animes, setAnimes] = useState([]);
   const [scans, setScans] = useState([]);
@@ -18,7 +20,6 @@ export const Anime = () => {
       setScans(animes?.data?.Scan);
     };
 
-    console.log(animes);
     fetchAnimes();
   }, []);
 
@@ -155,7 +156,7 @@ export const Anime = () => {
                       style.content_primary_card__info__content__item__text
                     }
                   >
-                    {animes?.premiered}
+                    {moment(animes.premiered).format("MM/DD/YY")}
                   </p>
                 </div>
                 <div

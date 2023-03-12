@@ -4,11 +4,13 @@ import ScaleLoader from "react-spinners/ScaleLoader";
 import "./Search.css";
 import { searchTitle } from "../../Api/Search/Search";
 import { SearchItem } from "./SearchItem";
+import { useLocation } from "react-router-dom";
 
 export const Search = () => {
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
   const [searchItems, setSearchItems] = useState([]);
+  const location = useLocation();
 
   //  es para que no bombardee el servidor fetch cada vez que se escriba algo en el search
   const [typingTimer, setTypingTimer] = useState();
@@ -34,11 +36,16 @@ export const Search = () => {
     );
   }, [search]);
 
+  useEffect(() => {
+    setSearch("");
+  }, [location]);
+
   return (
     <div className="search-wrapper">
       <input
         className="navbar-container__search__input"
         type="search"
+        value={search}
         placeholder="Search"
         onChange={(e) => setSearch(e.target.value)}
       />
@@ -48,6 +55,9 @@ export const Search = () => {
           {searchItems.slice(0, 3).map((item) => (
             <SearchItem key={item.id} {...item} />
           ))}
+          {searchItems.length === 0 && !loading && (
+            <p>No se pudo encontrar tu busqueda</p>
+          )}
         </div>
       )}
     </div>
