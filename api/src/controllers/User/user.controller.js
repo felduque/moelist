@@ -39,14 +39,10 @@ export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
     // check if user exists
-    console.log(email, password);
     const veryEmail = await User.findOne({ where: { email } });
 
     if (!veryEmail)
       return res.status(400).json({ error: "Invalid credentials" });
-
-    console.log(veryEmail);
-
     // check if password is correct
     const isMatch = await bcrypt.compare(password, veryEmail.password);
 
