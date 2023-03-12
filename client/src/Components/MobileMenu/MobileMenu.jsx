@@ -8,8 +8,7 @@ import { Search } from "../Search/Search";
 import { AuthContext } from "../../utils/context/AuthContext";
 
 export const MobileMenu = () => {
-  const { user } = useContext(AuthContext);
-  const closeMobile = useRef();
+  const { user, mobileMenuCloseRef } = useContext(AuthContext);
 
   return (
     <div
@@ -22,7 +21,7 @@ export const MobileMenu = () => {
           <h5
             className="offcanvas-title"
             id="mobileMenuLabel"
-            onClick={() => closeMobile.current.click()}
+            onClick={() => mobileMenuCloseRef.current.click()}
           >
             <Link
               to="/"
@@ -37,14 +36,14 @@ export const MobileMenu = () => {
             className="btn p-0 text-white fs-1"
             data-bs-dismiss="offcanvas"
             aria-label="Close"
-            ref={closeMobile}
+            ref={mobileMenuCloseRef}
           >
             <IoIosClose type="button" />
           </button>
         </div>
         <div className="offcanvas-body">
           <ul className="nav-list-mobile p-0 text-start ">
-            <li onClick={() => closeMobile.current.click()}>
+            <li onClick={() => mobileMenuCloseRef.current.click()}>
               <Link to={"/explorador"} className="text-white">
                 <RiHome4Fill className="mb-1 " /> Explorar
               </Link>
@@ -52,7 +51,7 @@ export const MobileMenu = () => {
 
             <li
               className="nav-list-mobile p-0  fw-bold"
-              onClick={closeMobile.current.click()}
+              onClick={() => mobileMenuCloseRef.current.click()}
             >
               {user ? (
                 <Link

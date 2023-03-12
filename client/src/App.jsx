@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Home } from "./Pages/Home/Home";
 import { Routes, Route } from "react-router-dom";
 import { Navbar } from "./Components/Navbar/Navbar";
@@ -20,10 +20,13 @@ import { AuthorOnlyRoutes } from "./Components/ProtectedRoutes/AuthorOnlyRoutes"
 function App() {
   const [user, setUser] = useState();
   const [favorites, setFavorites] = useState([]);
+  const mobileMenuCloseRef = useRef();
 
   return (
     <>
-      <AuthContext.Provider value={{ user, setUser, favorites, setFavorites }}>
+      <AuthContext.Provider
+        value={{ user, setUser, favorites, setFavorites, mobileMenuCloseRef }}
+      >
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
