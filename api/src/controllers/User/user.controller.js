@@ -43,6 +43,7 @@ export const loginUser = async (req, res) => {
 
     if (!veryEmail)
       return res.status(400).json({ error: "Invalid credentials" });
+
     // check if password is correct
     const isMatch = await bcrypt.compare(password, veryEmail.password);
 
