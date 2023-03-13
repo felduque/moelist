@@ -30,6 +30,10 @@ html, body {
   position: relative;
 }
 
+.button-icon {
+  margin-top: -4px;
+}
+
 .autor-bar {
   justify-content: center;
   padding: 15px;
