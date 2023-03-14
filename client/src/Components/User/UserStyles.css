@@ -1,3 +1,11 @@
+.button-icon {
+    display: inline ;
+}   
+
+.drop-zone img {
+    max-width: 100%;
+}
+
 .drop-zone {
     min-width: 100% !important;
     min-height: 300px;
@@ -19,6 +27,7 @@
     color: white !important;
 }
 
-.fields-container > div {
+.fields-container > div,
+.user-form > div {
     margin-bottom: 20px;
 }

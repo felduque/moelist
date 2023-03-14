@@ -22,7 +22,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import Select from "react-select";
 import { FileUploader } from "react-drag-drop-files";
 import { RiImageAddFill } from "react-icons/ri";
-import { validatePublication } from "../../helpers/validatePublication";
+import { validatePublication } from "../../helpers/validations/validatePublication";
+import { fileTypes } from "../../helpers/Validations/allowedFileTypes";
 
 const initFormState = {
   tipo: "",
@@ -48,7 +49,6 @@ const initFormState = {
 };
 
 export const UserPublication = () => {
-  const fileTypes = ["JPG", "PNG", "GIF", "WEBP", "AVIF", "JPEG"];
   const [productoras, setProductoras] = useState([]);
   const [genresView, setGenresView] = useState([]);
   const [estudioView, setEstudioView] = useState([]);

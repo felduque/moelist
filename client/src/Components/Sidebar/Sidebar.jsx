@@ -5,12 +5,10 @@ import { getManhuas } from "../../Api/Manhuas/mahuas";
 import { getManhwas } from "../../Api/Manhwas/manhwas";
 import { getMangas } from "../../Api/Mangas/mangas";
 import { CardItem } from "../CardItem/CardItem";
+import { CardLoop } from "../CardLoop/CardLoop";
 
 export const Sidebar = () => {
-  const [animes, setAnimes] = useState([]);
-  const [mangas, setMangas] = useState([]);
-  const [manhwas, setManhwas] = useState([]);
-  const [manhuas, setManhuas] = useState([]);
+  const [ultimos, setUltimos] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,11 +21,12 @@ export const Sidebar = () => {
       const orderMangas = mangas?.data.sort((a, b) => b - a);
       const orderAnimes = anime?.data.sort((a, b) => b - a);
 
-      setManhuas(orderManhuas);
-      setManhwas(orderManhwas);
-      setMangas(orderMangas);
-
-      setAnimes(orderAnimes);
+      setUltimos([
+        ...orderAnimes.slice(0, 2),
+        ...orderMangas.slice(0, 2),
+        ...orderManhwas.slice(0, 2),
+        ...orderManhuas.slice(0, 2),
+      ]);
     };
     fetchData();
   }, []);
@@ -37,23 +36,7 @@ export const Sidebar = () => {
         <div className="sidebar-content-title-list-cards">
           <h2 className="sidebar-text-title-list-cards">Ultimos Agregados</h2>
         </div>
-        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-1 px-3 px-sm-0 pt-4">
-          {animes?.slice(0, 2).map((anime, index) => {
-            return <CardItem key={index} {...anime} showHover={false} />;
-          })}
-
-          {mangas.slice(0, 2).map((manga, index) => {
-            return <CardItem key={index} {...manga} showHover={false} />;
-          })}
-
-          {manhwas.slice(0, 2).map((manhwa, index) => {
-            return <CardItem key={index} {...manhwa} showHover={false} />;
-          })}
-
-          {manhuas.slice(0, 2).map((manhua, index) => {
-            return <CardItem key={index} {...manhua} showHover={false} />;
-          })}
-        </div>
+        <CardLoop cards={ultimos} oneCol={true} showDesc={false} />
       </div>
     </div>
   );

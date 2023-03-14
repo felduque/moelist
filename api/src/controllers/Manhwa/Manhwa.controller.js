@@ -142,6 +142,7 @@ export const getManhwasById = async (req, res) => {
         "score",
         "popularity",
         "urlContent",
+        "contentType",
       ],
       include: [
         {

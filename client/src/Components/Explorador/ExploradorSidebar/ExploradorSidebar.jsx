@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import { selectStyles } from "../../../helpers/selectStyles";
+import { FaChevronDown } from "react-icons/fa";
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -81,31 +82,56 @@ export const ExploradorSidebar = () => {
         styles={selectStyles}
         onChange={(value) => setData({ ...data, status: value.label })}
       />
-      <h5 className="mt-4"> Generos </h5>
-      {generos.map((genero) => (
-        <div key={genero.value} className="form-check">
-          <input
-            className="form-check-input"
-            type="checkbox"
-            value={genero.label}
-            name="genero"
-            // cuando se marca se agrega el genero al array de generos si se desmarca se elimina
-            onChange={(e) => {
-              if (e.target.checked) {
-                handlePushGenres(e.target.value);
-              } else {
-                setData({
-                  ...data,
-                  genres: data.genres.filter((item) => item !== e.target.value),
-                });
-              }
-            }}
+      <div className="accordion mt-4" id="accordionExample">
+        <div className="accordion-item">
+          <h2 className="accordion-header" id="headingOne">
+            <button
+              className="accordion-button bg-dark text-white fw-semibold"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseOne"
+              aria-controls="collapseOne"
+            >
+              Generos
+              <FaChevronDown className="ms-auto" />
+            </button>
+          </h2>
+          <div
+            id="collapseOne"
+            className="accordion-collapse collapse txt-primary"
+            aria-labelledby="favorites-filter"
+          >
+            <div className="accordion-body bg-dark text-white">
+              {generos.map((genero) => (
+                <div key={genero.value} className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    value={genero.label}
+                    name="genero"
+                    // cuando se marca se agrega el genero al array de generos si se desmarca se elimina
+                    onChange={(e) => {
+                      if (e.target.checked) {
+                        handlePushGenres(e.target.value);
+                      } else {
+                        setData({
+                          ...data,
+                          genres: data.genres.filter(
+                            (item) => item !== e.target.value
+                          ),
+                        });
+                      }
+                    }}
 
-            // onChange={(e) => handlePushGenres(e.target.value)}
-          />
-          <label className="form-check-label">{genero.label}</label>
+                    // onChange={(e) => handlePushGenres(e.target.value)}
+                  />
+                  <label className="form-check-label">{genero.label}</label>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
-      ))}
+      </div>
     </>
   );
 };

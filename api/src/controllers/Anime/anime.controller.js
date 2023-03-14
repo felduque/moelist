@@ -127,6 +127,7 @@ export const getAnimeById = async (req, res) => {
         "trailer",
         "opening",
         "urlContent",
+        "contentType",
       ],
       include: [
         {

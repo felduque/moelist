@@ -140,6 +140,7 @@ export const getManhuaById = async (req, res) => {
         "popularity",
         "demography",
         "urlContent",
+        "contentType",
       ],
       include: [
         {

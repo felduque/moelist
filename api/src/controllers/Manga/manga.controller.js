@@ -140,6 +140,7 @@ export const getMangaById = async (req, res) => {
         "popularity",
         "urlContent",
         "demography",
+        "contentType",
       ],
       include: [
         {
