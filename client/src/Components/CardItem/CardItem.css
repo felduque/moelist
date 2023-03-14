@@ -83,18 +83,3 @@
     border-radius: 10px; 
 }
 
-.anime {
-    background-color: var(--color-anime) !important;
-}
-
-.manga {
-    background-color: var(--color-manga) !important;
-}
-
-.manhwa {
-    background-color: var(--color-manwha) !important;
-}
-
-.manhua {
-    background-color: var(--color-manhua) !important;
-}
