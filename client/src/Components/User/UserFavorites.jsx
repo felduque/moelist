@@ -11,6 +11,7 @@ import {
   demografia,
   estado,
 } from "../../helpers/valoresParaSelects";
+import { CardLoop } from "../CardLoop/CardLoop";
 
 const filtersInitState = {
   tipo: "",
@@ -178,16 +179,7 @@ export const UserFavorites = () => {
 
         <div className="col-9 d-flex justify-content-end gap-3"></div>
       </div>
-      <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6">
-        {filteredFavs?.map((favorite, index) => (
-          <CardItem
-            key={`${favorite.id}` + favorite.contentType + index}
-            {...favorite}
-            index={index}
-            action="remove"
-          />
-        ))}
-      </div>
+      <CardLoop cards={filteredFavs} action="remove" />
     </>
   );
 };

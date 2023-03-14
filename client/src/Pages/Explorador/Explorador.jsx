@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { getAnimes } from "../../Api/Anime/anime";
-import { CardItem } from "../../Components/CardItem/CardItem";
+import React, { useState } from "react";
+import { CardLoop } from "../../Components/CardLoop/CardLoop";
 import { ExploradorOrder } from "../../Components/Explorador/ExploradorOrder/ExploradorOrder";
 import { ExploradorSearch } from "../../Components/Explorador/ExploradorSearch/ExploradorSearch";
 import { ExploradorSidebar } from "../../Components/Explorador/ExploradorSidebar/ExploradorSidebar";
@@ -22,12 +21,11 @@ export const Explorador = () => {
             <ExploradorSidebar />
           </div>
           <div className="col-lg-9 text-white">
-            <ExploradorOrder />
-            <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xxl-6 mt-5 mt-xl-3">
-              {items?.map((item, index) => (
-                <CardItem key={index} {...item} index={index} />
-              ))}
+            <div className="mb-4">
+              <ExploradorOrder />
             </div>
+
+            <CardLoop cards={items} />
           </div>
         </div>
       </section>

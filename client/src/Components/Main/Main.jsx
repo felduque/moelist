@@ -5,6 +5,7 @@ import { getMangas } from "../../Api/Mangas/mangas";
 import { getManhuas } from "../../Api/Manhuas/mahuas";
 import { getManhwas } from "../../Api/Manhwas/manhwas";
 import { CardItem } from "../CardItem/CardItem";
+import { CardLoop } from "../CardLoop/CardLoop";
 
 export const Main = () => {
   const [animes, setAnimes] = useState([]);
@@ -48,36 +49,20 @@ export const Main = () => {
         <div className="conent-title-catogory one-category-main">
           <h2 className="text-white">Animes</h2>
         </div>
-        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xxl-6">
-          {animes.map((anime) => {
-            return <CardItem key={anime.id} {...anime} />;
-          })}
-        </div>
+        <CardLoop cards={animes} />
         <div className="conent-title-catogory">
           <h2 className="text-white">Mangas</h2>
         </div>
-        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xxl-6">
-          {mangas.map((manga) => {
-            return <CardItem key={manga.id} {...manga} />;
-          })}
-        </div>
+        <CardLoop cards={mangas} />
         <div className="conent-title-catogory">
           <h2 className="text-white">Manhwas</h2>
         </div>
-        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xxl-6">
-          {manhwas.map((manhwa) => {
-            return <CardItem key={manhwa.id} {...manhwa} />;
-          })}
-        </div>
+        <CardLoop cards={manhwas} />
 
         <div className="conent-title-catogory">
           <h2 className="text-white">Manhuas</h2>
         </div>
-        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xxl-6">
-          {manhuas.map((manhua) => {
-            return <CardItem key={manhua.id} {...manhua} />;
-          })}
-        </div>
+        <CardLoop cards={manhuas} />
       </div>
     </div>
   );
