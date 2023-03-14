@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import style from "./Manhwa.module.css";
 import { getManhwasById } from "../../../Api/Manhwas/manhwas";
 import { useParams } from "react-router-dom";
-import { AuthorBar } from "../../../Components/AuthorBar/AuthorBar";
+import { CardTopBar } from "../../../Components/AuthorBar/CardTopBar";
+import { AuthorBox } from "../../../Components/AuthorBar/AuthorBox";
+
 export const Manhwa = () => {
   const [manhwas, setManhwas] = useState([]);
   const [scans, setScans] = useState([]);
@@ -18,7 +20,7 @@ export const Manhwa = () => {
   }, []);
   return (
     <>
-      <AuthorBar author={manhwas.author} />
+      <CardTopBar />
       <div className={`container-fluid ${style.bg_card}`}>
         <div className={`row pt-5 ${style.content_sinopsis_and_banner}`}>
           <div className="col-12 col-xl-3 text-center">
@@ -27,6 +29,7 @@ export const Manhwa = () => {
               src={manhwas?.image}
               alt={manhwas?.title}
             />
+            <AuthorBox type={manhwas?.contentType} author={manhwas?.author} />
           </div>
           <div className="col-12 col-xl-9">
             <div className={style.content_sinopsis}>

@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import style from "./Manhua.module.css";
 import { useParams } from "react-router-dom";
 import { getManhuasById } from "../../../Api/Manhuas/mahuas";
-import { AuthorBar } from "../../../Components/AuthorBar/AuthorBar";
+import { CardTopBar } from "../../../Components/AuthorBar/CardTopBar";
+import { AuthorBox } from "../../../Components/AuthorBar/AuthorBox";
+
 export const Manhua = () => {
   const [manhuas, setManhuas] = useState([]);
   const [scans, setScans] = useState([]);
@@ -19,7 +21,7 @@ export const Manhua = () => {
 
   return (
     <>
-      <AuthorBar author={manhuas.author} />
+      <CardTopBar />
       <div className={`container-fluid ${style.bg_card}`}>
         <div className={`row pt-5 ${style.content_sinopsis_and_banner}`}>
           <div className="col-12 col-xl-3 text-center">
@@ -28,6 +30,7 @@ export const Manhua = () => {
               src={manhuas?.image}
               alt={manhuas?.title}
             />
+            <AuthorBox type={manhuas?.contentType} author={manhuas?.author} />
           </div>
           <div className="col-12 col-xl-9">
             <div className={style.content_sinopsis}>

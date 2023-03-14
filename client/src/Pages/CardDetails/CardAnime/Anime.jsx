@@ -3,9 +3,10 @@ import { getAnimeById } from "../../../Api/Anime/anime";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import { AuthorBar } from "../../../Components/AuthorBar/AuthorBar";
+import { AuthorBox } from "../../../Components/AuthorBar/AuthorBox";
 
 import moment from "moment";
+import { CardTopBar } from "../../../Components/AuthorBar/CardTopBar";
 
 export const Anime = () => {
   const [animes, setAnimes] = useState([]);
@@ -18,6 +19,8 @@ export const Anime = () => {
       const animes = await getAnimeById(id);
       setAnimes(animes?.data);
       setScans(animes?.data?.Scan);
+
+      console.log(animes);
     };
 
     fetchAnimes();
@@ -25,15 +28,17 @@ export const Anime = () => {
 
   return (
     <>
-      <AuthorBar author={animes.author} />
+      <CardTopBar author={animes.author} />
       <div className={`container-fluid ${style.bg_card}`}>
         <div className={`row pt-5 ${style.content_sinopsis_and_banner}`}>
-          <div className="col-12 col-xl-3 text-center">
+          <div className="col-12 col-xl-3 text-center text-white">
             <img
               className={style.content_primary_card__img}
               src={animes?.image}
               alt={animes?.title}
             />
+
+            <AuthorBox type={animes?.contentType} author={animes?.author} />
           </div>
           <div className="col-12 col-xl-9">
             <div className={style.title_card_content}>

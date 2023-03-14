@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import style from "./Manga.module.css";
 import { useParams } from "react-router-dom";
 import { getMangasById } from "../../../Api/Mangas/mangas";
-import { AuthorBar } from "../../../Components/AuthorBar/AuthorBar";
+import { CardTopBar } from "../../../Components/AuthorBar/CardTopBar";
+import { AuthorBox } from "../../../Components/AuthorBar/AuthorBox";
+
 export const Manga = () => {
   const [mangas, setMangas] = useState([]);
   const [scans, setScans] = useState([]);
@@ -11,6 +13,7 @@ export const Manga = () => {
   useEffect(() => {
     const fetchMangas = async () => {
       const manga = await getMangasById(id);
+
       setMangas(manga?.data);
       setScans(manga?.data?.Scan);
     };
@@ -19,7 +22,7 @@ export const Manga = () => {
 
   return (
     <>
-      <AuthorBar author={mangas.author} />
+      <CardTopBar />
       <div className={`container-fluid ${style.bg_card}`}>
         <div className={`row pt-5 ${style.content_sinopsis_and_banner}`}>
           <div className="col-12 col-xl-3 text-center">
@@ -28,6 +31,7 @@ export const Manga = () => {
               src={mangas?.image}
               alt={mangas?.title}
             />
+            <AuthorBox type={mangas?.contentType} author={mangas?.author} />
           </div>
           <div className="col-12 col-xl-9">
             <div className={style.content_sinopsis}>

@@ -36,21 +36,22 @@ html, body {
 
 .autor-bar {
   justify-content: center;
+  align-items: center;
   padding: 15px;
   display: flex;
-  top: 85px;
+  top: 0;
   position: fixed;
-  margin-top: 81px;
+  margin-top: 75px;
+  padding-top: 25px;
+  height: 50px;
   top: 0;
   width: 100%;
 }
 
-.author {
+.cardMessage {
   font-size: 20px;
   display: inline-block;
-  line-height: 15px;
-  margin-top: 1px;
-  
+  line-height: 15px;  
 }
 
 .bg-green {
@@ -108,6 +109,22 @@ input:disabled {
 #mobileMenu .offcanvas-inner {
   z-index: 20;
   position: relative;
+}
+
+.anime {
+  background-color: var(--color-anime) !important;
+}
+
+.manga {
+  background-color: var(--color-manga) !important;
+}
+
+.manhwa {
+  background-color: var(--color-manwha) !important;
+}
+
+.manhua {
+  background-color: var(--color-manhua) !important;
 }
 
 @media (max-width: 575px) {
