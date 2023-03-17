@@ -18,8 +18,6 @@ export const UserSettings = () => {
   const [preview, setPreview] = useState(null);
   const [data, setData] = useState({ ...user });
 
-  console.log(user);
-
   const handleSubmit = (e) => {
     setSubmitting(true);
     e.preventDefault();
@@ -50,7 +48,6 @@ export const UserSettings = () => {
 
   useEffect(() => {
     if (errors && submitting) {
-      console.log(errors);
       if (Object.keys(errors).length === 0) {
         editUser();
       } else {
@@ -103,10 +100,9 @@ export const UserSettings = () => {
             <BsPaypal />
           </div>
           <input
-            placeholder={
-              user?.paypal ? user?.paypal : "Ingrese su email de Paypal"
-            }
+            placeholder="Ingrese su email de Paypal"
             type="email"
+            value={data?.paypal}
             name="paypal"
             className="form-control"
             onChange={(e) => setData({ ...data, paypal: e.target.value })}
@@ -130,10 +126,8 @@ export const UserSettings = () => {
             className="form-control"
           />
         </div>
-        {errors?.binancePayId && (
-          <span className="text-danger mt-2 d-block">
-            {errors?.binancePayId}
-          </span>
+        {errors?.binanceId && (
+          <span className="text-danger mt-2 d-block">{errors?.binanceId}</span>
         )}
       </div>
 
