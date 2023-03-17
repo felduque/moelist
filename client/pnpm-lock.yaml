@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@loadable/component': ^5.15.3
   '@popperjs/core': 2.11.6
   '@types/react': ^18.0.27
   '@types/react-dom': ^18.0.10
@@ -23,6 +24,7 @@ specifiers:
   vite: ^4.1.0
 
 dependencies:
+  '@loadable/component': 5.15.3_react@18.2.0
   '@popperjs/core': 2.11.6
   axios: 1.3.3
   bootstrap: 5.2.3_@popperjs+core@2.11.6
@@ -637,6 +639,18 @@ packages:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.0
       '@jridgewell/sourcemap-codec': 1.4.14
+
+  /@loadable/component/5.15.3_react@18.2.0:
+    resolution: {integrity: sha512-VOgYgCABn6+/7aGIpg7m0Ruj34tGetaJzt4bQ345FwEovDQZ+dua+NWLmuJKv8rWZyxOUSfoJkmGnzyDXH2BAQ==}
+    engines: {node: '>=8'}
+    peerDependencies:
+      react: ^16.3.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      '@babel/runtime': 7.21.0
+      hoist-non-react-statics: 3.3.2
+      react: 18.2.0
+      react-is: 16.13.1
+    dev: false
 
   /@popperjs/core/2.11.6:
     resolution: {integrity: sha512-50/17A98tWUfQ176raKiOGXuYpLyyVMkxxG6oylzL3BPOlA6ADGdK7EYunSa4I064xerltq9TGXs8HmOk5E+vw==}
