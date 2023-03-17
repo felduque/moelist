@@ -583,3 +583,25 @@ export const filterTitle = async (req, res) => {
   const result = anime.concat(manga, manhua, manhwa);
   res.json(result);
 };
+
+export const pagination = async (req, res) => {
+  const { page, limit } = req.query;
+  const anime = await Anime.findAll({
+    offset: (page - 1) * limit,
+    limit: limit,
+  });
+  const manga = await Manga.findAll({
+    offset: (page - 1) * limit,
+    limit: limit,
+  });
+  const manhua = await Manhua.findAll({
+    offset: (page - 1) * limit,
+    limit: limit,
+  });
+  const manhwa = await Manhwa.findAll({
+    offset: (page - 1) * limit,
+    limit: limit,
+  });
+  const result = anime.concat(manga, manhua, manhwa);
+  res.json(result);
+};

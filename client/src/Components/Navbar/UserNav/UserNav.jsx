@@ -8,6 +8,12 @@ import { useNavigate } from "react-router-dom";
 export const UserNav = ({ user }) => {
   const navigate = useNavigate();
 
+  const closeSession = () => {
+    localStorage.removeItem("token");
+
+    window.location.reload();
+  };
+
   return (
     <>
       {user ? (
@@ -35,7 +41,14 @@ export const UserNav = ({ user }) => {
             <Link to="/user/favoritos" className="dropdown-item text-white">
               Ver Favoritos
             </Link>
-            <li className="dropdown-item text-white">Cerrar sesion</li>
+            <li
+              className="dropdown-item text-white cursor-pointer text-decoration-none"
+              onClick={() => {
+                closeSession();
+              }}
+            >
+              Cerrar sesion
+            </li>
           </ul>
         </div>
       ) : (

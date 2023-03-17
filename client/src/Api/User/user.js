@@ -9,6 +9,26 @@ export const getUserById = async (id) => {
   }
 };
 
+export const updateUser = async (id, data) => {
+  console.log(data, id);
+  try {
+    const token = localStorage.getItem("token");
+    const res = await axios.patch(
+      `http://localhost:3000/updateuser/${id}`,
+      data,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          "x-auth-token": token,
+        },
+      }
+    );
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const deleteFavorite = async (type, idContent, idUser) => {
   try {
     const res = await axios.delete("http://localhost:3000/deletefavorite/", {

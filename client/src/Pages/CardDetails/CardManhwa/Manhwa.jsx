@@ -8,6 +8,7 @@ import { AuthorBox } from "../../../Components/AuthorBar/AuthorBox";
 export const Manhwa = () => {
   const [manhwas, setManhwas] = useState([]);
   const [scans, setScans] = useState([]);
+  const [author, setAuthor] = useState([]);
 
   const { id } = useParams();
   useEffect(() => {
@@ -15,6 +16,7 @@ export const Manhwa = () => {
       const manhwa = await getManhwasById(id);
       setManhwas(manhwa?.data);
       setScans(manhwa?.data?.Scan);
+      setAuthor(manhwas?.data?.User);
     };
     fetchManhwas();
   }, []);
@@ -29,7 +31,7 @@ export const Manhwa = () => {
               src={manhwas?.image}
               alt={manhwas?.title}
             />
-            <AuthorBox type={manhwas?.contentType} author={manhwas?.author} />
+            <AuthorBox type={manhwas?.contentType} author={author?.userName} />
           </div>
           <div className="col-12 col-xl-9">
             <div className={style.content_sinopsis}>

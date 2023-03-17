@@ -11,6 +11,7 @@ import { CardTopBar } from "../../../Components/AuthorBar/CardTopBar";
 export const Anime = () => {
   const [animes, setAnimes] = useState([]);
   const [scans, setScans] = useState([]);
+  const [author, setAuthor] = useState([]);
 
   const { id } = useParams();
 
@@ -19,8 +20,7 @@ export const Anime = () => {
       const animes = await getAnimeById(id);
       setAnimes(animes?.data);
       setScans(animes?.data?.Scan);
-
-      console.log(animes);
+      setAuthor(animes?.data?.User);
     };
 
     fetchAnimes();
@@ -28,7 +28,7 @@ export const Anime = () => {
 
   return (
     <>
-      <CardTopBar author={animes.author} />
+      <CardTopBar author={author?.userName} />
       <div className={`container-fluid ${style.bg_card}`}>
         <div className={`row pt-5 ${style.content_sinopsis_and_banner}`}>
           <div className="col-12 col-xl-3 text-center text-white">
@@ -38,7 +38,7 @@ export const Anime = () => {
               alt={animes?.title}
             />
 
-            <AuthorBox type={animes?.contentType} author={animes?.author} />
+            <AuthorBox type={animes?.contentType} author={author?.userName} />
           </div>
           <div className="col-12 col-xl-9">
             <div className={style.title_card_content}>

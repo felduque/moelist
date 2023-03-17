@@ -7,6 +7,7 @@ import "./UserStyles.css";
 import { AuthContext } from "../../utils/context/AuthContext";
 import { validateUserSettings } from "../../helpers/Validations/ValidateUserSettings";
 import Swal from "sweetalert2";
+import { updateUser } from "../../Api/User/user";
 import { FileUploader } from "react-drag-drop-files";
 import { fileTypes } from "../../helpers/Validations/allowedFileTypes";
 
@@ -16,6 +17,8 @@ export const UserSettings = () => {
   const [errors, setErrors] = useState();
   const [preview, setPreview] = useState(null);
   const [data, setData] = useState({ ...user });
+
+  console.log(user);
 
   const handleSubmit = (e) => {
     setSubmitting(true);
@@ -36,10 +39,12 @@ export const UserSettings = () => {
   const editUser = () => {
     setTimeout(() => {
       setSubmitting(false);
+      updateUser(user.id, data);
       Swal.fire({
         icon: "success",
         title: "Ha actualizado su perfil correctamente",
       });
+      window.location.reload();
     }, 1500);
   };
 
@@ -98,10 +103,11 @@ export const UserSettings = () => {
             <BsPaypal />
           </div>
           <input
-            value={user?.paypal}
+            placeholder={
+              user?.paypal ? user?.paypal : "Ingrese su email de Paypal"
+            }
             type="email"
             name="paypal"
-            placeholder="Email usado para paypal"
             className="form-control"
             onChange={(e) => setData({ ...data, paypal: e.target.value })}
           />
@@ -118,8 +124,8 @@ export const UserSettings = () => {
           </div>
           <input
             type="text"
-            value={data?.binancePayId}
-            onChange={(e) => setData({ ...data, binancePayId: e.target.value })}
+            value={data?.binanceId}
+            onChange={(e) => setData({ ...data, binanceId: e.target.value })}
             placeholder="Pay Id de Binance"
             className="form-control"
           />

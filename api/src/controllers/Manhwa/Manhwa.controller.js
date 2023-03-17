@@ -150,6 +150,58 @@ export const getManhwasById = async (req, res) => {
           as: "Scan",
           attributes: ["id", "name", "url", "image"],
         },
+        {
+          model: User,
+          as: "User",
+          attributes: [
+            "id",
+            "userName",
+            "avatar",
+            "paypal",
+            "binanceId",
+            "twitter",
+          ],
+        },
+      ],
+    });
+    res.status(200).json(manhwa);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const lastManhwas = async (req, res) => {
+  try {
+    const manhwa = await Manhwa.findAll({
+      limit: 4,
+      order: [["createdAt", "DESC"]],
+      attributes: [
+        "id",
+        "title",
+        "description",
+        "image",
+        "status",
+        "day",
+        "type",
+        "source",
+        "chapters",
+        "volumes",
+        "rating",
+        "genres",
+        "authors",
+        "artists",
+        "score",
+        "popularity",
+        "urlContent",
+        "contentType",
+        "demography",
+      ],
+      include: [
+        {
+          model: Scan,
+          as: "Scan",
+          attributes: ["id", "name", "url", "image"],
+        },
       ],
     });
     res.status(200).json(manhwa);

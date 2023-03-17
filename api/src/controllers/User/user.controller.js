@@ -183,7 +183,16 @@ export const getUser = async (req, res) => {
   try {
     const { id } = req.params;
     const userFound = await User.findByPk(id, {
-      attributes: ["id", "email", "role", "avatar", "userName"],
+      attributes: [
+        "id",
+        "email",
+        "role",
+        "avatar",
+        "userName",
+        "paypal",
+        "binanceId",
+        "twitter",
+      ],
     });
 
     const animes = await userFound.getAnimes({
@@ -292,4 +301,43 @@ export const deleteFavorite = async (req, res) => {
     console.log(error);
     res.status(500).json({ error: "Server error" });
   }
+};
+
+export const updateUserData = async (req, res) => {
+  const { userName, paypal, binanceId, twitter } = req?.body;
+
+  const img = req?.files?.image;
+
+  const { id } = req?.params;
+
+  console.log(userName, paypal, binanceId, twitter, id);
+
+  const userFind = await User.findByPk(id);
+
+  if (!userFind) {
+    return res.status(400).json({ error: "Usuario Inexistente" });
+  }
+
+  let pathImage = __dirname + "/../../public/users/" + img?.name;
+  img?.mv(pathImage);
+  let url = "http://localhost:3000/users/" + img?.name;
+
+  if (!img) url = userFind.avatar;
+
+  const updateData = await User.update(
+    {
+      userName: userName,
+      paypal: paypal,
+      binanceId: binanceId,
+      twitter: twitter,
+      avatar: url,
+    },
+    {
+      where: {
+        id: id,
+      },
+    }
+  );
+
+  res.json(updateData);
 };

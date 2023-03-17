@@ -8,13 +8,14 @@ import { AuthorBox } from "../../../Components/AuthorBar/AuthorBox";
 export const Manhua = () => {
   const [manhuas, setManhuas] = useState([]);
   const [scans, setScans] = useState([]);
-
+  const [author, setAuthor] = useState([]);
   const { id } = useParams();
   useEffect(() => {
     const fetchManhuas = async () => {
       const manhua = await getManhuasById(id);
       setManhuas(manhua?.data);
       setScans(manhua?.data?.Scan);
+      setAuthor(manhua?.data?.User);
     };
     fetchManhuas();
   }, []);
@@ -30,7 +31,7 @@ export const Manhua = () => {
               src={manhuas?.image}
               alt={manhuas?.title}
             />
-            <AuthorBox type={manhuas?.contentType} author={manhuas?.author} />
+            <AuthorBox type={manhuas?.contentType} author={author?.userName} />
           </div>
           <div className="col-12 col-xl-9">
             <div className={style.content_sinopsis}>

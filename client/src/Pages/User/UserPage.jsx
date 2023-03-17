@@ -8,8 +8,6 @@ import "./UserPage.css";
 export const UserPage = () => {
   const { user } = useContext(AuthContext);
 
-  console.log(user);
-
   return (
     <section className="container-fluid py-5 px-3 p-sm-5 text-white ">
       <div className="row gap">

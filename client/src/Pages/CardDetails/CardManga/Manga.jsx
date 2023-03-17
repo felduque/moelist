@@ -8,6 +8,7 @@ import { AuthorBox } from "../../../Components/AuthorBar/AuthorBox";
 export const Manga = () => {
   const [mangas, setMangas] = useState([]);
   const [scans, setScans] = useState([]);
+  const [author, setAuthor] = useState([]);
 
   const { id } = useParams();
   useEffect(() => {
@@ -16,6 +17,7 @@ export const Manga = () => {
 
       setMangas(manga?.data);
       setScans(manga?.data?.Scan);
+      setAuthor(manga?.data?.User);
     };
     fetchMangas();
   }, []);
@@ -31,7 +33,7 @@ export const Manga = () => {
               src={mangas?.image}
               alt={mangas?.title}
             />
-            <AuthorBox type={mangas?.contentType} author={mangas?.author} />
+            <AuthorBox type={mangas?.contentType} author={author?.userName} />
           </div>
           <div className="col-12 col-xl-9">
             <div className={style.content_sinopsis}>

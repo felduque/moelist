@@ -15,7 +15,7 @@ export const CardTopBar = () => {
         className="fw-bold cardMessage text-white"
       >
         <BiHappyBeaming className="me-2 fs-4" />
-        Conviertete en Autor!
+        Conviertete en Autor! Click Aqui
       </a>
     </div>
   );

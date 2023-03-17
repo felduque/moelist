@@ -27,6 +27,15 @@ export const User = sequelize.define(
       defaultValue:
         "https://www.pngall.com/wp-content/uploads/5/User-Profile-PNG-Picture.png",
     },
+    paypal: {
+      type: DataTypes.STRING,
+    },
+    binanceId: {
+      type: DataTypes.STRING,
+    },
+    twitter: {
+      type: DataTypes.STRING,
+    },
   },
   {
     timestamps: false,

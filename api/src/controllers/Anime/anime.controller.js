@@ -95,6 +95,66 @@ export const createAnime = async (req, res) => {
   }
 };
 
+export const lastAnime = async (req, res) => {
+  try {
+    const anime = await Anime.findAll({
+      order: [["id", "DESC"]],
+      limit: 4,
+      attributes: [
+        "id",
+        "title",
+        "description",
+        "image",
+        "status",
+        "type",
+        "episodes",
+        "day",
+        "rating",
+        "premiered",
+        "duration",
+        "genres",
+        "studios",
+        "producers",
+        "demography",
+        "source",
+        "score",
+        "popularity",
+        "members",
+        "author",
+        "artist",
+        "favorites",
+        "season",
+        "trailer",
+        "opening",
+        "urlContent",
+        "contentType",
+      ],
+      include: [
+        {
+          model: Scan,
+          as: "Scan",
+          attributes: ["id", "name", "url", "image"],
+        },
+        {
+          model: User,
+          as: "User",
+          attributes: [
+            "id",
+            "userName",
+            "avatar",
+            "paypal",
+            "binanceId",
+            "twitter",
+          ],
+        },
+      ],
+    });
+    res.json(anime);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const getAnimeById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -134,6 +194,18 @@ export const getAnimeById = async (req, res) => {
           model: Scan,
           as: "Scan",
           attributes: ["id", "name", "url", "image"],
+        },
+        {
+          model: User,
+          as: "User",
+          attributes: [
+            "id",
+            "userName",
+            "avatar",
+            "paypal",
+            "binanceId",
+            "twitter",
+          ],
         },
       ],
     });

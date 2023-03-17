@@ -78,6 +78,46 @@ export const createManga = async (req, res) => {
   }
 };
 
+export const lastMangas = async (req, res) => {
+  try {
+    const mangas = await Manga.findAll({
+      limit: 4,
+      order: [["createdAt", "DESC"]],
+      attributes: [
+        "id",
+        "title",
+        "description",
+        "image",
+        "status",
+        "day",
+        "type",
+        "source",
+        "chapters",
+        "volumes",
+        "rating",
+        "genres",
+        "authors",
+        "artists",
+        "score",
+        "popularity",
+        "urlContent",
+        "contentType",
+        "demography",
+      ],
+      include: [
+        {
+          model: Scan,
+          as: "Scan",
+          attributes: ["id", "name", "url", "image"],
+        },
+      ],
+    });
+    res.status(200).json(mangas);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const getMangas = async (req, res) => {
   try {
     const mangas = await Manga.findAll({
@@ -147,6 +187,18 @@ export const getMangaById = async (req, res) => {
           model: Scan,
           as: "Scan",
           attributes: ["id", "name", "url", "image"],
+        },
+        {
+          model: User,
+          as: "User",
+          attributes: [
+            "id",
+            "userName",
+            "avatar",
+            "paypal",
+            "binanceId",
+            "twitter",
+          ],
         },
       ],
     });
