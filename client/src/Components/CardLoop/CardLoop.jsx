@@ -8,7 +8,7 @@ export const CardLoop = ({
   action = "add",
 }) => {
   const colsStyles = oneCol
-    ? "row-cols-1"
+    ? "row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-1"
     : "row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xxl-6";
 
   return (
