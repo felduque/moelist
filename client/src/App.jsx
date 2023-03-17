@@ -16,6 +16,8 @@ import { UserFavorites } from "./Components/User/UserFavorites";
 import { UserSettings } from "./Components/User/UserSettings";
 import { Navigate } from "react-router-dom";
 import { AuthorOnlyRoutes } from "./Components/ProtectedRoutes/AuthorOnlyRoutes";
+import { Privacy } from "./Pages/Privacy/Privacy";
+import { Footer } from "./Components/Footer/Footer";
 
 function App() {
   const [user, setUser] = useState();
@@ -55,9 +57,13 @@ function App() {
             />
             <Route index element={<Navigate to="configurar" />} />
           </Route>
-
+          <Route path="/privacy-policy" element={<Privacy />}></Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
+
+        <footer className="container-home-grid__footer">
+          <Footer />
+        </footer>
       </AuthContext.Provider>
     </>
   );
