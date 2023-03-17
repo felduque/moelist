@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Main.css";
-import { getContentAndPaginate } from "../../Api/Anime/anime";
+import { getContentAndPaginate } from "../../Api/Search/search";
 import { CardLoop } from "../CardLoop/CardLoop";
 
 export const Main = () => {
