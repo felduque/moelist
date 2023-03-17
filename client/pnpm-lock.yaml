@@ -15,6 +15,7 @@ specifiers:
   react-drag-drop-files: ^2.3.9
   react-icons: ^4.7.1
   react-is: ^18.2.0
+  react-paginate: ^8.1.4
   react-router-dom: ^6.8.1
   react-select: ^5.7.0
   react-spinners: ^0.13.8
@@ -32,6 +33,7 @@ dependencies:
   react-dom: 18.2.0_react@18.2.0
   react-drag-drop-files: 2.3.9_7i5myeigehqah43i5u7wbekgba
   react-icons: 4.7.1_react@18.2.0
+  react-paginate: 8.1.4_react@18.2.0
   react-router-dom: 6.8.1_biqbaboplfbrettd7655fr4n2y
   react-select: 5.7.0_zula6vjvt3wdocc4mwcxqa6nzi
   react-spinners: 0.13.8_biqbaboplfbrettd7655fr4n2y
@@ -1211,6 +1213,15 @@ packages:
     dependencies:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
+    dev: false
+
+  /react-paginate/8.1.4_react@18.2.0:
+    resolution: {integrity: sha512-c3rxjcTEqeDQa6LqXifxLeFguY2qy2CHGRphVjHLFFMGfIHyaJ+v3bOvIlLYEeohwQ1q+cQpknjsqBVrkc/SNA==}
+    peerDependencies:
+      react: ^16 || ^17 || ^18
+    dependencies:
+      prop-types: 15.8.1
+      react: 18.2.0
     dev: false
 
   /react-popper/2.3.0_r6q5zrenym2zg7je7hgi674bti:
