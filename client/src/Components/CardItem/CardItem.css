@@ -47,12 +47,15 @@
 }
 
 
-.desc {
-    font-size: 13px;
+.desc, .content-title {
     display: -webkit-box; 
     overflow: hidden;
     -webkit-line-clamp: 10;
     -webkit-box-orient: vertical;
+}
+
+.desc {
+    font-size: 13px;
 }
 
 .button-desc {
