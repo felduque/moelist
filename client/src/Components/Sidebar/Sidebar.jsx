@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Sidebar.css";
-import { getAnimes } from "../../Api/Anime/anime";
-import { getManhuas } from "../../Api/Manhuas/mahuas";
-import { getManhwas } from "../../Api/Manhwas/manhwas";
-import { getMangas } from "../../Api/Mangas/mangas";
-import { CardItem } from "../CardItem/CardItem";
+import { getContentAndPaginate } from "../../Api/Anime/anime";
 import { CardLoop } from "../CardLoop/CardLoop";
 
 export const Sidebar = () => {
@@ -12,21 +8,15 @@ export const Sidebar = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const anime = await getAnimes();
-      const mangas = await getMangas();
-      const manhwas = await getManhwas();
-      const manhuas = await getManhuas();
-      const orderManhuas = manhuas?.data.sort((a, b) => b - a);
-      const orderManhwas = manhwas?.data.sort((a, b) => b - a);
-      const orderMangas = mangas?.data.sort((a, b) => b - a);
-      const orderAnimes = anime?.data.sort((a, b) => b - a);
+      const resp = await getContentAndPaginate(1, 2);
+      const content = resp.data;
 
-      setUltimos([
-        ...orderAnimes.slice(0, 2),
-        ...orderMangas.slice(0, 2),
-        ...orderManhwas.slice(0, 2),
-        ...orderManhuas.slice(0, 2),
-      ]);
+      const animes = content.filter((c) => c.contentType === "anime");
+      const mangas = content.filter((c) => c.contentType === "manga");
+      const manhuas = content.filter((c) => c.contentType === "manhua");
+      const manhwas = content.filter((c) => c.contentType === "manhwa");
+
+      setUltimos([...animes, ...mangas, ...manhuas, ...manhwas]);
     };
     fetchData();
   }, []);

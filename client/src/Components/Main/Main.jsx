@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Main.css";
-import { getAnimes } from "../../Api/Anime/anime";
-import { getMangas } from "../../Api/Mangas/mangas";
-import { getManhuas } from "../../Api/Manhuas/mahuas";
-import { getManhwas } from "../../Api/Manhwas/manhwas";
-import { CardItem } from "../CardItem/CardItem";
+import { getContentAndPaginate } from "../../Api/Anime/anime";
 import { CardLoop } from "../CardLoop/CardLoop";
 
 export const Main = () => {
@@ -15,15 +11,13 @@ export const Main = () => {
 
   useEffect(() => {
     const fetchAnimes = async () => {
-      const animes = await getAnimes();
-      const mangas = await getMangas();
-      const manhwas = await getManhwas();
-      const manhuas = await getManhuas();
-      setManhuas(manhuas?.data);
-      setManhwas(manhwas?.data);
-      setMangas(mangas?.data);
+      const resp = await getContentAndPaginate(1, 12);
+      const content = resp.data;
 
-      setAnimes(animes?.data);
+      setAnimes(content.filter((c) => c.contentType === "anime"));
+      setManhuas(content.filter((c) => c.contentType === "manhua"));
+      setManhwas(content.filter((c) => c.contentType === "manhwa"));
+      setMangas(content.filter((c) => c.contentType === "manga"));
     };
     fetchAnimes();
   }, []);
