@@ -5,4 +5,6 @@ export const ExploradorContext = createContext({
   filters: {},
   setItems: () => {},
   setFilters: () => {},
+  loading: true,
+  setLoading: () => {},
 });

@@ -23,7 +23,7 @@ import {
 const animatedComponents = makeAnimated();
 
 export const ExploradorSidebar = () => {
-  const { setItems } = useContext(ExploradorContext);
+  const { setItems, setLoading } = useContext(ExploradorContext);
   const [data, setData] = useState({
     type: "",
     demography: "",
@@ -37,19 +37,22 @@ export const ExploradorSidebar = () => {
   };
 
   useEffect(() => {
+    console.log("pasa");
     const fetchItems = async () => {
+      //if (!loading) setLoading(true);
+      // setLoading(true);
       const items = await search(
         data.type,
         data.demography,
         data.status,
         data.genres
       );
+      setLoading(false);
       setItems(items.data);
     };
 
     fetchItems();
-    console.log("hola");
-  }, [data.type, data.demography, data.status, data.genres, setItems]);
+  }, [data.type, data.demography, data.status, data.genres]);
 
   return (
     <>
