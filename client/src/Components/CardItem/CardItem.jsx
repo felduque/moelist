@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import "./CardItem.css";
 import { useContext } from "react";
 import { AuthContext } from "../../utils/context/AuthContext";
 import { FindFavorite } from "../../helpers/FindFavorite";
 import { CardItemAction } from "./CardItemAction";
+
+import { motion } from "framer-motion";
 
 export const CardItem = ({
   id,
@@ -23,7 +25,13 @@ export const CardItem = ({
   const isAdded = FindFavorite(id, contentType, favorites);
 
   return (
-    <div className="col mb-4">
+    <motion.div
+      animate={{ opacity: 1 }}
+      initial={{ opacity: 0 }}
+      exit={{ opacity: 0 }}
+      layout
+      className="col mb-4"
+    >
       <div className="card-item text-decoration-none">
         <div className="card-inner text-center">
           <div className="card-image position-relative mb-2">
@@ -89,6 +97,6 @@ export const CardItem = ({
           </div>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 };
