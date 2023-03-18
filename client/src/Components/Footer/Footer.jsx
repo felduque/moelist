@@ -13,7 +13,7 @@ export const Footer = () => {
 
         <p className="about-us">
           Moelist nace como iniciativa que permita a los usuarios obtener
-          informacion de sus animes favoritos en español como titulo, sinopsi,
+          informacion de sus animes favoritos en español como titulo, sinopsis,
           fecha de lanzamiento, capitulos, calendario, fuentes premium para
           visualizar el contenido como Crunchyroll y demas informacion. Se busca
           impulsar muchisimo mas este amor por la cultura Occidental que se
