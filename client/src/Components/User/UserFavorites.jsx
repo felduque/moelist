@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { useContext } from "react";
 import { AuthContext } from "../../utils/context/AuthContext";
-import { CardItem } from "../CardItem/CardItem";
 import Select from "react-select";
 import { FaChevronDown } from "react-icons/fa";
 import { selectStyles } from "../../helpers/selectStyles";
@@ -12,6 +11,7 @@ import {
   estado,
 } from "../../helpers/valoresParaSelects";
 import { CardLoop } from "../CardLoop/CardLoop";
+import { Pagination } from "../Pagination/Pagination";
 
 const filtersInitState = {
   tipo: "",
@@ -24,11 +24,14 @@ export const UserFavorites = () => {
   const { favorites } = useContext(AuthContext);
   const [filteredFavs, setFilterFavs] = useState(favorites);
   const [filters, setFilters] = useState(filtersInitState);
+  const [totalItems, setTotalItems] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
 
-  // console.log(favorites);
-  console.log(favorites);
+  const itemsPerPage = 18;
 
-  const filtrar = () => {
+  let totalPages = Math.ceil(totalItems / itemsPerPage);
+
+  const filtrar = (pag = 0) => {
     const filtersConditions = {
       tipo: (item) => (!filters.tipo ? true : filters.tipo == item.contentType),
       demografia: (item) =>
@@ -51,8 +54,21 @@ export const UserFavorites = () => {
     ];
 
     const result = favorites.filter((fav) => selectedT.every((f) => f(fav)));
+    let paginated = result.slice(
+      pag * itemsPerPage,
+      pag * itemsPerPage + itemsPerPage
+    );
 
-    setFilterFavs(result);
+    if (paginated.length === 0 && pag > 0) pag--;
+
+    let from = pag * itemsPerPage;
+    let to = pag * itemsPerPage + itemsPerPage;
+
+    paginated = result.slice(from, to);
+
+    setTotalItems(result.length);
+    setFilterFavs(paginated);
+    setCurrentPage(pag);
   };
 
   useEffect(() => {
@@ -66,8 +82,8 @@ export const UserFavorites = () => {
 
   useEffect(() => {
     setFilterFavs(favorites);
-    filtrar();
-  }, [favorites]);
+    filtrar(currentPage);
+  }, [favorites, currentPage]);
 
   return (
     <>
@@ -180,6 +196,13 @@ export const UserFavorites = () => {
         <div className="col-9 d-flex justify-content-end gap-3"></div>
       </div>
       <CardLoop cards={filteredFavs} action="remove" />
+      <Pagination
+        pages={totalPages}
+        onPageChange={filtrar}
+        totalItems={totalItems}
+        itemsPerPage={itemsPerPage}
+        initialPage={currentPage}
+      />
     </>
   );
 };
