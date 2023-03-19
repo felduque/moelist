@@ -1,7 +1,6 @@
-// const regexEmail =
-//   /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
+const regexEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
-// const regexTwitter = /(?<=^|(?<=[^a-zA-Z0-9-_\.]))@([A-Za-z]+[A-Za-z0-9-_]+)/;
+const regexTwitter = /(?<!\w)@[\w+]{1,15}\b/;
 
 export const validateUserSettings = (values) => {
   const required = "Este campo es requerido";
@@ -13,17 +12,16 @@ export const validateUserSettings = (values) => {
     errors.userName = required;
   }
 
-  // if (values.paypal && !regexEmail.test(values.email)) {
-  //   errors.paypal = nonValid;
-  // }
-
-  if (values.binancePayId && isNaN(values.binancePayId)) {
-    errors.binancePayId = nonValid;
+  if (values.paypal && !regexEmail.test(values.paypal)) {
+    errors.paypal = nonValid;
   }
-
-  // if (values.twitter && !regexTwitter.test(values.twitter)) {
-  //   errors.twitter = nonValid;
-  // }
+  if (values.binanceId && isNaN(values.binanceId)) {
+    errors.binanceId = nonValid;
+  }
+  console.log(values.twitter);
+  if (values.twitter && !regexTwitter.test(values.twitter)) {
+    errors.twitter = nonValid;
+  }
 
   return errors;
 };

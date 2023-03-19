@@ -24,3 +24,11 @@ export const searchTitle = async (title) => {
   );
   return response;
 };
+
+export const getContentAndPaginate = async (page = 1, limit = 24) => {
+  const response = await axios.get(
+    `http://localhost:3000/pagination/?page=${page}&limit=${limit}`
+  );
+
+  return response;
+};

@@ -6,7 +6,7 @@ import "./Home.css";
 
 export const Home = () => {
   return (
-    <div className="container-home-grid">
+    <section className="container-home-grid">
       {/* maquetacion grid main, sidebar lateral derecho   y footer*/}
       <div className="container-home-grid__main">
         <Main />
@@ -14,9 +14,6 @@ export const Home = () => {
       <div className="container-home-grid__sidebar">
         <Sidebar />
       </div>
-      <div className="container-home-grid__footer">
-        <Footer />
-      </div>
-    </div>
+    </section>
   );
 };
