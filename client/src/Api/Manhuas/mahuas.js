@@ -25,6 +25,11 @@ export const updateManhua = async (id, manhua) => {
   return response;
 };
 
+export const lastManhua = async () => {
+  const response = await axios.get(`http://localhost:3000/lastmanhuas`);
+  return response;
+};
+
 export const createManhua = async (manhua) => {
   const token = localStorage.getItem("token");
   const response = await axios.post(`http://localhost:3000/manhua`, manhua, {

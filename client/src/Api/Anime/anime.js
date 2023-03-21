@@ -22,6 +22,11 @@ export const createAnime = async (anime) => {
   return response;
 };
 
+export const lastAnime = async () => {
+  const response = await axios.get(`http://localhost:3000/lastanime`);
+  return response;
+};
+
 export const updateAnime = async (id, anime) => {
   const token = localStorage.getItem("token");
   const response = await axios.patch(

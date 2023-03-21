@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./Sidebar.css";
-import { getContentAndPaginate } from "../../Api/Search/search";
+import { lastAnime } from "../../Api/Anime/anime";
+import { lastManga } from "../../Api/Mangas/mangas";
+import { lastManhua } from "../../Api/Manhuas/mahuas";
+import { lastManhwa } from "../../Api/Manhwas/manhwas";
+
 import { CardLoop } from "../CardLoop/CardLoop";
 
 export const Sidebar = () => {
@@ -8,18 +12,20 @@ export const Sidebar = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const resp = await getContentAndPaginate(1, 2);
-      const content = resp.data;
-
-      const animes = content.filter((c) => c.contentType === "anime");
-      const mangas = content.filter((c) => c.contentType === "manga");
-      const manhuas = content.filter((c) => c.contentType === "manhua");
-      const manhwas = content.filter((c) => c.contentType === "manhwa");
-
-      setUltimos([...animes, ...mangas, ...manhuas, ...manhwas]);
+      const response = await lastAnime();
+      const response2 = await lastManga();
+      const response3 = await lastManhua();
+      const response4 = await lastManhwa();
+      const data = response.data;
+      const data2 = response2.data;
+      const data3 = response3.data;
+      const data4 = response4.data;
+      setUltimos([...data, ...data2, ...data3, ...data4]);
     };
     fetchData();
   }, []);
+
+  console.log(ultimos);
   return (
     <div className="sidebar-container-rigth">
       <div className="sidebar-container-cards container">

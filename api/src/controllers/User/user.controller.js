@@ -310,8 +310,6 @@ export const updateUserData = async (req, res) => {
 
   const { id } = req?.params;
 
-  console.log(userName, paypal, binanceId, twitter, id);
-
   const userFind = await User.findByPk(id);
 
   if (!userFind) {

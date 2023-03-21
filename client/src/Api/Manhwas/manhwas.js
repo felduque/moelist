@@ -25,6 +25,11 @@ export const updateManhwa = async (id, manhwa) => {
   return response;
 };
 
+export const lastManhwa = async () => {
+  const response = await axios.get(`http://localhost:3000/lastmanhwas`);
+  return response;
+};
+
 export const createManhwa = async (manhwa) => {
   const token = localStorage.getItem("token");
   const response = await axios.post(`http://localhost:3000/manhwa`, manhwa, {
