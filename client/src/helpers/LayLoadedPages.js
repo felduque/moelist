@@ -61,7 +61,7 @@ export const ManhwaPage = loadable(
 );
 
 export const PrivacyPage = loadable(() => import("../Pages/Privacy/Privacy"), {
-  resolveComponent: (components) => components.Manhwa,
+  resolveComponent: (components) => components.Privacy,
 });
 
 export const NotFoundPage = loadable(
