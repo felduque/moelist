@@ -62,8 +62,9 @@ export const UserPublication = () => {
   const [data, setData] = useState(initFormState);
 
   const handleImage = (image) => {
+    console.log(image), "imagee";
     const reader = new FileReader();
-    setData({ ...data, image });
+    setData({ ...data, image: image });
     reader.onloadend = () => {
       setPreview(reader.result?.toString());
     };
@@ -330,7 +331,7 @@ export const UserPublication = () => {
         <FileUploader
           multiple={false}
           classes="drop-zone"
-          maxSize={1}
+          // maxSize={1}
           handleChange={(file) => handleImage(file)}
           children={
             <>

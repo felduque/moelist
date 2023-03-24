@@ -2,9 +2,7 @@ import style from "./Anime.module.css";
 import { getAnimeById } from "../../../Api/Anime/anime";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-
 import { AuthorBox } from "../../../Components/AuthorBar/AuthorBox";
-
 import moment from "moment";
 import { CardTopBar } from "../../../Components/AuthorBar/CardTopBar";
 
