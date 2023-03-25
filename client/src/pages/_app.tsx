@@ -4,6 +4,7 @@ import "@/styles/globals.css";
 import "@/styles/cardItem.css";
 import "@/styles/navbar.css";
 import "@/styles/loginRegisterForm.css";
+import "@/styles/footer.css";
 import "@/styles/search.css";
 
 import type { AppProps } from "next/app";
