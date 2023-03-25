@@ -28,7 +28,7 @@ export const LoginRegisterModal = () => {
               <IoIosClose />
             </button>
           </div>
-          {formType === "login" ? (
+          {formType == "login" ? (
             <LoginForm setFormType={setFormType} modalRef={modalRef} />
           ) : (
             <RegisterForm setFormType={setFormType} />

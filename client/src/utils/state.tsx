@@ -12,7 +12,7 @@ import { ContentType, User } from "./types";
 export function AppWrapper({ children }: PropsWithChildren) {
   const [user, setUser] = useState<User>();
   const [favorites, setFavorites] = useState<ContentType[]>([]);
-  const mobileMenuCloseRef = useRef();
+  const mobileMenuCloseRef = useRef<HTMLDivElement>(null);
 
   return (
     <AuthContext.Provider

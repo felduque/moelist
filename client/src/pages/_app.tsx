@@ -9,6 +9,7 @@ import "@/styles/search.css";
 import type { AppProps } from "next/app";
 import { useEffect } from "react";
 import { AppWrapper } from "@/utils/state";
+import { Navbar } from "@/components/Navbar/Navbar";
 
 export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
@@ -18,6 +19,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <AppWrapper>
+        <Navbar />
         <Component {...pageProps} />
       </AppWrapper>
     </>

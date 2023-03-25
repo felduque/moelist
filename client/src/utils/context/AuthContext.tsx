@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, RefObject } from "react";
 import { ContentType, User } from "../types";
 
 type AuthContextType = {
@@ -6,7 +6,7 @@ type AuthContextType = {
   setUser: (user: User) => void;
   favorites: ContentType[];
   setFavorites: (favorites: ContentType[]) => void;
-  mobileMenuCloseRef?: any;
+  mobileMenuCloseRef?: RefObject<HTMLDivElement>;
 };
 
 export const AuthContext = createContext<AuthContextType>({

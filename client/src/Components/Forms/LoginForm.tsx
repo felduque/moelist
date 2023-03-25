@@ -82,7 +82,7 @@ export const LoginForm: FC<Props> = ({ setFormType, modalRef }) => {
     }
   };
   return (
-    <form onSubmit={handleSubmit} className="p-4">
+    <form onSubmit={(e) => handleSubmit(e)} className="p-4">
       <div className="input-group">
         <div className=" mb-4 input-field">
           <input
@@ -90,6 +90,7 @@ export const LoginForm: FC<Props> = ({ setFormType, modalRef }) => {
             onChange={handleChange}
             type="email"
             placeholder="Escriba su Email"
+            autoComplete="current-email"
             required
           />
           <MdEmail className="input-icon" />
@@ -108,6 +109,7 @@ export const LoginForm: FC<Props> = ({ setFormType, modalRef }) => {
             name="password"
             onChange={handleChange}
             placeholder="Escriba su Contraseña"
+            autoComplete="current-password"
             required
           />
           <FaLock className="input-icon" />
