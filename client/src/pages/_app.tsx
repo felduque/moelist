@@ -10,18 +10,30 @@ import "@/styles/cardItem.css";
 import type { AppProps } from "next/app";
 import { useEffect } from "react";
 import { AppWrapper } from "@/utils/state";
-import { Navbar } from "@/components/Navbar/Navbar";
+import { ReactElement, ReactNode } from "react";
+import { NextPage } from "next";
 
-export default function App({ Component, pageProps }: AppProps) {
+import { AppLayout } from "@/components/layouts/AppLayout";
+
+export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+  getLayout?: (page: ReactElement) => ReactNode;
+};
+
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout;
+};
+
+export default function App({ Component, pageProps }: AppPropsWithLayout) {
   useEffect(() => {
     require("bootstrap/dist/js/bootstrap.bundle.min.js");
   }, []);
 
+  const getLayout = Component.getLayout ?? ((page) => page);
+
   return (
     <>
       <AppWrapper>
-        <Navbar />
-        <Component {...pageProps} />
+        <AppLayout>{getLayout(<Component {...pageProps} />)}</AppLayout>
       </AppWrapper>
     </>
   );

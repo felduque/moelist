@@ -1,14 +1,21 @@
-import { UserSidebar } from "@/components/User/UserSidebar";
-import React, { useContext } from "react";
-// import { NavLink } from "react-router-dom";
-// import { Outlet } from "react-router-dom";
-import { AuthContext } from "../../utils/context/AuthContext";
-import { useAppContext } from "@/utils/state";
+import React, { ReactElement } from "react";
 
-const UserPage = () => {
+import { useAppContext } from "@/utils/state";
+import { NextPageWithLayout } from "../_app";
+import Layout from "./layout";
+
+const UserPage: NextPageWithLayout = () => {
   const { user } = useAppContext();
 
   return <div>UserPage</div>;
+};
+
+UserPage.getLayout = function getLayout(page: ReactElement) {
+  return (
+    <Layout>
+      <p>hola</p>
+    </Layout>
+  );
 };
 
 export default UserPage;

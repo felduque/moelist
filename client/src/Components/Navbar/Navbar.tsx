@@ -7,10 +7,12 @@ import Link from "next/link";
 import { LoginRegisterModal } from "../LoginRegisterModal/LoginRegisterModal";
 import { MobileMenu } from "../MobileMenu/MobileMenu";
 import { Search } from "../Search/Search";
-
 import { UserNav } from "./UserNav/UserNav";
+import { useAppContext } from "@/utils/state";
 
 export const Navbar = () => {
+  const { user } = useAppContext();
+
   return (
     <header>
       <div className="bg-warning py-2 d-flex px-3 px-lg-5 justify-content-center top-header">
@@ -48,7 +50,7 @@ export const Navbar = () => {
                   <h2 className="navbar-text-explorer">Explorar</h2>
                 </div>
               </Link>
-              <UserNav />
+              <UserNav user={user} />
             </div>
           </div>
           <div className="col-3 d-flex justify-content-end align-items-center">

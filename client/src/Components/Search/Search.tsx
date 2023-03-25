@@ -3,11 +3,13 @@ import { searchTitle } from "@/utils/api/search";
 import { ContentType } from "@/utils/types";
 import { ScaleLoader } from "react-spinners";
 import { SearchItem } from "./SearchItem";
+import { useRouter } from "next/router";
 
 export const Search = () => {
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState<string>("");
   const [searchItems, setSearchItems] = useState<ContentType[]>([]);
+  const router = useRouter();
 
   //  es para que no bombardee el servidor fetch cada vez que se escriba algo en el search
   const [typingTimer, setTypingTimer] = useState<NodeJS.Timeout>();
@@ -34,9 +36,9 @@ export const Search = () => {
     );
   }, [search]);
 
-  // useEffect(() => {
-  //   setSearch("");
-  // }, []);
+  useEffect(() => {
+    setSearch("");
+  }, [router.asPath]);
 
   return (
     <div className="search-wrapper">
