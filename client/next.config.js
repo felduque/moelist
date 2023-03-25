@@ -6,6 +6,12 @@ const nextConfig = {
       {
         hostname: "localhost",
       },
+      {
+        hostname: "www.pngall.com",
+      },
+      {
+        hostname: "moelist.online",
+      },
     ],
   },
 };
