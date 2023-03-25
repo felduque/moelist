@@ -37,7 +37,7 @@
 }
 
 .added {
-    color: #e91e63
+    fill: #e91e63;
 }
 
 @media (min-width: 1020px) {

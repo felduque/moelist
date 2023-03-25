@@ -1,5 +1,5 @@
 export type User = {
-  id: string;
+  id: number;
   email: string;
   userName: string;
   avatar: string;
@@ -33,15 +33,15 @@ export type ContentType = {
   score?: number;
   type?: string;
   studios?: string[];
-  urlContent: string;
+  urlContent?: string;
   source?: string;
-  status: string;
+  status?: string;
   premiered?: string;
   season?: string;
   popularity?: number;
   User?: User;
-  Scan: Scan;
-  day: string;
+  Scan?: Scan;
+  day?: string;
   trailer?: string;
   authors?: string[];
   author?: string;

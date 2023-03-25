@@ -5,7 +5,6 @@ import Image from "next/image";
 import { CardItemAction } from "./CardAction";
 import { findFavorite } from "@/utils/helpers";
 import { ContentType } from "@/utils/types";
-import { AuthContext } from "@/utils/context/AuthContext";
 
 import { motion } from "framer-motion";
 import { useAppContext } from "@/utils/state";

@@ -53,3 +53,7 @@ form .btn-link:hover {
 .showHide {
     cursor: pointer;
 }
+
+.form-title {
+    text-transform: capitalize;
+}

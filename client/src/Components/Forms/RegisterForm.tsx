@@ -95,6 +95,7 @@ export const RegisterForm: FC<Props> = ({ setFormType }) => {
             type="email"
             name="email"
             placeholder="Escriba su Email"
+            autoComplete="current-email"
           />
           <MdEmail className="input-icon" />
         </div>
@@ -107,6 +108,7 @@ export const RegisterForm: FC<Props> = ({ setFormType }) => {
             onChange={handleChange}
             type={show ? "text" : "password"}
             name="password"
+            autoComplete="current-password"
             placeholder="Escriba su Contraseña"
           />
           <FaLock className="input-icon" />
@@ -127,6 +129,7 @@ export const RegisterForm: FC<Props> = ({ setFormType }) => {
             onChange={handleChange}
             type={show ? "text" : "password"}
             name="passwordConfirm"
+            autoComplete="current-password"
             placeholder="Confirmar Contraseña"
           />
           <FaLock className="input-icon" />

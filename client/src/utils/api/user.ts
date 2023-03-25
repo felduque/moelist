@@ -34,8 +34,8 @@ export const updateUser = async (id: string, data: EditUserParams) => {
 
 export const deleteFavorite = async (
   type: string,
-  idContent: string,
-  idUser: string
+  idContent: number,
+  idUser: number
 ) => {
   try {
     const res = await axios.delete("http://localhost:3000/deletefavorite/", {
@@ -64,8 +64,8 @@ export const getFavorites = async (id: string) => {
 
 export const addFavorite = async (
   type: string,
-  idContent: string,
-  idUser: string
+  idContent: number,
+  idUser: number
 ) => {
   try {
     const res = await axios.post<ContentType>(

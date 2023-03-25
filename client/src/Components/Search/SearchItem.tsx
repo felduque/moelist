@@ -13,8 +13,10 @@ export const SearchItem: FC<ContentType> = ({
   contentType,
 }) => {
   const { mobileMenuCloseRef } = useContext(AuthContext);
+  const router = useRouter();
 
   const handleClick = () => {
+    router.push(`/${contentType}/${id}`);
     mobileMenuCloseRef?.current?.click();
   };
 
@@ -26,6 +28,7 @@ export const SearchItem: FC<ContentType> = ({
           src={image}
           alt={title}
           height={150}
+          role="button"
           width={125}
           onClick={() => handleClick()}
         />

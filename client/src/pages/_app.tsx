@@ -1,11 +1,11 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import "@/styles/globals.css";
-import "@/styles/cardItem.css";
 import "@/styles/navbar.css";
 import "@/styles/loginRegisterForm.css";
 import "@/styles/footer.css";
 import "@/styles/search.css";
+import "@/styles/cardItem.css";
 
 import type { AppProps } from "next/app";
 import { useEffect } from "react";

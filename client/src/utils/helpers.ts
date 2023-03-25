@@ -1,7 +1,7 @@
 import { ContentType } from "./types";
 
 export const findFavorite = (
-  id: string,
+  id: number,
   contentType: string,
   favorites: ContentType[]
 ) => {

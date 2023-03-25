@@ -6,10 +6,10 @@ import { useAppContext } from "@/utils/state";
 
 type Props = {
   action: string;
-  contentId: string;
+  contentId: number;
   type: string;
   isAdded: boolean;
-  userId: string;
+  userId: number;
 };
 
 export const CardItemAction: FC<Props> = ({
