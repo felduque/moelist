@@ -1,4 +1,4 @@
-import React, { useState, useEffect, SelectHTMLAttributes } from "react";
+import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import { selectStyles } from "@/utils/helpers";
@@ -6,31 +6,29 @@ import { FaChevronDown } from "react-icons/fa";
 
 import "react-datepicker/dist/react-datepicker.css";
 
-import "./ExploradorSidebar.css";
-
 import { search } from "@/utils/api/search";
 
 import { useContext } from "react";
 import { ExploradorContext } from "../../../utils/context/ExploradorContext";
 
-import {
-  tipos,
-  demografia,
-  estado,
-  generos,
-} from "@/utils/valoresParaSelects";
+import { tipos, demografia, estado, generos } from "@/utils/valoresParaSelects";
 
 const animatedComponents = makeAnimated();
 
 export const ExploradorSidebar = () => {
   const { setItems, setLoading } = useContext(ExploradorContext);
-  const [data, setData] = useState<{type:string, demography:string, status:string, genres:string[]}>({
+  const [data, setData] = useState<{
+    type: string;
+    demography: string;
+    status: string;
+    genres: string[];
+  }>({
     type: "",
-    demography:"",
+    demography: "",
     status: "",
     genres: [],
   });
-  const handlePushGenres = (e:string) => {
+  const handlePushGenres = (e: string) => {
     console.log(e);
     //se usa set para que nose repitan los generos
     setData({ ...data, genres: [...new Set([...data.genres, e])] });
@@ -63,7 +61,7 @@ export const ExploradorSidebar = () => {
         options={tipos}
         classNamePrefix="select"
         styles={selectStyles}
-        onChange={(value:any) => setData({ ...data, type: value.label })}
+        onChange={(value: any) => setData({ ...data, type: value.label })}
       />
 
       <h5 className="mt-4">Demografia</h5>
@@ -73,7 +71,7 @@ export const ExploradorSidebar = () => {
         options={demografia}
         classNamePrefix="select"
         styles={selectStyles}
-        onChange={(value:any) => setData({ ...data, demography: value.label })}
+        onChange={(value: any) => setData({ ...data, demography: value.label })}
       />
 
       <h5 className="mt-4">Estado</h5>
@@ -83,7 +81,7 @@ export const ExploradorSidebar = () => {
         options={estado}
         classNamePrefix="select"
         styles={selectStyles}
-        onChange={(value:any) => setData({ ...data, status: value.label })}
+        onChange={(value: any) => setData({ ...data, status: value.label })}
       />
       <div className="accordion mt-4" id="accordionExample">
         <div className="accordion-item">

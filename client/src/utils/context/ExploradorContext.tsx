@@ -4,9 +4,9 @@ import { ContentType, filterType } from "../types";
 
 type ExploradorContextType = {
   items: ContentType[];
-  filters: filterType | {};
+  filters?: filterType | {};
   setItems: (items: ContentType[]) => void;
-  setFilters: (filters: filterType) => void;
+  setFilters?: (filters: filterType) => void;
   loading: boolean;
   setLoading: (loading: boolean) => void;
 };
