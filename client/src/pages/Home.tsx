@@ -7,7 +7,7 @@ import styles from "../styles/Home.module.css";
 
 export const Home = () => {
   return (
-    <section className={styles.container_home_grid}>
+    <section className={`${styles.container_home_grid} px-5 `}>
       {/* maquetacion grid main, sidebar lateral derecho   y footer*/}
       <div className={styles.container_home_grid__main}>
         <HomeMain />

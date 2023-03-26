@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ContentType } from "../types";
+import { ContentType, CreatePublicationParams } from "../types";
 
 export const getManhwas = async () => {
   const response = await axios.get<ContentType[]>(
@@ -15,11 +15,18 @@ export const getManhwasById = async (id: string) => {
   return response;
 };
 
-export const updateManhwa = async (id: string, manhwa: ContentType) => {
+export const updateManhwa = async (
+  id: number,
+  img: File | string,
+  manhwa?: ContentType
+) => {
+  if (typeof img === "string") return;
   const token = localStorage.getItem("token");
   const response = await axios.patch(
     `http://localhost:3000/manhwa/${id}`,
-    manhwa,
+    {
+      image: img,
+    },
     {
       headers: {
         "content-type": "multipart/form-data",
@@ -37,7 +44,7 @@ export const lastManhwa = async () => {
   return response;
 };
 
-export const createManhwa = async (manhwa: string) => {
+export const createManhwa = async (manhwa: CreatePublicationParams) => {
   const token = localStorage.getItem("token");
   const response = await axios.post(`http://localhost:3000/manhwa`, manhwa, {
     headers: {

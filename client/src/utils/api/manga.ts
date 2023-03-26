@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ContentType } from "../types";
+import { ContentType, CreatePublicationParams } from "../types";
 
 export const getMangas = async () => {
   const response = await axios.get<ContentType[]>(
@@ -13,11 +13,18 @@ export const getMangasById = async (id: string) => {
   return response;
 };
 
-export const updateManga = async (id: string, manga: ContentType) => {
+export const updateManga = async (
+  id: number,
+  img: File | string,
+  manga?: ContentType
+) => {
+  if (typeof img === "string") return;
   const token = localStorage.getItem("token");
   const response = await axios.patch(
     `http://localhost:3000/manga/${id}`,
-    manga,
+    {
+      image: img,
+    },
     {
       headers: {
         "content-type": "multipart/form-data",
@@ -35,7 +42,7 @@ export const lastManga = async () => {
   return response;
 };
 
-export const createManga = async (manga: ContentType) => {
+export const createManga = async (manga: CreatePublicationParams) => {
   const token = localStorage.getItem("token");
   const response = await axios.post(`http://localhost:3000/manga`, manga, {
     headers: {

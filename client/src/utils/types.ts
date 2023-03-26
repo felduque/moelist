@@ -2,9 +2,17 @@ export type User = {
   id: number;
   email: string;
   userName: string;
-  avatar: string;
+  avatar?: string;
   role: string;
-  binanceId?: string;
+  binanceId?: number;
+  paypal?: string;
+  twitter?: string;
+};
+
+export type UpdateUserParams = {
+  userName?: string;
+  avatar?: string | File;
+  binanceId?: number;
   paypal?: string;
   twitter?: string;
 };
@@ -18,12 +26,24 @@ export type LoginResp = {
   token: string;
 };
 
+export type filterType = {
+  tipo: string;
+  demografia: string;
+  generos: SelectOption[];
+  estado: string;
+};
+
+export type SelectOption = {
+  label: string;
+  value: string;
+};
+
 export type ContentType = {
   id: number;
   title: string;
   contentType: string;
   demography: string;
-  artist?: string;
+  artist?: string | string[];
   artists?: string[];
   genres?: string[];
   description: string;
@@ -40,16 +60,71 @@ export type ContentType = {
   season?: string;
   popularity?: number;
   User?: User;
-  Scan?: Scan;
+  Scan?: Scan | Scan[];
   day?: string;
   trailer?: string;
   authors?: string[];
-  author?: string;
+  author?: string | string[];
   duration?: string;
   favorites?: number;
   episodes?: number;
+  volumes?: number;
   chapters?: number;
 };
+
+export type ValidatePublicationType = Partial<{
+  titulo: string;
+  demografia: string;
+  artist: string;
+  artists: string;
+  genres: string;
+  sinopsis: string;
+  image: string;
+  tipo: string;
+  estudio: string;
+  artista: string;
+  urlContent: string;
+  source: string;
+  estado: string;
+  estreno: string;
+  temporada: string;
+  scans: string;
+  day: string;
+  trailer: string;
+  autor: string | string[];
+  duracion: string;
+  capitulos: string;
+  volumenes: string;
+  generos: string;
+  producers: string;
+}>;
+
+export type CreatePublicationParams = Partial<{
+  title: string;
+  demography: string;
+  artist: string | string[];
+  genres: string[];
+  description: string;
+  image: File | string;
+  producers: string[];
+  type: string;
+  studios: string[];
+  urlContent: string;
+  source: string;
+  status: string;
+  premiered: Date | null;
+  season: string;
+  scanId: number;
+  authorId: number;
+  scans: number;
+  day: string;
+  trailer: string;
+  author: string | string[];
+  duration: string;
+  chapters: number;
+  volumes: number;
+  episodes: number;
+}>;
 
 export type Scan = {
   id: number;
@@ -68,5 +143,3 @@ export type RegisterParams = Partial<{
   userName: string;
   passwordConfirm: string;
 }>;
-
-export type EditUserParams = {};

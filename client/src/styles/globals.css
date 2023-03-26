@@ -4,6 +4,7 @@
     padding: 0;
     font-family: 'Poppins', sans-serif;
     color: var(--body-color);
+    overflow-wrap: break-word;
   }
   
   a {
@@ -80,7 +81,7 @@
   .nav-pills .nav-link.active, 
   .nav-pills .show>.nav-link {
     background-color: var(--primary-color) !important;
-  
+    color: white !important
   }
   
   .select__menu-list {
@@ -153,3 +154,15 @@
   section {
     flex-grow: 1;
   }
+
+  .nav-list-mobile {
+    list-style: none;
+}
+
+.nav-list-mobile a {
+    display: block;
+    text-decoration: none;
+    color: white;
+    font-weight: 700;
+    margin-bottom: 10px;
+}

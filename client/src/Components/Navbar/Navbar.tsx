@@ -17,7 +17,7 @@ export const Navbar = () => {
     <header>
       <div className="bg-warning py-2 d-flex px-3 px-lg-5 justify-content-center top-header">
         <span>
-          <FaInfoCircle className="fs-5 me-2" />
+          <FaInfoCircle className="fs-5 me-2 text-dark" />
         </span>
         <span className="top-header-text">
           Este sitio aún se encuentra en fase de desarrollo. Por favor,

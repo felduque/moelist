@@ -1,21 +1,18 @@
 import React, { ReactElement } from "react";
 
-import { useAppContext } from "@/utils/state";
 import { NextPageWithLayout } from "../_app";
 import Layout from "./layout";
+import { UserSettings } from "@/components/User/UserSettings";
+import { useRouter } from "next/router";
 
 const UserPage: NextPageWithLayout = () => {
-  const { user } = useAppContext();
-
-  return <div>UserPage</div>;
+  const router = useRouter();
+  router.push("/user/configurar");
+  return <UserSettings />;
 };
 
 UserPage.getLayout = function getLayout(page: ReactElement) {
-  return (
-    <Layout>
-      <p>hola</p>
-    </Layout>
-  );
+  return <Layout>{page}</Layout>;
 };
 
 export default UserPage;

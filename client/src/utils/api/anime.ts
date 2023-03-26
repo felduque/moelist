@@ -1,4 +1,4 @@
-import { ContentType } from "@/utils/types";
+import { ContentType, CreatePublicationParams } from "@/utils/types";
 import axios from "axios";
 
 export const getAnimes = async () => {
@@ -15,7 +15,7 @@ export const getAnimeById = async (id: string) => {
   return response;
 };
 
-export const createAnime = async (anime: ContentType) => {
+export const createAnime = async (anime: CreatePublicationParams) => {
   const token = localStorage.getItem("token");
   console.log(token);
   const response = await axios.post(`http://localhost:3000/anime`, anime, {
@@ -38,11 +38,16 @@ export const lastAnime = async () => {
   }
 };
 
-export const updateAnime = async (id: string, anime: ContentType) => {
+export const updateAnime = async (
+  id: number,
+  img: File | string,
+  anime?: CreatePublicationParams
+) => {
+  if (typeof img === "string") return;
   const token = localStorage.getItem("token");
   const response = await axios.patch(
     `http://localhost:3000/anime/${id}`,
-    anime,
+    { image: img },
     {
       headers: {
         "content-type": "multipart/form-data",

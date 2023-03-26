@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ContentType } from "../types";
+import { ContentType, CreatePublicationParams } from "../types";
 
 export const getManhuas = async () => {
   const response = await axios.get<ContentType[]>(
@@ -15,11 +15,16 @@ export const getManhuasById = async (id: string) => {
   return response;
 };
 
-export const updateManhua = async (id: string, manhua: ContentType) => {
+export const updateManhua = async (
+  id: number,
+  img: File | string,
+  manhua?: ContentType
+) => {
+  if (typeof img === "string") return;
   const token = localStorage.getItem("token");
   const response = await axios.patch(
     `http://localhost:3000/manhua/${id}`,
-    manhua,
+    { image: img },
     {
       headers: {
         "content-type": "multipart/form-data",
@@ -37,7 +42,7 @@ export const lastManhua = async () => {
   return response;
 };
 
-export const createManhua = async (manhua: ContentType) => {
+export const createManhua = async (manhua: CreatePublicationParams) => {
   const token = localStorage.getItem("token");
   const response = await axios.post(`http://localhost:3000/manhua`, manhua, {
     headers: {

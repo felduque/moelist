@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ContentType, EditUserParams, GetUserResponseType } from "../types";
+import { ContentType, GetUserResponseType, UpdateUserParams } from "../types";
 
 export const getUserById = async (id: string) => {
   try {
@@ -12,7 +12,7 @@ export const getUserById = async (id: string) => {
   }
 };
 
-export const updateUser = async (id: string, data: EditUserParams) => {
+export const updateUser = async (id: number, data: UpdateUserParams) => {
   console.log(data, id);
   try {
     const token = localStorage.getItem("token");

@@ -29,9 +29,9 @@ export const HomeMain = () => {
   }, []);
 
   return (
-    <div className={styles.content_primary_main}>
+    <div className={`${styles.content_primary_main}`}>
       <div
-        className={`${styles.content_all_main}content-all-main pt-5 container`}
+        className={`${styles.content_all_main}content-all-main pt-5 container `}
       >
         <div className={styles.alert_page}>
           <h2 className={styles.alert_page_text}>

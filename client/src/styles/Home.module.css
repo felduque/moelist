@@ -25,7 +25,7 @@
 
 
 @media (max-width: 768px) {
-    .container-home-grid {
+    .container_home_grid {
         grid-template-columns: 1fr;
         grid-template-rows: 1fr;
         grid-template-areas:
