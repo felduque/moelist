@@ -3,7 +3,7 @@ import { ContentType, User } from "../types";
 
 type AuthContextType = {
   user?: User;
-  setUser: (user: User) => void;
+  setUser: (user?: User) => void;
   favorites: ContentType[];
   setFavorites: (favorites: ContentType[]) => void;
   mobileMenuCloseRef?: RefObject<HTMLDivElement>;

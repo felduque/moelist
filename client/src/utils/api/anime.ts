@@ -1,5 +1,5 @@
 import { ContentType, CreatePublicationParams } from "@/utils/types";
-import axios from "axios";
+import axios from "./axios";
 
 export const getAnimes = async () => {
   const response = await axios.get<ContentType[]>(

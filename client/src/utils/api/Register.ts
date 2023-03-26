@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "./axios";
 import { RegisterParams } from "../types";
 
 export const registerUser = async (user: RegisterParams) => {

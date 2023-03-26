@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 
 const UserPage: NextPageWithLayout = () => {
   const router = useRouter();
+
   useEffect(() => {
     router.push("/user/configurar");
   }, []);

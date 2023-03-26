@@ -1,5 +1,4 @@
-import axios from "axios";
-
+import axios from "./axios";
 export const createScan = async (datos: any, token: string) => {
   try {
     const res = await axios.post("http://localhost:3000/scans", datos, {

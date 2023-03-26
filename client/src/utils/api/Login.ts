@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "./axios";
 import { LoginParams, LoginResp } from "../types";
 
 export const loginUser = async (user: LoginParams) => {

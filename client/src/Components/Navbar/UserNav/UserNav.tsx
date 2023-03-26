@@ -4,16 +4,26 @@ import Link from "next/link";
 import Image from "next/image";
 import { FaUserAlt } from "react-icons/fa";
 import { User } from "@/utils/types";
+import { deleteCookie } from "cookies-next";
+import { useAuth } from "@/hooks/useAuth";
+import { useAppContext } from "@/utils/state";
+import { useRouter } from "next/router";
 
 type Props = {
   user?: User;
 };
 
 export const UserNav: FC<Props> = ({ user }) => {
+  const { setToken } = useAuth();
+  const { setUser } = useAppContext();
+  const router = useRouter();
+
   const closeSession = () => {
     localStorage.removeItem("token");
-
-    window.location.reload();
+    deleteCookie("x-token");
+    setToken(null);
+    setUser(undefined);
+    if (router.asPath.includes("/user")) router.replace("/");
   };
   return (
     <>
@@ -45,6 +55,7 @@ export const UserNav: FC<Props> = ({ user }) => {
               Ver Favoritos
             </Link>
             <li
+              role="button"
               className="dropdown-item text-white cursor-pointer text-decoration-none"
               onClick={() => {
                 closeSession();

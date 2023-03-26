@@ -8,9 +8,6 @@ const Layout = ({ children }: any) => {
   const { user } = useAppContext();
   const router = useRouter();
   const { action } = router.query;
-  const [currentTab, setTab] = useState<string | string[] | undefined>(
-    "configurar"
-  );
 
   return (
     <section className="container-fluid py-5 px-5 p-sm-5 text-white ">

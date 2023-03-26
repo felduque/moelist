@@ -1,7 +1,7 @@
-import axios from "axios";
+import axios from "./axios";
 import { ContentType, GetUserResponseType, UpdateUserParams } from "../types";
 
-export const getUserById = async (id: string) => {
+export const getUserById = async (id: number) => {
   try {
     const res = await axios.get<GetUserResponseType>(
       `http://localhost:3000/getuserid/${id}`

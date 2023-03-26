@@ -15,7 +15,6 @@ export const Search = () => {
   const [typingTimer, setTypingTimer] = useState<NodeJS.Timeout>();
 
   useEffect(() => {
-    console.log("[as");
     if (search.length < 2) return;
 
     setSearchItems([]); // vacia el search
