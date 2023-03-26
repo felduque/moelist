@@ -401,7 +401,7 @@ export const UserPublication = () => {
               value={artistsView}
               styles={selectStyles}
               classNamePrefix="select"
-              onChange={(val: MultiValue<any>) => handlePush(val, "artist")}
+              onChange={(val) => handlePush(val, "artist")}
             />
             {errors?.artista && (
               <span className="text-danger mt-2 d-block">
