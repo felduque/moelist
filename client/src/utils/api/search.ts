@@ -5,7 +5,7 @@ export const search = async (
   type: string,
   demography: string,
   status: string,
-  genres: string
+  genres: string[]
 ) => {
   console.log(type, demography, status, genres, "holaaaaaaaa");
   const response = await axios.get<ContentType[]>(
