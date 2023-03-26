@@ -25,7 +25,7 @@ export const UserNav: FC<Props> = ({ user }) => {
           >
             <Image
               className="navbar-container__icons__explore__img"
-              src={user.avatar}
+              src={user.avatar!}
               alt="user.name"
               width={60}
               height={60}

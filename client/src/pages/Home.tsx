@@ -5,7 +5,7 @@ import { Sidebar } from "@/components/Sidebar/Sidebar";
 
 import styles from "../styles/Home.module.css";
 
-export const Home = () => {
+const Home = () => {
   return (
     <section className={`${styles.container_home_grid} px-5 `}>
       {/* maquetacion grid main, sidebar lateral derecho   y footer*/}
@@ -18,3 +18,5 @@ export const Home = () => {
     </section>
   );
 };
+
+export default Home;

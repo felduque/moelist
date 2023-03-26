@@ -36,7 +36,7 @@
   }
   
   .top-header {
-    z-index: 1;
+    z-index: 2;
     position: relative;
   }
   
@@ -56,6 +56,7 @@
     height: 50px;
     top: 0;
     width: 100%;
+    z-index: 1;
   }
   
   .cardMessage {
@@ -140,7 +141,12 @@
   @media (max-width: 575px) {
     .autor-bar {
       margin-top: 62px;
-      z-index: 0;
+      padding: 0;
+     
+    }
+
+    .cardMessage {
+      font-size: 18px;
     }
   }
 

@@ -1,13 +1,14 @@
 import { useAppContext } from "@/utils/state";
+import Image from "next/image";
 
 export const UserSidebar = () => {
   const { user } = useAppContext();
 
   return (
     <div className="border text-center p-5 rounded">
-      <img
+      <Image
         className="avatar"
-        src={user?.avatar}
+        src={user?.avatar!}
         alt="avatar"
         height="192"
         width="192"

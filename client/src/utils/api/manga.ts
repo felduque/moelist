@@ -8,7 +8,7 @@ export const getMangas = async () => {
   return response;
 };
 
-export const getMangasById = async (id: string) => {
+export const getMangasById = async (id: number) => {
   const response = await axios.get(`http://localhost:3000/manga/${id}`);
   return response;
 };

@@ -60,7 +60,7 @@ export type ContentType = {
   season?: string;
   popularity?: number;
   User?: User;
-  Scan?: Scan | Scan[];
+  Scan?: Scan;
   day?: string;
   trailer?: string;
   authors?: string[];
@@ -130,6 +130,7 @@ export type Scan = {
   id: number;
   url: string;
   image: string;
+  name: string;
 };
 
 export type LoginParams = {

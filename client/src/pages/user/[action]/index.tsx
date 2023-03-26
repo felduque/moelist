@@ -4,7 +4,7 @@ import { UserSettings } from "@/components/User/UserSettings";
 import { NextPageWithLayout } from "@/pages/_app";
 import { useRouter } from "next/router";
 import React, { ReactElement, useEffect, useState } from "react";
-import Layout from "../layout";
+import Layout from "../../../components/layouts/layout";
 
 const Index: NextPageWithLayout = () => {
   const router = useRouter();

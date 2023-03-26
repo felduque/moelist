@@ -2,9 +2,9 @@ import { UserSidebar } from "@/components/User/UserSidebar";
 import { useAppContext } from "@/utils/state";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-const layout = ({ children }: any) => {
+const Layout = ({ children }: any) => {
   const { user } = useAppContext();
   const router = useRouter();
   const { action } = router.query;
@@ -55,4 +55,4 @@ const layout = ({ children }: any) => {
   );
 };
 
-export default layout;
+export default Layout;

@@ -8,7 +8,7 @@ export const getAnimes = async () => {
   return response;
 };
 
-export const getAnimeById = async (id: string) => {
+export const getAnimeById = async (id: number) => {
   const response = await axios.get<ContentType>(
     `http://localhost:3000/anime/${id}`
   );

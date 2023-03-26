@@ -8,7 +8,7 @@ export const getManhwas = async () => {
   return response;
 };
 
-export const getManhwasById = async (id: string) => {
+export const getManhwasById = async (id: number) => {
   const response = await axios.get<ContentType>(
     `http://localhost:3000/manhwa/${id}`
   );

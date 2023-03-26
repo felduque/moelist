@@ -8,7 +8,7 @@ export const getManhuas = async () => {
   return response;
 };
 
-export const getManhuasById = async (id: string) => {
+export const getManhuasById = async (id: number) => {
   const response = await axios.get<ContentType>(
     `http://localhost:3000/manhua/${id}`
   );
