@@ -82,11 +82,9 @@ Manhwa.belongsTo(User, { foreignKey: "authorId" });
 // ManhuaFav.sync({ force: true });
 // ManhwaFav.sync({ force: true });
 
-// app.use(cors());
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(cors());
+
 app.use(morgan("dev"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(
@@ -97,7 +95,7 @@ app.use(
 );
 
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "http://localhost:5173");
+  res.header("Access-Control-Allow-Origin", "http://localhost:3001");
   // Se agrega el x-auth-token para que se pueda enviar el token en el header
   res.header(
     "Access-Control-Allow-Headers",
