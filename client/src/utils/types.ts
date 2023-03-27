@@ -3,6 +3,18 @@ enum Role {
   USER = "User",
 }
 
+export type filtersResponseType = {
+  count: number;
+  result: ContentType[];
+};
+
+export type FiltersType = Partial<{
+  type: string;
+  demography: string;
+  status: string;
+  genres: string[];
+}>;
+
 export type User = {
   id: number;
   email: string;
@@ -29,13 +41,6 @@ export type GetUserResponseType = {
 
 export type LoginResp = {
   token: string;
-};
-
-export type filterType = {
-  tipo: string;
-  demografia: string;
-  generos: SelectOption[];
-  estado: string;
 };
 
 export type SelectOption = {
