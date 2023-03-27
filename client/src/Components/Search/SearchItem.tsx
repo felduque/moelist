@@ -34,7 +34,11 @@ export const SearchItem: FC<ContentType> = ({
         />
       </div>
       <div className="col-9 text-white text-start">
-        <h5 role="button" className="fw-bold" onClick={() => handleClick()}>
+        <h5
+          role="button"
+          className="fw-bold content-title"
+          onClick={() => handleClick()}
+        >
           {title}
         </h5>
         <p className="search_desc">{description}</p>
