@@ -250,10 +250,12 @@ const CardManga = () => {
               <div className="col-12 col-md-6 col-xl-4">
                 <a href={manga?.urlContent} target="_blank">
                   <div className={style.content_afiliates_logos}>
-                    <img
+                    <Image
                       className={style.afiliate_logo}
-                      src={scans?.image}
-                      alt={scans?.name}
+                      src={scans?.image!}
+                      alt={scans?.name!}
+                      width={350}
+                      height={260}
                     />
 
                     <h3 className="text-white text-center">{scans?.name}</h3>
