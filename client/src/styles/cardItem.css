@@ -47,11 +47,18 @@
     }
 }
 
-
-.desc, .content-title {
+.content-title {
     display: -webkit-box; 
     overflow: hidden;
     -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+
+.desc {
+    display: -webkit-box; 
+    overflow: hidden;
+    -webkit-line-clamp: 8;
     -webkit-box-orient: vertical;
 }
 
