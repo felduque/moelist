@@ -11,8 +11,10 @@ export const filtersGeneral = async (req, res) => {
   let page = 1;
   let limit = 24;
 
+  let searchQuery = {};
+
   if (queries.genres) {
-    queries.genres = {
+    searchQuery.genres = {
       [Op.contains]: [queries.genres.split(",")],
     };
   }
@@ -29,11 +31,17 @@ export const filtersGeneral = async (req, res) => {
     type = queries.type;
   }
 
-  delete queries.type; // borra el tipo de los filtros para que no se rompa el where
+  if (queries.demography) {
+    searchQuery.demography = queries.demography;
+  }
+
+  if (queries.status) {
+    searchQuery.status = queries.status;
+  }
 
   const { result, count } = await filterAndPaginateContent(
     type,
-    queries,
+    searchQuery,
     page,
     limit
   );
