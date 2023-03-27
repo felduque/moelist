@@ -1,5 +1,4 @@
 import React, { useState, useEffect, FormEvent } from "react";
-// import "./UserStyles.css";
 import Creatable from "react-select/creatable";
 import Swal from "sweetalert2";
 import {
@@ -14,7 +13,7 @@ import {
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import Select, { MultiValue } from "react-select";
+import Select from "react-select";
 import { FileUploader } from "react-drag-drop-files";
 import { RiImageAddFill } from "react-icons/ri";
 import { fileTypes, selectStyles } from "@/utils/helpers";
@@ -322,8 +321,8 @@ export const UserPublication = () => {
         </label>
         <FileUploader
           multiple={false}
-          classes={styles.drop_zone}
-          maxSize={1}
+          classes="drop-zone"
+          // maxSize={1}
           handleChange={(file: File) => handleImage(file)}
           children={
             <>

@@ -2,7 +2,6 @@ import React from "react";
 import { useRouter } from "next/router";
 import style from "@/styles/CardDetail.module.css";
 import { useEffect, useState } from "react";
-
 import moment from "moment";
 
 import { getAnimeById } from "@/utils/api/anime";
