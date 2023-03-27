@@ -7,7 +7,7 @@ type Props = {
   onPageChange: (selected: number) => void;
   totalItems: number;
   itemsPerPage: number;
-  initialPage: number;
+  initialPage?: number;
 };
 
 export const Pagination: FC<Props> = ({
