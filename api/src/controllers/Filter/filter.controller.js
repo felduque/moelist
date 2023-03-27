@@ -5,549 +5,40 @@ import { Manhwa } from "../../models/Manhwa/manhwa.model.js";
 import { Op } from "sequelize";
 
 export const filtersGeneral = async (req, res) => {
-  let { type, status, demography, genres } = req.query;
+  let queries = req.query;
+  let type = "Anime";
 
-  if (!status) status = undefined;
-  if (!demography) demography = undefined;
-  if (!genres) genres = undefined;
-  if (!type) type = undefined;
+  let page = 1;
+  let limit = 24;
 
-  console.log(type, "type");
-  console.log(status, "status");
-  console.log(demography, "demography");
-  console.log(genres, "genres");
-
-  switch (type) {
-    case "Anime":
-      if (
-        status === undefined &&
-        demography === undefined &&
-        genres === undefined
-      ) {
-        console.log("1");
-        const anime = await Anime.findAll();
-        res.json(anime);
-      } else if (status === undefined && demography === undefined) {
-        console.log("2");
-        const anime = await Anime.findAll({
-          where: {
-            genres: {
-              [Op.contains]: [genres],
-            },
-          },
-        });
-        res.json(anime);
-      } else if (status === undefined && genres === undefined) {
-        console.log("3");
-        const anime = await Anime.findAll({
-          where: {
-            demography,
-          },
-        });
-        res.json(anime);
-      } else if (demography === undefined && genres === undefined) {
-        console.log("4");
-        const anime = await Anime.findAll({
-          where: {
-            status,
-          },
-        });
-        res.json(anime);
-      } else if (status === undefined) {
-        console.log("5");
-        const anime = await Anime.findAll({
-          where: {
-            demography,
-            genres: {
-              [Op.contains]: [genres],
-            },
-          },
-        });
-        res.json(anime);
-      } else if (demography === undefined) {
-        console.log("6");
-        const anime = await Anime.findAll({
-          where: {
-            status,
-            genres: {
-              [Op.contains]: [genres],
-            },
-          },
-        });
-        res.json(anime);
-      } else if (genres === undefined) {
-        console.log("7");
-        const anime = await Anime.findAll({
-          where: {
-            status,
-            demography,
-          },
-        });
-        res.json(anime);
-      } else {
-        console.log("8");
-        const anime = await Anime.findAll({
-          where: {
-            status,
-            demography,
-            genres: {
-              [Op.contains]: [genres],
-            },
-          },
-        });
-        res.json(anime);
-      }
-      break;
-
-    case "Manga":
-      if (
-        status === undefined &&
-        demography === undefined &&
-        genres === undefined
-      ) {
-        const manga = await Manga.findAll();
-        res.json(manga);
-      } else if (status === undefined && demography === undefined) {
-        const manga = await Manga.findAll({
-          where: {
-            genres: {
-              [Op.contains]: [genres],
-            },
-          },
-        });
-        res.json(manga);
-      } else if (status === undefined && genres === undefined) {
-        const manga = await Manga.findAll({
-          where: {
-            demography,
-          },
-        });
-        res.json(manga);
-      } else if (demography === undefined && genres === undefined) {
-        const manga = await Manga.findAll({
-          where: {
-            status,
-          },
-        });
-        res.json(manga);
-      } else if (status === undefined) {
-        const manga = await Manga.findAll({
-          where: {
-            demography,
-            genres: {
-              [Op.contains]: [genres],
-            },
-          },
-        });
-        res.json(manga);
-      } else if (demography === undefined) {
-        const manga = await Manga.findAll({
-          where: {
-            status,
-            genres: {
-              [Op.contains]: [genres],
-            },
-          },
-        });
-        res.json(manga);
-      } else if (genres === undefined) {
-        const manga = await Manga.findAll({
-          where: {
-            status,
-            demography,
-          },
-        });
-        res.json(manga);
-      } else {
-        const manga = await Manga.findAll({
-          where: {
-            status,
-            demography,
-            genres: {
-              [Op.contains]: [genres],
-            },
-          },
-        });
-        res.json(manga);
-      }
-      break;
-
-    case "Manhua":
-      if (
-        status === undefined &&
-        demography === undefined &&
-        genres === undefined
-      ) {
-        const manhua = await Manhua.findAll();
-        res.json(manhua);
-      } else if (status === undefined && demography === undefined) {
-        const manhua = await Manhua.findAll({
-          where: {
-            genres: {
-              [Op.contains]: [genres],
-            },
-          },
-        });
-        res.json(manhua);
-      } else if (status === undefined && genres === undefined) {
-        const manhua = await Manhua.findAll({
-          where: {
-            demography,
-          },
-        });
-        res.json(manhua);
-      } else if (demography === undefined && genres === undefined) {
-        const manhua = await Manhua.findAll({
-          where: {
-            status,
-          },
-        });
-        res.json(manhua);
-      } else if (status === undefined) {
-        const manhua = await Manhua.findAll({
-          where: {
-            demography,
-            genres: {
-              [Op.contains]: [genres],
-            },
-          },
-        });
-        res.json(manhua);
-      } else if (demography === undefined) {
-        const manhua = await Manhua.findAll({
-          where: {
-            status,
-            genres: {
-              [Op.contains]: [genres],
-            },
-          },
-        });
-        res.json(manhua);
-      } else if (genres === undefined) {
-        const manhua = await Manhua.findAll({
-          where: {
-            status,
-            demography,
-          },
-        });
-        res.json(manhua);
-      } else {
-        const manhua = await Manhua.findAll({
-          where: {
-            status,
-            demography,
-            genres: {
-              [Op.contains]: [genres],
-            },
-          },
-        });
-        res.json(manhua);
-      }
-      break;
-
-    case "Manhwa":
-      if (
-        status === undefined &&
-        demography === undefined &&
-        genres === undefined
-      ) {
-        const manhwa = await Manhwa.findAll();
-        res.json(manhwa);
-      } else if (status === undefined && demography === undefined) {
-        const manhwa = await Manhwa.findAll({
-          where: {
-            genres: {
-              [Op.contains]: [genres],
-            },
-          },
-        });
-        res.json(manhwa);
-      } else if (status === undefined && genres === undefined) {
-        const manhwa = await Manhwa.findAll({
-          where: {
-            demography,
-          },
-        });
-        res.json(manhwa);
-      } else if (demography === undefined && genres === undefined) {
-        const manhwa = await Manhwa.findAll({
-          where: {
-            status,
-          },
-        });
-        res.json(manhwa);
-      } else if (status === undefined) {
-        const manhwa = await Manhwa.findAll({
-          where: {
-            demography,
-            genres: {
-              [Op.contains]: [genres],
-            },
-          },
-        });
-        res.json(manhwa);
-      } else if (demography === undefined) {
-        const manhwa = await Manhwa.findAll({
-          where: {
-            status,
-            genres: {
-              [Op.contains]: [genres],
-            },
-          },
-        });
-        res.json(manhwa);
-      } else if (genres === undefined) {
-        const manhwa = await Manhwa.findAll({
-          where: {
-            status,
-            demography,
-          },
-        });
-        res.json(manhwa);
-      } else {
-        const manhwa = await Manhwa.findAll({
-          where: {
-            status,
-            demography,
-            genres: {
-              [Op.contains]: [genres],
-            },
-          },
-        });
-        res.json(manhwa);
-      }
-      break;
-
-    default:
-      if (!type) {
-        if (
-          status === undefined &&
-          demography === undefined &&
-          genres === undefined
-        ) {
-          const anime = await Anime.findAll();
-          const manga = await Manga.findAll();
-          const manhua = await Manhua.findAll();
-          const manhwa = await Manhwa.findAll();
-          const result = anime.concat(manga, manhua, manhwa);
-          res.json(result);
-        } else if (status === undefined && demography === undefined) {
-          const anime = await Anime.findAll({
-            where: {
-              genres: {
-                [Op.contains]: [genres],
-              },
-            },
-          });
-          const manga = await Manga.findAll({
-            where: {
-              genres: {
-                [Op.contains]: [genres],
-              },
-            },
-          });
-          const manhua = await Manhua.findAll({
-            where: {
-              genres: {
-                [Op.contains]: [genres],
-              },
-            },
-          });
-          const manhwa = await Manhwa.findAll({
-            where: {
-              genres: {
-                [Op.contains]: [genres],
-              },
-            },
-          });
-          const result = anime.concat(manga, manhua, manhwa);
-          res.json(result);
-        } else if (status === undefined && genres === undefined) {
-          const anime = await Anime.findAll({
-            where: {
-              demography,
-            },
-          });
-          const manga = await Manga.findAll({
-            where: {
-              demography,
-            },
-          });
-          const manhua = await Manhua.findAll({
-            where: {
-              demography,
-            },
-          });
-          const manhwa = await Manhwa.findAll({
-            where: {
-              demography,
-            },
-          });
-          const result = anime.concat(manga, manhua, manhwa);
-          res.json(result);
-        } else if (demography === undefined && genres === undefined) {
-          const anime = await Anime.findAll({
-            where: {
-              status,
-            },
-          });
-          const manga = await Manga.findAll({
-            where: {
-              status,
-            },
-          });
-          const manhua = await Manhua.findAll({
-            where: {
-              status,
-            },
-          });
-          const manhwa = await Manhwa.findAll({
-            where: {
-              status,
-            },
-          });
-          const result = anime.concat(manga, manhua, manhwa);
-          res.json(result);
-        } else if (status === undefined) {
-          const anime = await Anime.findAll({
-            where: {
-              demography,
-              genres: {
-                [Op.contains]: [genres],
-              },
-            },
-          });
-          const manga = await Manga.findAll({
-            where: {
-              demography,
-              genres: {
-                [Op.contains]: [genres],
-              },
-            },
-          });
-          const manhua = await Manhua.findAll({
-            where: {
-              demography,
-              genres: {
-                [Op.contains]: [genres],
-              },
-            },
-          });
-          const manhwa = await Manhwa.findAll({
-            where: {
-              demography,
-              genres: {
-                [Op.contains]: [genres],
-              },
-            },
-          });
-          const result = anime.concat(manga, manhua, manhwa);
-          res.json(result);
-        } else if (demography === undefined) {
-          const anime = await Anime.findAll({
-            where: {
-              status,
-              genres: {
-                [Op.contains]: [genres],
-              },
-            },
-          });
-          const manga = await Manga.findAll({
-            where: {
-              status,
-              genres: {
-                [Op.contains]: [genres],
-              },
-            },
-          });
-          const manhua = await Manhua.findAll({
-            where: {
-              status,
-              genres: {
-                [Op.contains]: [genres],
-              },
-            },
-          });
-          const manhwa = await Manhwa.findAll({
-            where: {
-              status,
-              genres: {
-                [Op.contains]: [genres],
-              },
-            },
-          });
-          const result = anime.concat(manga, manhua, manhwa);
-          res.json(result);
-        } else if (genres === undefined) {
-          const anime = await Anime.findAll({
-            where: {
-              status,
-              demography,
-            },
-          });
-          const manga = await Manga.findAll({
-            where: {
-              status,
-              demography,
-            },
-          });
-          const manhua = await Manhua.findAll({
-            where: {
-              status,
-              demography,
-            },
-          });
-          const manhwa = await Manhwa.findAll({
-            where: {
-              status,
-              demography,
-            },
-          });
-          const result = anime.concat(manga, manhua, manhwa);
-          res.json(result);
-        } else {
-          const anime = await Anime.findAll({
-            where: {
-              status,
-              demography,
-              genres: {
-                [Op.contains]: [genres],
-              },
-            },
-          });
-          const manga = await Manga.findAll({
-            where: {
-              status,
-              demography,
-              genres: {
-                [Op.contains]: [genres],
-              },
-            },
-          });
-          const manhua = await Manhua.findAll({
-            where: {
-              status,
-              demography,
-              genres: {
-                [Op.contains]: [genres],
-              },
-            },
-          });
-          const manhwa = await Manhwa.findAll({
-            where: {
-              status,
-              demography,
-              genres: {
-                [Op.contains]: [genres],
-              },
-            },
-          });
-          const result = anime.concat(manga, manhua, manhwa);
-          res.json(result);
-        }
-      }
-      break;
+  if (queries.genres) {
+    queries.genres = {
+      [Op.contains]: [queries.genres.split(",")],
+    };
   }
+
+  if (queries.limit) {
+    limit = queries.limit;
+  }
+
+  if (queries.page) {
+    page = queries.page;
+  }
+
+  if (queries.type) {
+    type = queries.type;
+  }
+
+  delete queries.type; // borra el tipo de los filtros para que no se rompa el where
+
+  const { result, count } = await filterAndPaginateContent(
+    type,
+    queries,
+    page,
+    limit
+  );
+
+  return res.json({ count, result });
 };
 
 export const filterTitle = async (req, res) => {
@@ -604,4 +95,78 @@ export const pagination = async (req, res) => {
   });
   const result = anime.concat(manga, manhua, manhwa);
   res.json(result);
+};
+
+const filterAndPaginateContent = async (
+  type = "Anime",
+  filters,
+  page,
+  limit
+) => {
+  let searchFilters = {
+    where: filters,
+    offset: (page - 1) * limit,
+    limit,
+  };
+
+  let result = [];
+  let count = 0;
+
+  switch (type) {
+    case "Anime":
+      const animes = await Anime.findAndCountAll(searchFilters);
+      result = animes.rows;
+      count = animes.count;
+
+      break;
+    case "Manga":
+      const mangas = await Manga.findAndCountAll(searchFilters);
+      result = mangas.rows;
+      count = mangas.count;
+      break;
+
+    case "Manhua":
+      const manhuas = await Manhua.findAndCountAll(searchFilters);
+      result = manhuas.rows;
+      count = manhuas.count;
+      break;
+    case "Manhwa":
+      const manhwas = await Manhwa.findAndCountAll(searchFilters);
+      result = manhwas.rows;
+      count = manhwas.count;
+      break;
+
+    default:
+      searchFilters.limit /= 4;
+
+      const AllAnimes = await Anime.findAndCountAll(searchFilters);
+      const AllMangas = await Manga.findAndCountAll(searchFilters);
+      const AllManhwas = await Manhwa.findAndCountAll(searchFilters);
+      const AllManhuas = await Manhua.findAndCountAll(searchFilters);
+
+      console.log("animes", AllAnimes.count);
+      console.log("mangas", AllMangas.count);
+      console.log("manhwas", AllManhwas.count);
+      console.log("manhuas", AllManhuas.count);
+
+      console.log("animes regresa", AllAnimes.rows.length);
+      console.log("mangas regresa", AllMangas.rows.length);
+      console.log("manhwas regresa", AllMangas.rows.length);
+      console.log("manhuas regresa", AllManhuas.rows.length);
+
+      result = AllAnimes.rows.concat(
+        AllMangas.rows,
+        AllManhwas.rows,
+        AllManhuas.rows
+      );
+
+      console.log("final total", result.length);
+
+      count +=
+        AllAnimes.count + AllMangas.count + AllManhuas.count + AllManhwas.count;
+
+      break;
+  }
+
+  return { result, count };
 };
