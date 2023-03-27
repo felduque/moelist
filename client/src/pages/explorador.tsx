@@ -23,7 +23,9 @@ const Explorador = () => {
   const [filters, setFilters] = useState<FiltersType>(initFilters);
 
   const handlePageChange = async (selected: number) => {
+    setLoading(true);
     const { data } = await search(filters, 18, selected + 1);
+    setLoading(false);
     setItems(data.result);
   };
 
