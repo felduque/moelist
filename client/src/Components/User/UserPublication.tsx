@@ -321,7 +321,7 @@ export const UserPublication = () => {
         </label>
         <FileUploader
           multiple={false}
-          classes="drop-zone"
+          classes={styles.drop_zone}
           // maxSize={1}
           handleChange={(file: File) => handleImage(file)}
           children={
