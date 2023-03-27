@@ -1,15 +1,13 @@
 import axios from "./axios";
-import { ContentType } from "../types";
+import { ContentType, filtersResponseType, FiltersType } from "../types";
 
 export const search = async (
-  type: string,
-  demography: string,
-  status: string,
-  genres: string[]
+  filters?: FiltersType,
+  limit: number = 18,
+  page: number = 1
 ) => {
-  console.log(type, demography, status, genres, "holaaaaaaaa");
-  const response = await axios.get<ContentType[]>(
-    `http://localhost:3000/filter?type=${type}&demography=${demography}&status=${status}&genres=${genres}`,
+  const response = await axios.get<filtersResponseType>(
+    `http://localhost:3000/filter?type=${filters?.type}&demography=${filters?.demography}&status=${filters?.status}&genres=${filters?.genres}&limit=${limit}&page=${page}`,
     {
       headers: {
         "Content-Type": "application/json",
