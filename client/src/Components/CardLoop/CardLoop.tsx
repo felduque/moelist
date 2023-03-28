@@ -2,12 +2,14 @@ import React, { FC } from "react";
 import { CardItem } from "../CardItem/CardItem";
 import { motion, AnimatePresence } from "framer-motion";
 import { ContentType } from "../../utils/types";
+import { CardSkeleton } from "@/components/CardSkeleton/CardSkeleton";
 
 type Props = {
   cards: ContentType[];
   oneCol?: boolean;
   showDesc?: boolean;
   action?: "add" | "remove";
+  loading?: boolean;
 };
 
 export const CardLoop: FC<Props> = ({
@@ -15,6 +17,7 @@ export const CardLoop: FC<Props> = ({
   oneCol = false,
   showDesc = true,
   action = "add",
+  loading = false,
 }) => {
   const colsStyles = oneCol
     ? "row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-1"
@@ -22,6 +25,7 @@ export const CardLoop: FC<Props> = ({
 
   return (
     <motion.div layout className={`row ${colsStyles}`}>
+      {loading && <CardSkeleton count={6} />}
       <AnimatePresence>
         {cards.map((card, index) => {
           return (

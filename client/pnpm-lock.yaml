@@ -19,6 +19,7 @@ specifiers:
   react-dom: 18.2.0
   react-drag-drop-files: ^2.3.9
   react-icons: ^4.8.0
+  react-loading-skeleton: ^3.2.0
   react-paginate: ^8.1.4
   react-select: ^5.7.2
   react-spinners: ^0.13.8
@@ -44,6 +45,7 @@ dependencies:
   react-dom: 18.2.0_react@18.2.0
   react-drag-drop-files: 2.3.9_biqbaboplfbrettd7655fr4n2y
   react-icons: 4.8.0_react@18.2.0
+  react-loading-skeleton: 3.2.0_react@18.2.0
   react-paginate: 8.1.4_react@18.2.0
   react-select: 5.7.2_aen5vu2fkbnw3ssyd5drxdxkh4
   react-spinners: 0.13.8_biqbaboplfbrettd7655fr4n2y
@@ -2467,6 +2469,14 @@ packages:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
     dev: false
 
+  /react-loading-skeleton/3.2.0_react@18.2.0:
+    resolution: {integrity: sha512-kN12x4Ud69jbksr2EdhYywAFeW4bPdvFQ9p3ID1OM/QeFjgwFSmSUY2a6P6uOb5ACzWp3ozY8C+7+04KR6+PHA==}
+    peerDependencies:
+      react: '>=16.8.0'
+    dependencies:
+      react: 18.2.0
+    dev: false
+
   /react-onclickoutside/6.13.0_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-ty8So6tcUpIb+ZE+1HAhbLROvAIJYyJe/1vRrrcmW+jLsaM+/powDRqxzo6hSh9CuRZGSL1Q8mvcF5WRD93a0A==}
     peerDependencies:
@@ -2521,14 +2531,6 @@ packages:
       - '@types/react'
     dev: false
 
-  /react-side-effect/2.1.2_react@18.2.0:
-    resolution: {integrity: sha512-PVjOcvVOyIILrYoyGEpDN3vmYNLdy1CajSFNt4TDsVQC5KpTijDvWVoR+/7Rz2xT978D8/ZtFceXxzsPwZEDvw==}
-    peerDependencies:
-      react: ^16.3.0 || ^17.0.0 || ^18.0.0
-    dependencies:
-      react: 18.2.0
-    dev: false
-
   /react-spinners/0.13.8_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-3e+k56lUkPj0vb5NDXPVFAOkPC//XyhKPJjvcGjyMNPWsBKpplfeyialP74G7H7+It7KzhtET+MvGqbKgAqpZA==}
     peerDependencies:
@@ -2537,17 +2539,6 @@ packages:
     dependencies:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
-    dev: false
-
-  /react-super-seo/1.1.3_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-NBGRHm5HMVgqnA0MsBQVwyzNTUZSL4+fZUxCNlYfRBxS3z2/juwBFIGDZ4ULBKcdWeJpmw5aUJ57xjsRuXxGTg==}
-    peerDependencies:
-      react: ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0
-      react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0
-    dependencies:
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-      react-helmet: 6.1.0_react@18.2.0
     dev: false
 
   /react-transition-group/4.4.5_biqbaboplfbrettd7655fr4n2y:
