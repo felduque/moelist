@@ -11,6 +11,7 @@ import { ContentType } from "@/utils/types";
 import { NextPage, NextPageContext } from "next";
 
 const Cardcontent: NextPage<ContentType | undefined> = (content) => {
+  console.log(content?.image);
   return (
     <>
       <Head>
@@ -362,6 +363,13 @@ const Cardcontent: NextPage<ContentType | undefined> = (content) => {
                       width={350}
                       height={260}
                     />
+                    {/* <img
+                      className={style.afiliate_logo}
+                      src={content?.Scan?.image}
+                      alt={content?.Scan?.name}
+                      width={350}
+                      height={260}
+                    /> */}
 
                     <h3 className="text-white text-center">
                       {content?.Scan?.name}

@@ -7,6 +7,7 @@ import axios from "axios";
 import Router from "next/router";
 import { NextPage, NextPageContext } from "next";
 import { ContentType } from "@/utils/types";
+import Image from "next/image";
 
 const CardManhua: NextPage<ContentType | undefined> = (content) => {
   return (
@@ -72,13 +73,20 @@ const CardManhua: NextPage<ContentType | undefined> = (content) => {
       <div className={`container-fluid ${style.bg_card}`}>
         <div className={`row pt-5 ${style.content_sinopsis_and_banner}`}>
           <div className="col-12 col-xl-3 text-center">
-            <img
+            <Image
+              src={content?.image!}
+              alt={content?.title!}
+              width={250}
+              height={250}
+              className="content-card-main-banner"
+            />
+            {/* <img
               className={style.content_primary_card__img}
               src={content?.image!}
               alt={content?.title!}
               width={440}
               height={440}
-            />
+            /> */}
 
             <AuthorBox
               type={content?.contentType || ""}
@@ -280,13 +288,21 @@ const CardManhua: NextPage<ContentType | undefined> = (content) => {
               <div className="col-12 col-md-6 col-xl-4">
                 <a href={content?.urlContent} target="_blank">
                   <div className={style.content_afiliates_logos}>
-                    <img
+                    <Image
                       className={style.afiliate_logo}
                       src={content?.Scan?.image!}
                       alt={content?.Scan?.name!}
                       width={350}
                       height={260}
                     />
+                    {/* 
+                    <img
+                      className={style.afiliate_logo}
+                      src={content?.Scan?.image!}
+                      alt={content?.Scan?.name!}
+                      width={350}
+                      height={260}
+                    /> */}
 
                     <h3 className="text-white text-center">
                       {content?.Scan?.name}
