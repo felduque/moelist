@@ -3,33 +3,28 @@ import { useContext } from "react";
 import { AuthContext } from "../../utils/context/AuthContext";
 import Select, { ActionMeta, SingleValue } from "react-select";
 import { FaChevronDown } from "react-icons/fa";
-// import {
-//   tipos,
-//   generos,
-//   demografia,
-//   estado,
-// } from "../../helpers/valoresParaSelects";
+
 import { CardLoop } from "../CardLoop/CardLoop";
 import { selectStyles } from "@/utils/helpers";
 import { demografia, estado, generos, tipos } from "@/utils/valoresParaSelects";
 import { Pagination } from "../Pagination/Pagination";
-import { ContentType, filterType } from "@/utils/types";
+import { ContentType, FiltersType } from "@/utils/types";
 
 const filtersInitState = {
-  tipo: "",
-  demografia: "",
-  generos: [],
-  estado: "",
+  type: "",
+  demography: "",
+  genres: [],
+  status: "",
 };
 
 export const UserFavorites = () => {
   const { favorites } = useContext(AuthContext);
   const [filteredFavs, setFilterFavs] = useState(favorites);
-  const [filters, setFilters] = useState<filterType>({
-    tipo: "",
-    demografia: "",
-    generos: [],
-    estado: "",
+  const [filters, setFilters] = useState<FiltersType>({
+    type: "",
+    demography: "",
+    genres: [],
+    status: "",
   });
   const [totalItems, setTotalItems] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
@@ -40,28 +35,28 @@ export const UserFavorites = () => {
 
   const filtrar = (pag = 0) => {
     const filtersConditions = {
-      tipo: (item: ContentType) =>
-        !filters.tipo ? true : filters.tipo == item.contentType,
-      demografia: (item: ContentType) =>
-        !filters.demografia
+      type: (item: ContentType) =>
+        !filters.type ? true : filters.type == item.contentType,
+      demography: (item: ContentType) =>
+        !filters.demography
           ? true
-          : filters.demografia == item.demography.toLowerCase(),
-      estado: (item: ContentType) =>
-        !filters.estado
+          : filters.demography == item.demography.toLowerCase(),
+      status: (item: ContentType) =>
+        !filters.status
           ? true
-          : filters.estado == item.status?.toLowerCase() ||
+          : filters.status == item.status?.toLowerCase() ||
             item.status == "Emision",
-      generos: (item: ContentType) =>
-        filters.generos.length == 0
+      genres: (item: ContentType) =>
+        filters.genres?.length == 0
           ? true
-          : filters.generos.every((g) => item?.genres?.includes(g.label)),
+          : filters.genres?.every((g: any) => item?.genres?.includes(g.label)),
     };
 
     const selectedT = [
-      filtersConditions.tipo,
-      filtersConditions.demografia,
-      filtersConditions.generos,
-      filtersConditions.estado,
+      filtersConditions.type,
+      filtersConditions.demography,
+      filtersConditions.genres,
+      filtersConditions.status,
     ];
 
     const result = favorites.filter((fav) => selectedT.every((f) => f(fav)));
@@ -85,10 +80,10 @@ export const UserFavorites = () => {
   useEffect(() => {
     filtrar();
   }, [
-    filters.tipo,
-    filters.demografia,
-    filters.estado,
-    filters.generos.length,
+    filters.type,
+    filters.demography,
+    filters.status,
+    filters.genres?.length,
   ]);
 
   useEffect(() => {
@@ -133,51 +128,51 @@ export const UserFavorites = () => {
               <div className="accordion-body bg-dark text-white">
                 <div className="row">
                   <div className="col-12 col-md-6 col-xl-3">
-                    <label htmlFor="tipos">Tipos</label>
+                    <label htmlFor="types">types</label>
                     <Select
                       className="mt-2"
-                      id="tipos"
+                      id="types"
                       styles={selectStyles}
                       placeholder="Todos"
-                      defaultValue={filters.tipo}
-                      value={{ label: filters.tipo, value: filters.tipo }}
+                      defaultValue={filters.type}
+                      value={{ label: filters.type, value: filters.type }}
                       options={tipos}
-                      onChange={(val) => handleChange({ val, filter: "tipo" })}
+                      onChange={(val) => handleChange({ val, filter: "type" })}
                       classNamePrefix="select"
                     />
                   </div>
 
                   <div className="col-12 col-md-6 col-xl-3">
-                    <label htmlFor="demografia">Demografia</label>
+                    <label htmlFor="demography">demography</label>
                     <Select
                       className="mt-2"
-                      id="demografia"
+                      id="demography"
                       styles={selectStyles}
                       placeholder="Todos"
                       value={{
-                        label: filters.demografia,
-                        value: filters.demografia,
+                        label: filters.demography,
+                        value: filters.demography,
                       }}
                       options={demografia}
                       onChange={(val) =>
-                        handleChange({ val, filter: "demografia" })
+                        handleChange({ val, filter: "demography" })
                       }
                       classNamePrefix="select"
                     />
                   </div>
 
                   <div className="col-12 col-md-6 col-xl-3 mt-4 mt-xl-0">
-                    <label htmlFor="estado">Estado</label>
+                    <label htmlFor="status">status</label>
                     <Select
                       className="mt-2"
-                      id="estado"
+                      id="status"
                       styles={selectStyles}
                       onChange={(val) =>
-                        handleChange({ val, filter: "estado" })
+                        handleChange({ val, filter: "status" })
                       }
                       value={{
-                        label: filters.estado,
-                        value: filters.estado,
+                        label: filters.status,
+                        value: filters.status,
                       }}
                       placeholder="Todos"
                       options={estado}
@@ -186,17 +181,17 @@ export const UserFavorites = () => {
                   </div>
 
                   <div className="col-12 col-md-6 col-xl-3 mt-4 mt-xl-0">
-                    <label htmlFor="generos">Generos</label>
+                    <label htmlFor="genres">genres</label>
                     <Select
                       isMulti
                       className="mt-2"
-                      id="generos"
+                      id="genres"
                       styles={selectStyles}
                       placeholder="Todos"
                       options={generos}
-                      value={filters.generos}
+                      value={filters.genres}
                       onChange={(val) =>
-                        handleChange({ val, filter: "generos" })
+                        handleChange({ val, filter: "genres" })
                       }
                       classNamePrefix="select"
                     />

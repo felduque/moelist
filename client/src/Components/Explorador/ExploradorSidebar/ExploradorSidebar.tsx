@@ -12,18 +12,15 @@ import { useContext } from "react";
 import { ExploradorContext } from "../../../utils/context/ExploradorContext";
 
 import { tipos, demografia, estado, generos } from "@/utils/valoresParaSelects";
+import { FiltersType } from "@/utils/types";
 
 const animatedComponents = makeAnimated();
 
 export const ExploradorSidebar = () => {
-  const { setItems, setLoading } = useContext(ExploradorContext);
-  const [data, setData] = useState<{
-    type: string;
-    demography: string;
-    status: string;
-    genres: string[];
-  }>({
-    type: "",
+  const { setItems, setLoading, setCount, setFilters, filters } =
+    useContext(ExploradorContext);
+  const [data, setData] = useState<FiltersType>({
+    type: "Anime",
     demography: "",
     status: "",
     genres: [],
@@ -31,22 +28,21 @@ export const ExploradorSidebar = () => {
   const handlePushGenres = (e: string) => {
     console.log(e);
     //se usa set para que nose repitan los generos
-    setData({ ...data, genres: [...new Set([...data.genres, e])] });
+    setData({ ...data, genres: [...new Set([...data?.genres!, e])] });
+    setFilters(data);
   };
 
   useEffect(() => {
-    console.log("pasa");
+    setFilters(data);
+
     const fetchItems = async () => {
       //if (!loading) setLoading(true);
       // setLoading(true);
-      const items = await search(
-        data.type,
-        data.demography,
-        data.status,
-        data.genres
-      );
+      const items = await search(data);
+
       setLoading(false);
-      setItems(items.data);
+      setItems(items.data.result);
+      setCount(items.data.count);
     };
 
     fetchItems();
@@ -60,6 +56,7 @@ export const ExploradorSidebar = () => {
         components={animatedComponents}
         options={tipos}
         classNamePrefix="select"
+        defaultValue={tipos[0]}
         styles={selectStyles}
         onChange={(value: any) => setData({ ...data, type: value.label })}
       />
@@ -117,7 +114,7 @@ export const ExploradorSidebar = () => {
                       } else {
                         setData({
                           ...data,
-                          genres: data.genres.filter(
+                          genres: data?.genres?.filter(
                             (item) => item !== e.target.value
                           ),
                         });

@@ -1,14 +1,15 @@
 import { createContext } from "react";
 
-import { ContentType, filterType } from "../types";
+import { ContentType, FiltersType } from "../types";
 
 type ExploradorContextType = {
   items: ContentType[];
-  filters?: filterType | {};
+  filters?: FiltersType | {};
   setItems: (items: ContentType[]) => void;
-  setFilters?: (filters: filterType) => void;
+  setFilters: (filters: FiltersType) => void;
   loading: boolean;
   setLoading: (loading: boolean) => void;
+  setCount: (count: number) => void;
 };
 
 export const ExploradorContext = createContext<ExploradorContextType>({
@@ -18,4 +19,5 @@ export const ExploradorContext = createContext<ExploradorContextType>({
   setFilters: () => {},
   loading: true,
   setLoading: () => {},
+  setCount: () => {},
 });
