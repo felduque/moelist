@@ -10,6 +10,13 @@ const nextConfig = {
         protocol: "https",
         hostname: "apix.moelist.online",
       },
+      /* para que sirve cuando uno anda desarrollando */
+      {
+        hostname: "www.pngall.com",
+      },
+      {
+        hostname: "localhost",
+      },
     ],
   },
 };
