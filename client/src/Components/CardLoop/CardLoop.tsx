@@ -10,6 +10,7 @@ type Props = {
   showDesc?: boolean;
   action?: "add" | "remove";
   loading?: boolean;
+  skeletonCount?: number;
 };
 
 export const CardLoop: FC<Props> = ({
@@ -18,6 +19,7 @@ export const CardLoop: FC<Props> = ({
   showDesc = true,
   action = "add",
   loading = false,
+  skeletonCount = 12,
 }) => {
   const colsStyles = oneCol
     ? "row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-1"
@@ -25,7 +27,7 @@ export const CardLoop: FC<Props> = ({
 
   return (
     <motion.div layout className={`row ${colsStyles}`}>
-      {loading && <CardSkeleton count={6} />}
+      {loading && <CardSkeleton count={skeletonCount} />}
       <AnimatePresence>
         {cards.map((card, index) => {
           return (

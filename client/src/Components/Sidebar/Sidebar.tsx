@@ -41,6 +41,7 @@ export const Sidebar = () => {
           oneCol={true}
           showDesc={false}
           loading={loading}
+          skeletonCount={6}
         />
       </div>
     </div>
