@@ -1,8 +1,8 @@
 import React, { ReactElement, useEffect } from "react";
 
 import { NextPageWithLayout } from "../_app";
-import Layout from "../../components/layouts/layout";
-import { UserSettings } from "@/components/User/UserSettings";
+import Layout from "@/Components/layouts/layout";
+import { UserSettings } from "@/Components/User/UserSettings";
 import { useRouter } from "next/router";
 
 const UserPage: NextPageWithLayout = () => {

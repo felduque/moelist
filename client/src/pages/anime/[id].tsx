@@ -1,41 +1,124 @@
 import React from "react";
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
 import style from "@/styles/CardDetail.module.css";
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import moment from "moment";
-
-import { getAnimeById } from "@/utils/api/anime";
-import { AuthorBox } from "@/components/Author/AuthorBox";
-import { CardTopBar } from "@/components/CardDetail/CardAuthorBar";
-import { ContentType, Scan, User } from "@/utils/types";
+import Head from "next/head";
+// import { getAnimeById } from "@/utils/api/anime";
+import { AuthorBox } from "@/Components/Author/AuthorBox";
+import { CardTopBar } from "@/Components/CardDetail/CardAuthorBar";
+// import { ContentType, Scan, User } from "@/utils/types";
 import Image from "next/image";
+import axios from "axios";
+import Router from "next/router";
 
-const CardAnime = () => {
-  const router = useRouter();
-  const [anime, setAnime] = useState<ContentType>();
-  const [scans, setScans] = useState<Scan>();
-  const [author, setAuthor] = useState<User>();
-  const id =
-    router.query["id"] ||
-    router.asPath.match(new RegExp(`[&?]${"id"}=(.*)(&|$)`));
+interface CardAnimeProps {
+  anime: {
+    id: number;
+    title: string;
+    contentType: string;
+    demography: string;
+    artist?: string | string[];
+    artists?: string[];
+    genres?: string[];
+    description: string;
+    image: string;
+    producers?: string[];
+    rating?: number;
+    score?: number;
+    type?: string;
+    studios?: string[];
+    urlContent?: string;
+    source?: string;
+    status?: string;
+    premiered?: string;
+    season?: string;
+    popularity?: number;
+    day?: string;
+    trailer?: string;
+    authors?: string[];
+    author?: string | string[];
+    duration?: string;
+    favorites?: number;
+    episodes?: number;
+    volumes?: number;
+    chapters?: number;
+  };
+  scans: {
+    id: number;
+    name: string;
+    url: string;
+    image: string;
+    createdAt: string;
+    updatedAt: string;
+  };
+  author: {
+    id: number;
+    userName: string;
+    email: string;
+    createdAt: string;
+    updatedAt: string;
+  };
+}
 
-  useEffect(() => {
-    if (!id) {
-      return;
-    }
-    const fetchAnimes = async () => {
-      const animes = await getAnimeById(parseInt(id as string));
-
-      setAnime(animes?.data);
-      setScans(animes?.data?.Scan);
-      setAuthor(animes?.data?.User);
-    };
-
-    fetchAnimes();
-  }, [id]);
-
+const CardAnime = ({ anime, scans, author }: CardAnimeProps) => {
   return (
     <>
+      <Head>
+        <title>{anime?.title?.slice(0, 60)}</title>
+        <meta name="description" content={anime?.description?.slice(0, 150)} />
+        <meta name="keywords" content={anime?.genres?.join(", ")} />
+        <meta name="author" content={author?.userName} />
+        <meta name="robots" content="index, follow" />
+        <meta name="language" content="Spanish" />
+        <meta name="revisit-after" content="1 days" />
+        <meta name="distribution" content="web" />
+        <meta name="rating" content="general" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#000000" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <meta name="apple-mobile-web-app-title" content="Moelist" />
+        <meta name="application-name" content="Moelist" />
+        <meta name="msapplication-TileColor" content="#000000" />
+        <meta name="msapplication-config" content="/browserconfig.xml" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="MobileOptimized" content="320" />
+        <meta name="google" content="notranslate" />
+        <meta
+          name="google-site-verification"
+          content="google-site-verification"
+        />
+        <meta property="og:locale" content="es_ES" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={anime?.title?.slice(0, 60)} />
+        <meta
+          property="og:description"
+          content={anime?.description?.slice(0, 150)}
+        />
+        <meta property="og:url" content="https://moelist.online" />
+        <meta property="og:site_name" content="Moelist" />
+        <meta property="og:image" content={anime?.image} />
+        <meta property="og:image:secure_url" content={anime?.image} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content={anime?.title?.slice(0, 60)} />
+        <meta name="googlebot" content="index, follow" />
+        <meta name="googlebot-news" content="index, follow" />
+        <meta name="googlebot-video" content="index, follow" />
+        <meta name="googlebot-image" content="index, follow" />
+        <meta name="googlebot-mobile" content="index, follow" />
+        <meta name="robots" content="index, follow" />
+        <meta name="robots-news" content="index, follow" />
+        <meta name="robots-video" content="index, follow" />
+        <meta name="robots-image" content="index, follow" />
+        <meta name="robots-mobile" content="index, follow" />
+        <meta name="google" content="nositelinkssearchbox" />
+        <meta name="google" content="notranslate" />
+      </Head>
+
       <CardTopBar />
       <div className={`container-fluid ${style.bg_card}`}>
         <div className={`row pt-5 ${style.content_sinopsis_and_banner}`}>
@@ -337,6 +420,24 @@ const CardAnime = () => {
       </div>
     </>
   );
+};
+
+CardAnime.getInitialProps = async (ctx: any) => {
+  console.log(typeof ctx, "ctx");
+  const { query } = ctx;
+  const { id } = query;
+
+  if (!id) {
+    Router.reload();
+  }
+  try {
+    const res = await axios.get(`http://localhost:3000/anime/${id}`);
+    const data = await res.data;
+    return { anime: data, scans: data.Scan, author: data.User };
+  } catch (error) {
+    console.log(error);
+    Router.reload();
+  }
 };
 
 export default CardAnime;
