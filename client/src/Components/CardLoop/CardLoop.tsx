@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { CardItem } from "../CardItem/CardItem";
 import { motion, AnimatePresence } from "framer-motion";
 import { ContentType } from "../../utils/types";
-import { CardSkeleton } from "@/components/CardSkeleton/CardSkeleton";
+import { CardSkeleton } from "@/Components/CardSkeleton/CardSkeleton";
 
 type Props = {
   cards: ContentType[];
